@@ -27,7 +27,7 @@ public class Tower : MonoBehaviour
     [SerializeField]
     protected int numberOfTargets;
 
-    protected Type _TargetEnemyType = typeof(Enemy);
+    protected Type _TargetEnemyType = typeof(EnemyBase);
 
     protected Vector3 targetDirection;
     public List<GameObject> targets;
