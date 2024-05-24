@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EnemyState_Idle_Base : EnemyState_Base
 {
-    public EnemyState_Idle_Base(EnemyBase parent)
+    public EnemyState_Idle_Base(Enemy_Base parent)
         : base(parent)
     {
 

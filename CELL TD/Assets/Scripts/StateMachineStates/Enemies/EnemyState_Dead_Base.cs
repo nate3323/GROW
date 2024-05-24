@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EnemyState_Dead_Base : EnemyState_Base
 {
-    public EnemyState_Dead_Base(EnemyBase parent)
+    public EnemyState_Dead_Base(Enemy_Base parent)
         : base(parent)
     {
 

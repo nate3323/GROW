@@ -12,8 +12,9 @@ using TMPro;
 using Random = UnityEngine.Random;
 
 
+[RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(StateMachine))]
-public class EnemyBase : MonoBehaviour, IEnemy
+public class Enemy_Base : MonoBehaviour, IEnemy
 {
     public static bool ShowDistractednessBar = true;
 
@@ -23,43 +24,22 @@ public class EnemyBase : MonoBehaviour, IEnemy
 
 
 
-    [Tooltip("This enemy's type")]
-    [SerializeField] protected EnemyTypes _EnemyType;
+    [Tooltip("This enemy's stats information")]
+    [SerializeField] protected EnemyInfo_Base _EnemyInfo;
+   
 
-    [Min(0)]
-    [SerializeField] protected float _MaxHealth = 50; //The max amount of health this enemy can have
+    protected NavMeshAgent _NavMeshAgent;
 
-    [Min(0f)]
-    [SerializeField] protected float _AttackDamage = 2f;
-
-
-    [Header("Enemy Movement")]
-
-    [Tooltip("This emeny's base movement speed")]
-    [Min(0f)]
-    protected float _BaseMoveSpeed;
-
-    [Tooltip("How much money to player gets for destoying this enemy.")]
-    [SerializeField] protected float _RewardAmount = 50;
-
-    [Min(0f)]
-    [Tooltip("This sets how close the cat must get to the next WayPoint to consider itself to have arrived there. This causes it to then target the next WayPoint (or a randomly selected one if the current WayPoint has multiple next points set in the Inspector.")]
-    [SerializeField] protected float _WayPointArrivedDistance = 2f;
-    
-    [Tooltip("Controls the enemies's navigation")]
-    public NavMeshAgent agent;
-
-
+    protected float _AttackDamage;
+    protected float _BaseMovementSpeed;
+    protected float _RewardAmount;
+    protected float _WayPointArrivedDistance;
 
     protected float _Health; // This enemy's current health.
     protected bool _IsDead = false; // If this enemy has been defeated or not.
 
     protected float _DistanceFromNextWayPoint = 0f;
     protected WayPoint _NextWayPoint;
-
-    protected GameObject _DistractednessMeterGO;
-    protected UnityEngine.UI.Image _DistractednessMeterBarImage;
-    protected TextMeshPro _DistractednessMeterLabel;
 
     private AudioSource enemyAudio;
 
@@ -70,21 +50,13 @@ public class EnemyBase : MonoBehaviour, IEnemy
 
     protected void Awake()
     {
-        
-    }
+        InitEnemyStats();
 
-    // Start is called before the first frame update
-    protected void Start()    
-    {
         IsDead = false;
+
+        _NavMeshAgent = GetComponent<NavMeshAgent>();
+
         enemyAudio = GetComponent<AudioSource>();
-
-        agent = GetComponent<NavMeshAgent>();
-
-
-        // Find the closest WayPoint and start moving there.
-        //FindNearestWayPoint();
-        //agent.SetDestination(_NextWayPoint.transform.position);
 
 
         if (_stateMachine == null)
@@ -95,6 +67,28 @@ public class EnemyBase : MonoBehaviour, IEnemy
 
             InitStateMachine();
         }
+    }
+
+    // Start is called before the first frame update
+    protected void Start()    
+    {
+        // Find the closest WayPoint and start moving there.
+        //FindNearestWayPoint();
+        //agent.SetDestination(_NextWayPoint.transform.position);
+
+    }
+
+    /// <summary>
+    /// Initializes the stats for this enemy.
+    /// Subclasses should override this function to init stats specific to that enemy type.
+    /// </summary>
+    protected virtual void InitEnemyStats()
+    {
+        _AttackDamage = _EnemyInfo.AttackDamage;
+        _BaseMovementSpeed = _EnemyInfo.BaseMovementSpeed;
+        _Health = _EnemyInfo.MaxHealth;
+        _RewardAmount = _EnemyInfo.RewardAmount;
+        _WayPointArrivedDistance = _EnemyInfo.WayPointArrivedDistance;
     }
 
     /// <summary>
@@ -119,7 +113,7 @@ public class EnemyBase : MonoBehaviour, IEnemy
 
 
         // Tell state machine to write in the debug console every time it exits or enters a state.
-        //_stateMachine.EnableDebugLogging = true;
+        _stateMachine.EnableDebugLogging = true;
 
         // This is necessary since we only have one state and no transitions for now.
         // Mouse over the AllowUnknownStates property for more info.
@@ -149,7 +143,7 @@ public class EnemyBase : MonoBehaviour, IEnemy
                 // Check for null in case we are already at the last WayPoint, as GetNextWayPoint()
                 // returns null if there is no next WayPoint.
                 if (_NextWayPoint != null)
-                    agent.SetDestination(_NextWayPoint.transform.position);
+                    _NavMeshAgent.SetDestination(_NextWayPoint.transform.position);
             }
         }
         else
@@ -157,8 +151,6 @@ public class EnemyBase : MonoBehaviour, IEnemy
             _DistanceFromNextWayPoint = 0f;
         }
 
-
-        _DistractednessMeterGO.SetActive(ShowDistractednessBar);
     }
     
     //I am intending this function to be called from either the tower or the projectile that the tower fires
@@ -251,14 +243,14 @@ public class EnemyBase : MonoBehaviour, IEnemy
     public bool HasReachedDestination()
     {
         return _DistanceFromNextWayPoint <= _WayPointArrivedDistance &&
-               agent.pathStatus == NavMeshPathStatus.PathComplete;
+               _NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete;
     }
 
 
 
     IEnumerator PlayDeathSound()
     {
-        agent.speed = 0;
+        _NavMeshAgent.speed = 0;
 
         // TODO: Play death sound here
 
@@ -269,17 +261,18 @@ public class EnemyBase : MonoBehaviour, IEnemy
    
 
 
-    public float AttackDamage { get { return _AttackDamage; } }
-    public float BaseMovementSpeed { get { return _BaseMoveSpeed; } }
-    public EnemyTypes EnemyType { get { return _EnemyType; } }    
+    public float AttackDamage { get { return _EnemyInfo.AttackDamage; } }
+    public float BaseMovementSpeed { get { return _BaseMovementSpeed; } }
+    public EnemyTypes EnemyType { get { return _EnemyInfo.Type; } }    
     public float Health { get { return _Health; } }
     public bool IsBacteria { get; protected set; } = false;
     public bool IsDead { get; protected set; } = false;
     public bool IsFungi { get; protected set; } = false;
     public bool IsVirus { get; protected set; } = false;
-    public float MaxHealth { get { return _MaxHealth; } }
-    public float RewardAmount { get { return _RewardAmount; } }
-public WayPoint NextWayPoint 
+    public float MaxHealth { get { return _EnemyInfo.MaxHealth; } }
+    public float RewardAmount { get { return _EnemyInfo.RewardAmount; } }
+
+    public WayPoint NextWayPoint 
     { 
         get { return _NextWayPoint; } 
         set

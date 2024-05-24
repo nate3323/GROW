@@ -27,7 +27,7 @@ public class Tower : MonoBehaviour
     [SerializeField]
     protected int numberOfTargets;
 
-    protected Type _TargetEnemyType = typeof(EnemyBase);
+    protected Type _TargetEnemyType = typeof(Enemy_Base);
 
     protected Vector3 targetDirection;
     public List<GameObject> targets;
@@ -256,7 +256,7 @@ public class Tower : MonoBehaviour
         get { return _TargetEnemyType; }
         set 
         {
-            if (!typeof(EnemyBase).IsAssignableFrom(value))
+            if (!typeof(Enemy_Base).IsAssignableFrom(value))
             {
                 throw new Exception($"The passed in enemy type is not a subclass of EnemyBase! The tower in question is \"{gameObject.name}\" of type {this.GetType()}");
             }

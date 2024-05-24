@@ -1,0 +1,213 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+
+using UnityEngine;
+using UnityEngine.UI;
+
+
+/// <summary>
+/// This class tracks how many cats are left across all spawners.
+/// </summary>
+public class WaveManager : MonoBehaviour
+{
+    public event EventHandler WaveEnded;
+    public event EventHandler LevelCleared;
+
+
+
+    public static WaveManager Instance;
+
+    private int _TotalWavesInLevel;
+
+    private List<EnemySpawner> _EnemySpawners;
+    private int _TotalEnemiesInWave;
+    private int _EnemiesRemainingInWave;
+    
+    private int _EnemiesKilled;
+    private int _EnemiesReachedGoal;
+
+    private int _TotalCatsDistracted;
+    private int _TotalEnemiesReachedGoal;
+
+    private float _SecondsSinceLevelStart;
+    private float _SecondsSinceWaveStart;
+
+    private int _WaveNumber = 0;
+    private bool _WaveInProgress = false;
+
+
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.LogError("There is already a WaveManager in this scene. Self destructing!");
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
+        Enemy_Base.OnEnemyDied += OnEnemyDied;
+        Enemy_Base.OnEnemyReachedGoal += OnEnemyReachedGoal;
+
+        _EnemySpawners = new List<EnemySpawner>();
+        GameObject[] spawners = GameObject.FindGameObjectsWithTag("Enemy Spawner");
+
+        foreach(GameObject spawner in spawners)
+        {
+            EnemySpawner enemySpawner = spawner.GetComponent<EnemySpawner>();
+            if(spawner.GetComponent<EnemySpawner>().NumberOfWaves > _TotalWavesInLevel)
+            {
+                _TotalWavesInLevel = spawner.GetComponent<EnemySpawner>().NumberOfWaves;
+                _EnemySpawners.Add(spawner.GetComponent<EnemySpawner>());
+            }
+            else
+            {
+                Debug.LogError($"Enemy spawner object \"{spawner.name}\" does not have an EnemySpawner component on it!");
+            }
+        }
+
+    }
+
+    private void Update()
+    {
+        _SecondsSinceLevelStart += Time.deltaTime;
+
+        if (_WaveInProgress)
+            _SecondsSinceWaveStart += Time.deltaTime;
+
+
+        if (!_WaveInProgress && WaveNumber == _TotalWavesInLevel)
+        {
+            LevelCleared?.Invoke(this, EventArgs.Empty);
+
+            //HUD.RevealVictory();
+        }
+    }
+
+    public void StartNextWave()
+    {
+        // Don't try to start a wave if one is already in progress.
+        if (IsWaveInProgress)
+            return;
+
+
+        _WaveInProgress = true;
+
+        _WaveNumber++;
+
+
+        FindAllSpawners();
+
+        foreach (EnemySpawner spawner in _EnemySpawners)
+        {
+            spawner.StartNextWave();
+        }
+
+        CalculateTotalEnemiesInWave();
+
+        _EnemiesRemainingInWave = _TotalEnemiesInWave;
+        _EnemiesKilled = 0;
+        _EnemiesReachedGoal = 0;
+
+        //HUD.ShowWaveDisplay();
+        //HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave);
+    }
+
+    public void StopAllSpawning()
+    {
+        foreach (EnemySpawner spawner in _EnemySpawners)
+        {
+            spawner.StopSpawner();
+        }
+    }
+
+    public void OnEnemyDied(object Sender, EventArgs e)
+    {
+        _EnemiesRemainingInWave--;
+        _EnemiesKilled++;
+        _TotalCatsDistracted++;
+
+        //HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave);
+
+        if (_EnemiesRemainingInWave < 1)
+        {
+            //HUD.HideWaveDisplay();
+            _WaveInProgress = false;
+
+            WaveEnded?.Invoke(this, EventArgs.Empty);
+
+            if (_WaveNumber >= _TotalWavesInLevel /* && player.IsDead */)
+            {
+                //HUD.RevealVictory();
+            }
+        }
+    }
+
+    public void OnEnemyReachedGoal(object Sender, EventArgs e)
+    {
+        _EnemiesRemainingInWave--;
+        _EnemiesReachedGoal++;
+        _TotalEnemiesReachedGoal++;
+
+        //HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave);
+
+        if (_EnemiesRemainingInWave < 1)
+        {
+            //HUD.HideWaveDisplay();
+            _WaveInProgress = false;
+
+            WaveEnded?.Invoke(this, EventArgs.Empty);
+
+            if (_WaveNumber >= _TotalWavesInLevel)
+            {
+                //HUD.RevealVictory();
+            }
+        }
+    }
+
+    private void CalculateTotalEnemiesInWave()
+    {
+        _TotalEnemiesInWave = 0;
+        foreach (EnemySpawner spawner in _EnemySpawners)
+        {
+            //Debug.Log($"Spawner: {spawner.CatsInCurrentWave}");
+            _TotalEnemiesInWave += spawner.EnemiesInCurrentWave();
+        }
+
+        //Debug.Log($"Total: {_TotalCatsInWave}");
+    }
+
+    private void FindAllSpawners()
+    {
+        _EnemySpawners = FindObjectsByType<EnemySpawner>(FindObjectsSortMode.None).ToList();
+    }
+
+
+    private void OnWaveEnded(object sender, EventArgs e)
+    {
+        
+    }
+
+
+
+    public int TotalWavesInLevel { get { return _TotalWavesInLevel; } }
+
+    public int WaveNumber { get { return _WaveNumber; } }
+    public bool IsWaveInProgress { get { return _WaveInProgress; } }
+
+    public int NumEnemiesKilledInWave { get { return _EnemiesKilled; } }
+    public int NumEnemiesReachedGoalInWave { get { return _EnemiesReachedGoal; } }
+    public int TotalEnemiesInWave { get { return _TotalEnemiesInWave; } }
+   
+    public int TotalEnemiesKilledInLevel { get { return _TotalCatsDistracted; } }
+    public int TotalEnemiesReachedGoalInLevel { get { return _TotalEnemiesReachedGoal; } }
+
+    public float SecondsElapsedSinceLevelStarted { get { return _SecondsSinceLevelStart; } }
+    public float SecondsElapsedSinceWaveStarted { get { return _SecondsSinceWaveStart; } }
+
+}
+
