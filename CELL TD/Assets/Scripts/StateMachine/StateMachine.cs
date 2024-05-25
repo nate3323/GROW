@@ -70,7 +70,8 @@ public class StateMachine : MonoBehaviour
     /// <returns>Returns true if a state machine transition was triggered, or false otherwise.</returns>
     private bool DoSpecificStateTransitionsCheck()
     {
-        if (!_fromStateTransitions.TryGetValue(CurrentState.Name, out List<Transition> transitions))
+        if (CurrentState == null ||
+            !_fromStateTransitions.TryGetValue(CurrentState.Name, out List<Transition> transitions))
             return false;
 
         foreach (Transition t in transitions)
@@ -137,7 +138,7 @@ public class StateMachine : MonoBehaviour
     public bool SetState(IState state)
     {
         if (state == null)
-            throw new Exception("The passed in state is null!");
+            throw new ArgumentNullException("The passed in state is null!");
 
 
         return ChangeState(state);
