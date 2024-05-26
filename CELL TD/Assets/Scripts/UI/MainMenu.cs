@@ -8,18 +8,18 @@ public class MainMenu : MonoBehaviour
     //Go To Map Selector
     public void GoToSelector()
     {
-        SceneManager.LoadScene("Selector");
+        GameManager.Instance.SetGameState(typeof(GameState_LevelSelect));
     }
 
     //Open Settings
     public void OpenSettings()
     {
-        //TODO
+        GameManager.Instance.SetGameState(typeof(GameState_Settings));
     }
 
     //Quit Game
     public void QuitGame()
     {
-        Application.Quit();
+        GameManager.Instance.SetGameState(typeof(GameState_ShutDown));
     }
 }
