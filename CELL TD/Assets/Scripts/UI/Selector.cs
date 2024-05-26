@@ -7,6 +7,6 @@ public class Selector : MonoBehaviour
 {
     public void ReturnToMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        GameManager.Instance.SetGameState(typeof(GameState_MainMenu));
     }
 }

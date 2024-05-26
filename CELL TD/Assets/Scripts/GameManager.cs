@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 
 /// <summary>
@@ -13,8 +15,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
-
+    public static GameManager Instance;  
 
     private StateMachine _StateMachine;
 
@@ -24,7 +25,7 @@ public class GameManager : MonoBehaviour
     {
         if (Instance != null)
         {
-            Debug.LogWarning("There is already a GameManager in this scene. Self destructing...");
+            //Debug.LogWarning("There is already a GameManager in this scene. Self destructing...");
             Destroy(gameObject);
             return;
         }
@@ -34,9 +35,7 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-
-        HealthSystem = GameObject.Find("PlayerUI").GetComponent<HealthSystem>();
-        MoneySystem = GameObject.Find("MoneyUI").GetComponent<MoneySystem>();
+        SceneManager.activeSceneChanged += OnActiveSceneChanged;
 
 
         _StateMachine = GetComponent<StateMachine>();
@@ -52,15 +51,33 @@ public class GameManager : MonoBehaviour
     protected virtual void InitStateMachine()
     {
         // Create startup and menu states
-        GameState_StartUp startUpState = new GameState_StartUp(this);
+        GameState_StartUp startUpState = new GameState_StartUp(this); // startup / init / title screen state
+        GameState_ShutDown shutDownState = new GameState_ShutDown(this); // shutdown / cleanup state
         GameState_MainMenu mainMenuState = new GameState_MainMenu(this);
         GameState_PauseMenu pauseMenuState = new GameState_PauseMenu(this);
+        GameState_LevelSelect levelSelectState = new GameState_LevelSelect(this);
+        GameState_Settings settingsState = new GameState_Settings(this);
 
-        // Create game states
+        // Manually register startup/menu states so they can be triggered via GameManager.SetGameState().
+        // If we don't do this, the state machine will not know about any states that aren't referenced
+        // by the transitions we define below.
+        _StateMachine.AddStates(startUpState,
+                                shutDownState,
+                                mainMenuState,
+                                pauseMenuState,
+                                levelSelectState,
+                                settingsState);
+
+        // Create in-game states
         GameState_InGame inGameState = new GameState_InGame(this);
         GameState_Victory victoryState = new GameState_Victory(this);
         GameState_Defeat defeatedState = new GameState_Defeat(this);
 
+        // Manually register in-game states.
+        _StateMachine.AddStates(inGameState,
+                                victoryState,
+                                defeatedState);
+        
 
         // Create and register automatic state transitions. The current state can also be changed manually via _StateMachine.SetState() if necessary.
         // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -77,12 +94,10 @@ public class GameManager : MonoBehaviour
         // Tell state machine to write in the debug console every time it exits or enters a state.
         _StateMachine.EnableDebugLogging = true;
 
-        // This is necessary since we only have one state and no transitions for now.
         // Mouse over the AllowUnknownStates property for more info.
         _StateMachine.AllowUnknownStates = true;
 
-
-        // Set the starting state.
+        // Set the initial state of the state machine.
         _StateMachine.SetState(startUpState);
     }
 
@@ -91,10 +106,46 @@ public class GameManager : MonoBehaviour
         IsInitialized = true;
     }
 
+    /// <summary>
+    /// This function is called when we switch scenes to reacquire references to things like
+    /// player UI, etc.
+    /// </summary>
+    public void UpdateReferences()
+    {
+        GameObject playerUI = GameObject.Find("PlayerUI");
+        HealthSystem = playerUI != null ? playerUI.GetComponent<HealthSystem>()
+                                        : null;
+        
+        GameObject moneyUI = GameObject.Find("MoneyUI");
+        MoneySystem = moneyUI != null ? moneyUI.GetComponent<MoneySystem>()
+                                        : null;
 
+    }
+
+    /// <summary>
+    /// Called when the active scene changes.
+    /// </summary>
+    /// <param name="current">The outgoing scene.</param>
+    /// <param name="next">The new active scene.</param>
+    private void OnActiveSceneChanged(Scene current, Scene next)
+    {
+        UpdateReferences();
+    }
+
+    /// <summary>
+    /// Sets the current state to the state that has the specified type.
+    /// </summary>
+    /// <param name="stateClassName"></param>
+    public void SetGameState(Type stateType)
+    {
+        _StateMachine.SetState(stateType);       
+    }
+
+    
 
     public bool IsInitialized { get; private set; }
 
+    public int CurrentLevelNumber { get; set; }
     public HealthSystem HealthSystem { get; private set; }
     public MoneySystem MoneySystem { get; private set; }
 }

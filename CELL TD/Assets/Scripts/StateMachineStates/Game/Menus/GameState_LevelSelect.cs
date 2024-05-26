@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 
 
 /// <summary>
-/// This state is when the player is in the game, and not paused.
+/// This state is when the player enters the level selector.
 /// </summary>
-public class GameState_InGame : GameState_Base
+public class GameState_LevelSelect : GameState_Base
 {
-    public GameState_InGame(GameManager parent)
+    public GameState_LevelSelect(GameManager parent)
         : base(parent)
     {
 
@@ -19,7 +19,7 @@ public class GameState_InGame : GameState_Base
 
     public override void OnEnter()
     {
-        SceneManager.LoadScene($"Level_{GameManager.Instance.CurrentLevelNumber}");
+        SceneManager.LoadScene("LevelSelector");
     }
 
     public override void OnExit()

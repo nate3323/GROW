@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 
 
 /// <summary>
-/// This state is when the player is in the game, and not paused.
+/// This state is when the player enters the settings.
 /// </summary>
-public class GameState_InGame : GameState_Base
+public class GameState_Settings : GameState_Base
 {
-    public GameState_InGame(GameManager parent)
+    public GameState_Settings(GameManager parent)
         : base(parent)
     {
 
@@ -18,13 +18,13 @@ public class GameState_InGame : GameState_Base
 
 
     public override void OnEnter()
-    {
-        SceneManager.LoadScene($"Level_{GameManager.Instance.CurrentLevelNumber}");
+    {        
+        // Display the settings window
     }
 
     public override void OnExit()
     {
-
+        // Close the settings window
     }
 
     public override void OnUpdate()
