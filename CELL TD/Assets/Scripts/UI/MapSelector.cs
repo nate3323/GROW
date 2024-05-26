@@ -9,6 +9,10 @@ public class MapSelector : MonoBehaviour
     private string _mapName;
     public void LoadMap()
     {
-        SceneManager.LoadScene(_mapName);
+        // Set the new current level number.
+        GameManager.Instance.CurrentLevelNumber = 1;
+
+        // Manually switch to the in-game state.
+        GameManager.Instance.SetGameState(typeof(GameState_InGame));
     }
 }

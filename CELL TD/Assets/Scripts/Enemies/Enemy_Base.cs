@@ -45,7 +45,7 @@ public class Enemy_Base : MonoBehaviour, IEnemy
 
     public bool isATarget = false;
 
-    private StateMachine _stateMachine;
+    private StateMachine _StateMachine;
 
 
     protected void Awake()
@@ -59,14 +59,11 @@ public class Enemy_Base : MonoBehaviour, IEnemy
         enemyAudio = GetComponent<AudioSource>();
 
 
-        if (_stateMachine == null)
-        {
-            _stateMachine = GetComponent<StateMachine>();
-            if (_stateMachine == null)
-                throw new Exception($"The enemy \"{gameObject.name}\" does not have a StateMachine component!");
+        _StateMachine = GetComponent<StateMachine>();
+        if (_StateMachine == null)
+            throw new Exception($"The enemy \"{gameObject.name}\" does not have a StateMachine component!");
 
-            InitStateMachine();
-        }
+        InitStateMachine();
     }
 
     // Start is called before the first frame update
@@ -75,7 +72,6 @@ public class Enemy_Base : MonoBehaviour, IEnemy
         // Find the closest WayPoint and start moving there.
         //FindNearestWayPoint();
         //agent.SetDestination(_NextWayPoint.transform.position);
-
     }
 
     /// <summary>
@@ -104,24 +100,24 @@ public class Enemy_Base : MonoBehaviour, IEnemy
         // Create and register transitions.
         // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        //_stateMachine.AddTransitionFromState(movingState, new Transition(slowedState, () => slowingEntities.Count > 0 && stoppingEntities.Count == 0));
+        //_StateMachine.AddTransitionFromState(movingState, new Transition(slowedState, () => slowingEntities.Count > 0 && stoppingEntities.Count == 0));
 
         // If health is at or below 0, then switch to the dead state regardless of what state this enemy is currently in.        
-        _stateMachine.AddTransitionFromAnyState(new Transition(deadState, () => _Health <= 0));
+        _StateMachine.AddTransitionFromAnyState(new Transition(deadState, () => _Health <= 0));
 
         // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
         // Tell state machine to write in the debug console every time it exits or enters a state.
-        _stateMachine.EnableDebugLogging = true;
+        _StateMachine.EnableDebugLogging = true;
 
         // This is necessary since we only have one state and no transitions for now.
         // Mouse over the AllowUnknownStates property for more info.
-        _stateMachine.AllowUnknownStates = true;
+        _StateMachine.AllowUnknownStates = true;
 
 
         // Set the starting state.
-        _stateMachine.SetState(idleState);
+        _StateMachine.SetState(idleState);
     }
 
     // Update is called once per frame

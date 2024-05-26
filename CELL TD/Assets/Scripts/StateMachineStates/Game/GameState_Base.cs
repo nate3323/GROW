@@ -3,19 +3,19 @@ using UnityEngine;
 
 
 /// <summary>
-/// This is the base class that all enemy states inherit from.
+/// This is the base class that all game states inherit from.
 /// </summary>
-public abstract class EnemyState_Base : State_Base
+public abstract class GameState_Base : State_Base
 {
-    new protected Enemy_Base _parent;
+    new protected GameManager _parent;
 
 
 
     /// <summary>
     /// The constructor.
     /// </summary>
-    /// <param name="parent">The state needs a reference to its parent enemy object so it can call methods on it.</param>
-    public EnemyState_Base(Enemy_Base parent)
+    /// <param name="parent">The state needs a reference to its parent GameManager object so it can call methods on it.</param>
+    public GameState_Base(GameManager parent)
         : base(parent.gameObject)
     {
         _parent = parent;
@@ -38,3 +38,4 @@ public abstract class EnemyState_Base : State_Base
     }
 
 }
+

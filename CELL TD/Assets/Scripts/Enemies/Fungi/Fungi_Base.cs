@@ -7,7 +7,7 @@ using UnityEngine;
 /// <summary>
 /// This is the base class for all fungi-type enemies
 /// </summary>
-public class FungiBase : Enemy_Base, IFungi
+public class Fungi_Base : Enemy_Base, IFungi
 {
     new void Awake()
     {
