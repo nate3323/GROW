@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TowerTypes
+public class SlowingAOETower : Tower
 {
-    Macrophage,
-    Neutrophil,
-    Basophil
+
 }

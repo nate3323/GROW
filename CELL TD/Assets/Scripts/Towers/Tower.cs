@@ -23,7 +23,7 @@ public class Tower : MonoBehaviour
     [SerializeField]
     protected SphereCollider range;
     [SerializeField, Min(1)]
-    protected float distractValue;
+    protected float damageValue;
     [SerializeField]
     protected int numberOfTargets;
 
@@ -209,9 +209,9 @@ public class Tower : MonoBehaviour
     {
         Destroy(this);
     }
-    public float GetDistractionValue()
+    public float GetDamagenValue()
     {
-        return distractValue;
+        return damageValue;
     }
 
     public float GetBuildCost()
@@ -248,7 +248,7 @@ public class Tower : MonoBehaviour
 
 
     public float BuildCost { get { return buildCost; } }
-    public float DistractValue { set { distractValue = value; } get { return distractValue; } }
+    public float DamageValue { set { damageValue = value; } get { return damageValue; } }
     public bool IsTargetDetectionEnabled { get { return _Collider.enabled; } }
 
     public Type TargetEnemyType
