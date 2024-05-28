@@ -43,6 +43,8 @@ public class Enemy_Base : MonoBehaviour, IEnemy
 
     private AudioSource enemyAudio;
 
+    public List<GameObject> slowingEntities;
+    public List<GameObject> stoppingEntities;
     public bool isATarget = false;
 
     private StateMachine _StateMachine;
@@ -95,12 +97,21 @@ public class Enemy_Base : MonoBehaviour, IEnemy
         // Create enemy states.
         EnemyState_Idle_Base idleState = new EnemyState_Idle_Base(this);
         EnemyState_Dead_Base deadState = new EnemyState_Dead_Base(this);
+        EnemyState_Moving movingState = new EnemyState_Moving(this);
+        EnemyState_Slowed slowedState = new EnemyState_Slowed(this);
+        EnemyState_Stopped stoppedState = new EnemyState_Stopped(this);
 
 
         // Create and register transitions.
         // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        //_StateMachine.AddTransitionFromState(movingState, new Transition(slowedState, () => slowingEntities.Count > 0 && stoppingEntities.Count == 0));
+        _StateMachine.AddTransitionFromState(movingState, new Transition(slowedState, () => slowingEntities.Count > 0 && stoppingEntities.Count == 0));
+        _StateMachine.AddTransitionFromState(movingState, new Transition(stoppedState, () => stoppingEntities.Count > 0));
+        _StateMachine.AddTransitionFromState(slowedState, new Transition(stoppedState, () => stoppingEntities.Count > 0));
+        _StateMachine.AddTransitionFromState(stoppedState, new Transition(slowedState, () => stoppingEntities.Count == 0 &&
+                                                                                             slowingEntities.Count > 0));
+
+        _StateMachine.AddTransitionFromAnyState(new Transition(movingState, () => slowingEntities.Count == 0 && stoppingEntities.Count == 0));
 
         // If health is at or below 0, then switch to the dead state regardless of what state this enemy is currently in.        
         _StateMachine.AddTransitionFromAnyState(new Transition(deadState, () => _Health <= 0));
