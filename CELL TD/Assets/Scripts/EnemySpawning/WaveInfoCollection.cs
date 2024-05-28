@@ -10,7 +10,7 @@ using UnityEngine;
 /// </summary>
 public class WaveCollection : MonoBehaviour
 {
-    private List<Wave> _WaveList = new List<Wave>();
+    private List<Waves> _WaveList = new List<Waves>();
 
 
 
@@ -18,7 +18,7 @@ public class WaveCollection : MonoBehaviour
     {
         // Load all of the WaveInfo scriptable objects in the project, even if they
         // aren't inside the EnemyInfo folder.
-        _WaveList = Resources.LoadAll<Wave>("").ToList();
+        _WaveList = Resources.LoadAll<Waves>("").ToList();
 
         SyncWavesWithPrefabs();
     }
@@ -37,14 +37,14 @@ public class WaveCollection : MonoBehaviour
     {
     }
 
-    public List<EnemySpawnInfo> GetEnemySpawnInfo(int index)
+    public List<SpawnInfo> GetEnemySpawnInfo(int index)
     {
-        return _WaveList[index].Enemies;
+        return _WaveList[0].WaveInfo[index].Enemies;
     }
 
     public Wave GetWaveInfo(int index)
     {
-        return _WaveList[index];
+        return _WaveList[0].WaveInfo[index];
     }
 
 
