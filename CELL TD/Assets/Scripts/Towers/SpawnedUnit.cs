@@ -8,7 +8,7 @@ public class SpawnedUnit : MonoBehaviour
 {
     // Variables
     private NavMeshAgent agent;
-    private Tower parentTower;
+    private Tower_Base parentTower;
     private bool isAttacking = false;
     private GameObject target;
     private List<GameObject> targetsInRange;
@@ -16,7 +16,7 @@ public class SpawnedUnit : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        parentTower = transform.parent.gameObject.GetComponent<Tower>();
+        parentTower = transform.parent.gameObject.GetComponent<Tower_Base>();
         targetsInRange = new List<GameObject>();
 
     }

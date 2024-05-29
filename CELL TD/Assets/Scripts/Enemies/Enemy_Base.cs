@@ -161,7 +161,7 @@ public class Enemy_Base : MonoBehaviour, IEnemy
     }
     
     //I am intending this function to be called from either the tower or the projectile that the tower fires
-    public void ApplyDamage(float damageValue, Tower targetingTower)
+    public void ApplyDamage(float damageValue, Tower_Base targetingTower)
     {
 
         _Health -= damageValue;

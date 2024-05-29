@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TowerTypes
+public class Neutrophil_ProjectileTower : Tower_Base
 {
-    Macrophage,
-    Neutrophil,
-    Basophil
+
 }

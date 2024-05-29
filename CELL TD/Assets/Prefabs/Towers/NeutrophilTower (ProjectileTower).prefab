@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ea62b230270793d43ba7d7189004f7a9, type: 3}
       propertyPath: m_Name
-      value: NeutrophilTower
+      value: NeutrophilTower (ProjectileTower)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -83,16 +83,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1d533b7c1e86cc45ad289ca6f4a1c3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerTypeTag: 1
-  buildCost: 80
-  refundPercentage: 0.85
+  _TowerInfo: {fileID: 11400000, guid: 5441e1783949848439bb1c55a7867836, type: 2}
   range: {fileID: 4438946523483774491}
-  damageValue: 10
-  numberOfTargets: 0
   targets: []
-  towerLevel: 1
-  upgradeCost: 20
-  fireRate: 0.5
 --- !u!114 &2529162555403338560
 MonoBehaviour:
   m_ObjectHideFlags: 0

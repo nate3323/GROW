@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: eb24dd541293d9e4091ed3d862023cc0, type: 3}
       propertyPath: m_Name
-      value: LymphocyoteTower
+      value: Lymphocyte (SlowingAOETower)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -83,16 +83,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40f4b6b7497c23740b2b171f7741a107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerTypeTag: 2
-  buildCost: 100
-  refundPercentage: 0.85
+  _TowerInfo: {fileID: 11400000, guid: 35d5f31950d1d7f43ad08ec16ceb4bd5, type: 2}
   range: {fileID: 5241760635518110145}
-  damageValue: 5
-  numberOfTargets: 0
   targets: []
-  towerLevel: 1
-  upgradeCost: 50
-  fireRate: 0
 --- !u!114 &7737114546434829329
 MonoBehaviour:
   m_ObjectHideFlags: 0
