@@ -13,8 +13,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [Header("Wave Settings")]
     [Tooltip("A list of Wave scriptable Objects that have a list of enemies to spawn")]
-    [SerializeField]
-    private List<Wave> _Waves;
+    private List<Waves> _Waves;
 
     [Tooltip("The time between enemies spawning")]
     [SerializeField]
@@ -28,13 +27,15 @@ public class EnemySpawner : MonoBehaviour
 
     private int _CurrentWave;
 
+    private int _CurrentWaveInfo = 0;
+
     private Transform _SpawnedEnemiesParent;
 
 
     private void Awake()
     {
+        _Waves = Resources.LoadAll<Waves>("").ToList();
         _CurrentWave = 0;
-
         _SpawnedEnemiesParent = GameObject.Find("Spawned Enemies Parent").transform;
     }
 
@@ -45,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
     }
 
     public void StartNextWave()
-    {       
+    {
         StartCoroutine(Spawn(_CurrentWave++));
     }
     public void StopSpawner()
@@ -54,20 +55,23 @@ public class EnemySpawner : MonoBehaviour
     }
     IEnumerator Spawn(int currentWave)
     {
+        Debug.Log(currentWave);
+        Debug.Log(_Waves[0].WaveInfo[0].Enemies[0].Enemy.name);
         int currentEnemyType = 0;
-        EnemyTypes type = _Waves[currentWave].Enemies[currentEnemyType].EnemyInfo.Type;
-        int enemiesOfCurrentType = _Waves[currentWave].Enemies[currentEnemyType].NumberToSpawn;
+        EnemyTypes type = _Waves[0].WaveInfo[_CurrentWaveInfo].Enemies[currentEnemyType].Enemy.Type;
+        int enemiesOfCurrentType = _Waves[_CurrentWaveInfo].WaveInfo[currentWave].Enemies[currentEnemyType].amount;
         int totalEnemies = EnemiesInCurrentWave();
         GameObject enemy = null;
         
         for (int i = 0; i < totalEnemies; i++)
         {
             if( enemiesOfCurrentType == 0 ) {
-                type = _Waves[currentWave].Enemies[currentEnemyType].EnemyInfo.Type;
-                enemiesOfCurrentType = _Waves[currentWave].Enemies[currentEnemyType].NumberToSpawn;
+                type = _Waves[_CurrentWaveInfo].WaveInfo[currentWave].Enemies[currentEnemyType].Enemy.Type;
+                enemiesOfCurrentType = _Waves[_CurrentWaveInfo].WaveInfo[currentWave].Enemies[currentEnemyType].amount;
             }
 
-            enemy = Instantiate(_Waves[currentWave].Enemies[currentEnemyType].EnemyInfo.Prefab, _SpawnedEnemiesParent);
+            enemy = Instantiate(_Waves[_CurrentWaveInfo].WaveInfo[currentWave].Enemies[currentEnemyType].Enemy.Prefab, _SpawnedEnemiesParent);
+            float delayBetween = _Waves[_CurrentWaveInfo].WaveInfo[currentWave].Enemies[currentEnemyType].timeBetween;
 
 
             enemiesOfCurrentType--;
@@ -76,7 +80,7 @@ public class EnemySpawner : MonoBehaviour
                 currentEnemyType++;
             }
 
-            yield return new WaitForSeconds(_TimeBetweenSpawns);
+            yield return new WaitForSeconds(delayBetween);
         }
 
     }
@@ -84,11 +88,11 @@ public class EnemySpawner : MonoBehaviour
 
     public int EnemiesInCurrentWave()
     {
-        Wave current = _Waves[_CurrentWave - 1];
+        Wave current = _Waves[_CurrentWaveInfo].WaveInfo[_CurrentWave-1];
         int tally = 0;
-        foreach(EnemySpawnInfo cats in current.Enemies)
+        foreach(SpawnInfo enemy in current.Enemies)
         {
-            tally += cats.NumberToSpawn;
+            tally += enemy.amount;
         }
         return tally;
     }
