@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 7847912624285093134}
   - component: {fileID: 5178420519930522020}
   m_Layer: 0
-  m_Name: MacrophageTower
+  m_Name: Macrophage (UnitSpawnerTower)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,16 +81,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d710e7c1c5c77c4280dc180106b03fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerTypeTag: 0
-  buildCost: 75
-  refundPercentage: 0.85
-  range: {fileID: 0}
-  damageValue: 0
-  numberOfTargets: 0
+  _TowerInfo: {fileID: 11400000, guid: 17deb387edede7946afda801485d3550, type: 2}
+  range: {fileID: 7847912624285093134}
   targets: []
-  towerLevel: 1
-  upgradeCost: 25
-  fireRate: 2
   unitPrefab: {fileID: 4808694354577833756, guid: 2eed3cd9977a85949ad2a42bcde5fe8a, type: 3}
   maxUnits: 0
   spawnPoint: {fileID: 3273052641148002110}

@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
         _StateMachine.AllowUnknownStates = true;
 
         // Set the initial state of the state machine.
-        _StateMachine.SetState(startUpState);
+        SetInitialGameState();
     }
 
     public void NotifyInitializationCompleted()
@@ -134,6 +134,44 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
+    /// This function determines the appropriate initial game state for the GameManager to start in.
+    /// </summary>
+    private void SetInitialGameState()
+    {
+        // If we are starting in scene other than the StartUp scene, then run the startup logic to make sure the game is properly initialized.
+        if (SceneManager.GetActiveScene().name != "StartUp")
+            StartUp.DoStartUpWork();
+
+
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "StartUp":
+                SetGameState(typeof(GameState_StartUp));
+                return;
+
+            case "MainMenu":
+                SetGameState(typeof(GameState_MainMenu));
+                return;
+
+            case "LevelSelect":
+                SetGameState(typeof(GameState_LevelSelect));
+                return;            
+        }
+
+
+        if (SceneManager.GetActiveScene().name.StartsWith("Level_"))
+        {
+            SetGameState(typeof(GameState_InGame));
+            return;
+        }
+
+
+        // No corresponding state was found.
+        Debug.LogError($"The GameManager does not have a game state corresponding with the scene \"{SceneManager.GetActiveScene().name}\"! Add one in GameManager.SetInitialGameState(). Defaulting to \"StartUp\" this time.");
+        SetGameState(typeof(GameState_StartUp));
+    }
+
+    /// <summary>
     /// Sets the current state to the state that has the specified type.
     /// </summary>
     /// <param name="stateClassName"></param>
@@ -146,7 +184,7 @@ public class GameManager : MonoBehaviour
 
     public bool IsInitialized { get; private set; }
 
-    public int CurrentLevelNumber { get; set; }
+    public int CurrentLevelNumber { get; set; } = 1;
     public HealthSystem HealthSystem { get; private set; }
     public MoneySystem MoneySystem { get; private set; }
 }

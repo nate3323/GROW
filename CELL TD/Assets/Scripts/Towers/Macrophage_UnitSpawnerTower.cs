@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitSpawner:Tower
+public class Macrophage_UnitSpawnerTower : Tower_Base
 {
     [Header("Spawned Unit Information")]
     [SerializeField, Tooltip("The prefab of the units to spawn")]

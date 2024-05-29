@@ -9,9 +9,6 @@ using UnityEngine;
 /// </summary>
 public class GameState_ShutDown : GameState_Base
 {
-    bool _ShutdownIsComplete;
-
-
     public GameState_ShutDown(GameManager parent)
         : base(parent)
     {
@@ -22,10 +19,7 @@ public class GameState_ShutDown : GameState_Base
     public override void OnEnter()
     {
         // Do shutdown work.
-        DoShutDownWork();
-
-        // Set flag to indicate that shutdown work is complete.
-        _ShutdownIsComplete = true;
+        ShutDown.DoShutDownWork();
     }
 
     public override void OnExit()
@@ -35,18 +29,10 @@ public class GameState_ShutDown : GameState_Base
 
     public override void OnUpdate()
     {
-        if (_ShutdownIsComplete)
+        if (ShutDown.ShutDownIsComplete)
         {
             Application.Quit();
         }
     }
 
-    /// <summary>
-    /// Handles any shutdown/cleanup logic.
-    /// </summary>
-    private void DoShutDownWork()
-    {
-
-    }
-    
 }

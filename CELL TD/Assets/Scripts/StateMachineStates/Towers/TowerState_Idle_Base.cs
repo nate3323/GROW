@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class TowerState_Idle_Base : TowerState_Base
 {
-    public TowerState_Idle_Base(Tower parent)
+    public TowerState_Idle_Base(Tower_Base parent)
         : base(parent)
     {
 

@@ -11,8 +11,6 @@ using UnityEngine.InputSystem.Utilities;
 /// </summary>
 public class GameState_StartUp : GameState_Base
 {
-    private bool _StartUpIsComplete;
-
     private float _Timer;
     private bool _AnyButtonPressed;
 
@@ -29,10 +27,7 @@ public class GameState_StartUp : GameState_Base
     public override void OnEnter()
     {
         // Do startup work.
-        DoStartUpWork();
-
-        // Set flag to indicate that startup work is complete.
-        _StartUpIsComplete = true;
+        StartUp.DoStartUpWork();
     }
 
     public override void OnExit()
@@ -44,19 +39,11 @@ public class GameState_StartUp : GameState_Base
     {
         // Switch to main menu after 5 seconds for now.
         _Timer += Time.deltaTime;
-        if (_StartUpIsComplete &&
+        if (StartUp.StartUpIsComplete &&
             (_Timer >= 5.0f || _AnyButtonPressed))
         {
             _parent.NotifyInitializationCompleted();
         }
-    }
-
-    /// <summary>
-    /// Handles any startup logic.
-    /// </summary>
-    private void DoStartUpWork()
-    {
-
     }
 
     private void OnAnyButtonPress(InputControl control)

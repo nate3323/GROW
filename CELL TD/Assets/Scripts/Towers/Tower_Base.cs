@@ -7,25 +7,14 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(StateMachine))]
-public class Tower : MonoBehaviour
+public class Tower_Base : MonoBehaviour
 {
-    [Tooltip("This field gives us an easy way to find the TowerInfo object that corresponds to this tower.")]
-    [SerializeField] TowerTypes towerTypeTag;
-
-    [SerializeField,Min(1)]
-    protected float buildCost;
-    
-    [Tooltip("This is the percentage of the cost that is refunded when the player destroys the tower.")]
-    [Range(0f, 1f)]
-    [SerializeField]
-    protected float refundPercentage = 0.85f;
+    [Tooltip("This tower's stats information")]
+    [SerializeField] protected TowerInfo_Base _TowerInfo;
     
     [SerializeField]
     protected SphereCollider range;
-    [SerializeField, Min(1)]
-    protected float damageValue;
-    [SerializeField]
-    protected int numberOfTargets;
+
 
     protected Type _TargetEnemyType = typeof(Enemy_Base);
 
@@ -35,25 +24,19 @@ public class Tower : MonoBehaviour
     protected SphereCollider _Collider;
 
     protected StateMachine _stateMachine;
-    public int towerLevel = 1;
-    [SerializeField] private float upgradeCost;
+    protected int _TowerLevel = 1;
 
-    [SerializeField]
-    protected float fireRate;
+    protected float _DamageValue;
+    protected float _FireRate;
+    protected float _NumberOfTargets;
+
+
     
-    public float FireRate
+    private void Start()
     {
-        set 
-        { 
-            fireRate = value;
-        }
-        get 
-        { 
-            return fireRate; 
-        }
+        InitTowerStats();
     }
 
-    
     private void OnEnable()
     {
         // This corrects the problem with our prefabs. For example, the laser tower
@@ -97,6 +80,17 @@ public class Tower : MonoBehaviour
 
             targets.Remove(collider.gameObject);
         }
+    }
+
+    /// <summary>
+    /// Initializes the stats for this tower.
+    /// Subclasses should override this function to init stats specific to that tower type.
+    /// </summary>
+    protected virtual void InitTowerStats()
+    {
+        _DamageValue = _TowerInfo.DamageValue;
+        _FireRate = _TowerInfo.FireRate;
+        _NumberOfTargets = _TowerInfo.NumberOfTargets;
     }
 
     /// <summary>
@@ -174,7 +168,7 @@ public class Tower : MonoBehaviour
     }
     public virtual void Upgrade()
     {
-        towerLevel++;
+        _TowerLevel++;
     }
     void OnMouseEnter()
     {
@@ -190,7 +184,6 @@ public class Tower : MonoBehaviour
 
     void OnMouseUpAsButton()
     {
-
         if (enabled)
         {
             
@@ -211,26 +204,7 @@ public class Tower : MonoBehaviour
     }
     public float GetDamagenValue()
     {
-        return damageValue;
-    }
-
-    public float GetBuildCost()
-    {
-        return buildCost;
-    }
-    public float GetUpgradeCost()
-    {
-        return upgradeCost;
-    }
-    public float SetUpgradeCost(float newCost)
-    {
-        upgradeCost = newCost;
-        return upgradeCost;
-    }
-
-    public float GetRefundPercentage()
-    {
-        return refundPercentage;
+        return _DamageValue;
     }
 
     public virtual void EnableTargetDetection()
@@ -247,9 +221,16 @@ public class Tower : MonoBehaviour
 
 
 
-    public float BuildCost { get { return buildCost; } }
-    public float DamageValue { set { damageValue = value; } get { return damageValue; } }
+    public float BuildCost { get { return _TowerInfo.BuildCost; } }
+    public float RefundPercentage { get { return _TowerInfo.RefundPercentage; } }
+    public float UpgradeCost { get { return _TowerInfo.UpgradeCost; } }
+    public float DamageValue { get { return _TowerInfo.DamageValue; } }
+    public float FireRate { get { return _TowerInfo.FireRate; } }
+    public TowerInfo_Base TowerInfo { get { return _TowerInfo; } }
+
+    public int NumberOfTargets { get { return _TowerInfo.NumberOfTargets; } }
     public bool IsTargetDetectionEnabled { get { return _Collider.enabled; } }
+    public int TowerLevel { get { return _TowerLevel; } }
 
     public Type TargetEnemyType
     {
@@ -265,5 +246,5 @@ public class Tower : MonoBehaviour
         }
     }
 
-    public TowerTypes TowerTypeTag { get { return towerTypeTag; } }
+    public TowerTypes TowerType { get { return _TowerInfo.TowerType; } }
 }
