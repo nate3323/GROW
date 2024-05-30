@@ -109,6 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ButtonsParent: {fileID: 7873574857729964519}
   _TowerSelectorButtonPrefab: {fileID: 72163972175948286, guid: 27a1f1176e7091849920ea3eee541f10, type: 3}
+  _placer: {fileID: 2142549424214715536, guid: b0b151819c84c6d4298fba0769d9c21b, type: 3}
 --- !u!1 &5279319221640252189
 GameObject:
   m_ObjectHideFlags: 0
