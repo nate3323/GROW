@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class placer : MonoBehaviour
 {
@@ -13,43 +14,113 @@ public class placer : MonoBehaviour
     [SerializeField]
     private Material highlightMat;
 
+    [SerializeField]
+    private Material badMat;
+
+    [SerializeField]
+    private LayerMask layerToCheck;
+
+    private bool overlapping = false;
+
     void Start()
     {
-        mainCamera = Camera.main;
         MeshFilter[] sourceMeshFilters = tower.GetComponentsInChildren<MeshFilter>();
 
-        // Iterate through all the MeshFilters found
         foreach (MeshFilter sourceMeshFilter in sourceMeshFilters)
         {
-            //Parent
             GameObject newModel = new GameObject("part");
             newModel.transform.parent = transform;
 
-            //Add Components
             newModel.AddComponent<MeshFilter>();
             newModel.AddComponent<MeshRenderer>();
 
-            //Set Components
-            newModel.GetComponent<MeshFilter>().sharedMesh = sourceMeshFilter.sharedMesh;
-            newModel.GetComponent<MeshFilter>().transform.localScale = sourceMeshFilter.transform.localScale;
-            for (int i = 0; i < newModel.AddComponent<MeshRenderer>().materials.Length; i++)
-            {
-                newModel.AddComponent<MeshRenderer>().materials[i] = highlightMat;
-            }
+            MeshFilter newMeshFilter = newModel.GetComponent<MeshFilter>();
+            MeshRenderer newMeshRenderer = newModel.GetComponent<MeshRenderer>();
+
+            newMeshFilter.sharedMesh = sourceMeshFilter.sharedMesh;
+
+            newMeshFilter.transform.localScale = sourceMeshFilter.transform.localScale;
         }
+
+        UpdateMats(true);
+        overlapping = true;
     }
 
     void Update()
     {
-        Vector3 mouseScreenPosition = Input.mousePosition;
+        // Get the mouse position in screen space
+        Vector3 mouseScreenPos = Input.mousePosition;
+        mouseScreenPos.z = Camera.main.transform.position.y;
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
 
-        Ray ray = mainCamera.ScreenPointToRay(mouseScreenPosition);
+        mouseWorldPos.y = 0f;
+        transform.position = mouseWorldPos;
 
-        if (Physics.Raycast(ray, out RaycastHit hitInfo))
+        CheckOverlap();
+
+        if (Input.GetButtonDown("Fire1"))
         {
-            Vector3 worldMousePosition = hitInfo.point;
+            Debug.Log(info.BuildCost);
+            if (tower && GameObject.FindGameObjectWithTag("Money").GetComponent<MoneySystem>().AddCurrency((int)info.BuildCost) && !overlapping && !IsOverUI())
+            {
+                PlaceTower();
+            }
+        }
+    }
 
-            transform.position = worldMousePosition;
+    private bool IsOverUI()
+    {
+        return EventSystem.current.IsPointerOverGameObject();
+    }
+
+    private void PlaceTower()
+    {
+        var newTower = Instantiate(tower);
+        newTower.transform.position = transform.position;
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+        Destroy(this);
+    }
+
+    private void CheckOverlap()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.1f, layerToCheck);
+        if (colliders.Length > 0)
+        {
+            overlapping = true;
+        }
+        else
+        {
+            overlapping = false;
+        }
+
+        UpdateMats(overlapping);
+    }
+
+    private void UpdateMats(bool overlap)
+    {
+        Material targetMat = null;
+        if (overlap)
+        {
+            targetMat = badMat;
+        }
+        else
+        {
+            targetMat = highlightMat;
+        }
+
+        MeshRenderer[] meshRenderers = GetComponentsInChildren<MeshRenderer>();
+
+        foreach (MeshRenderer meshRenderer in meshRenderers)
+        {
+            Material[] newMaterials = meshRenderer.materials;
+            for (int i = 0; i < newMaterials.Length; i++)
+            {
+                newMaterials[i] = targetMat;
+            }
+            meshRenderer.materials = newMaterials;
         }
     }
 }
