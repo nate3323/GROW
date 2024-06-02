@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: Macrophage (Unit Spawner Tower)
   TowerType: 1
-  UiIcon: {fileID: 21300000, guid: 2427d3a17b5b2b94b959c6d0ebdd6792, type: 3}
+  DisplayIcon: {fileID: 21300000, guid: 2427d3a17b5b2b94b959c6d0ebdd6792, type: 3}
   Prefab: {fileID: 6176236417056638460, guid: 1a9cb39fcfc7ad84baf11535f92106c3, type: 3}
   BuildCost: 0
-  RefundPercentage: 0.85
-  UpgradeCost: 0
-  DamageValue: 0
-  FireRate: 0
-  NumberOfTargets: 0
+  BaseRefundPercentage: 0.85
+  BaseUpgradeCost: 0
+  BaseMaxHealth: 100
+  BaseDamageValue: 0
+  BaseFireRate: 0
+  BaseNumberOfTargets: 0
+  LevelUpDefinitions: []
