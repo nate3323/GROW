@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEditor.VersionControl.Asset;
 
 
 
@@ -70,7 +72,8 @@ public class StateMachine : MonoBehaviour
     /// <returns>Returns true if a state machine transition was triggered, or false otherwise.</returns>
     private bool DoSpecificStateTransitionsCheck()
     {
-        if (!_fromStateTransitions.TryGetValue(CurrentState.Name, out List<Transition> transitions))
+        if (CurrentState == null ||
+            !_fromStateTransitions.TryGetValue(CurrentState.Name, out List<Transition> transitions))
             return false;
 
         foreach (Transition t in transitions)
@@ -137,7 +140,7 @@ public class StateMachine : MonoBehaviour
     public bool SetState(IState state)
     {
         if (state == null)
-            throw new Exception("The passed in state is null!");
+            throw new ArgumentNullException("The passed in state is null!");
 
 
         return ChangeState(state);
@@ -272,6 +275,25 @@ public class StateMachine : MonoBehaviour
     }
 
     /// <summary>
+    /// This is the same as AddTransitionFromState() except that it lets you add a list of such transitions all in one function call.
+    /// </summary>
+    public void AddTransitionsFromState(params (IState fromState, Transition transition)[] transitionsInfo)
+    {
+        if (transitionsInfo == null || transitionsInfo.Length == 0)
+            throw new ArgumentNullException("The passed in transition info array is null or empty!");
+
+
+        for (int i = 0; i < transitionsInfo.Length; i++)
+        {
+            if (transitionsInfo[i].fromState == null || transitionsInfo[i].transition == null)
+                Debug.LogError($"Skipping the transition at index {i} because the fromState, transition, or both are null!");
+
+            AddTransitionFromState(transitionsInfo[i].fromState,
+                                   transitionsInfo[i].transition);
+        }
+    }
+
+    /// <summary>
     /// This function adds a transition that can occur from any other state.
     /// </summary>
     /// <param name="transition">A transition object that defines the state to transition into and the condition that must be met for this transition to occur.</param>
@@ -288,6 +310,57 @@ public class StateMachine : MonoBehaviour
 
         // Add the transition's target state to the states list if it isn't already there.
         AddStateToLookupTables(transition.ToState);
+    }
+
+    /// <summary>
+    /// This is the same as AddTransitionFromAnyState() except that it lets you add a list of such transitions all in one function call.
+    /// </summary>
+    public void AddTransitionsFromAnyState(params Transition[] transitions)
+    {
+        if (transitions == null || transitions.Length == 0)
+            throw new ArgumentNullException("The passed in transitions array is null or empty!");
+
+
+        for (int i = 0; i < transitions.Length; i++)
+        {
+            Transition transition = transitions[i];
+
+            if (transition == null)
+                Debug.LogError($"Skipping the transition at index {i} because it is null!");
+
+            AddTransitionFromAnyState(transition);
+        }
+    }
+
+    /// <summary>
+    /// This method adds a state into the state machine without being attached to any transitions.
+    /// A state added this way will never be entered unless you add transitions for it, or enter it
+    /// manually via the SetState() method.
+    /// </summary>
+    /// <param name="state"></param>
+    public void AddState(IState state)
+    {
+        if (state == null)
+            throw new ArgumentNullException("The passed in state is null!");
+
+        AddStateToLookupTables(state);
+    }
+
+    public void AddStates(params IState[] states)
+    {
+        if (states == null || states.Length == 0)
+            throw new ArgumentNullException("The passed in states array is null or empty!");
+
+
+        for (int i = 0; i < states.Length; i++)
+        {
+            IState state = states[i];
+
+            if (state == null)
+                Debug.LogError($"Skipping the state at index {i} because it is null!");
+
+            AddStateToLookupTables(state);
+        }
     }
 
     private void AddStateToLookupTables(IState state)
