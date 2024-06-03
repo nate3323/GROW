@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class placer : MonoBehaviour
+public class Placer : MonoBehaviour
 {
     public GameObject tower;
     public TowerInfo_Base info;
