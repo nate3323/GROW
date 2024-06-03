@@ -1,8 +1,9 @@
+using Assets.Scripts.Towers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -26,9 +27,14 @@ public class Tower_Base : MonoBehaviour
     protected StateMachine _stateMachine;
     protected int _TowerLevel = 1;
 
+    protected float _Health;
+    protected float _MaxHealth;
     protected float _DamageValue;
     protected float _FireRate;
-    protected float _NumberOfTargets;
+    protected int _NumberOfTargets;
+    protected float _NextUpgradeCost;
+    protected float _RefundPercentage; // The percentage of the build cost that is recovered when you destroy the tower.
+    protected float _RefundAmount; // The amount of nutrients recovere when destroying the tower.
 
 
     
@@ -83,14 +89,29 @@ public class Tower_Base : MonoBehaviour
     }
 
     /// <summary>
+    /// Displays the TowerUI when the user clicks on the tower.
+    /// </summary>
+    private void OnMouseUp()
+    {
+        TowerUI.ShowTowerUI(this);
+    }
+
+    /// <summary>
     /// Initializes the stats for this tower.
     /// Subclasses should override this function to init stats specific to that tower type.
     /// </summary>
     protected virtual void InitTowerStats()
     {
-        _DamageValue = _TowerInfo.DamageValue;
-        _FireRate = _TowerInfo.FireRate;
-        _NumberOfTargets = _TowerInfo.NumberOfTargets;
+        _Health = _TowerInfo.BaseMaxHealth;
+        _MaxHealth = _TowerInfo.BaseMaxHealth;
+        _DamageValue = _TowerInfo.BaseDamageValue;
+        _FireRate = _TowerInfo.BaseFireRate;
+        _NumberOfTargets = _TowerInfo.BaseNumberOfTargets;
+        _NextUpgradeCost = _TowerInfo.BaseUpgradeCost;
+        _RefundPercentage = _TowerInfo.BaseRefundPercentage;
+        _RefundAmount = _TowerInfo.BuildCost * _RefundPercentage;
+
+        _TowerLevel = 1;
     }
 
     /// <summary>
@@ -166,10 +187,7 @@ public class Tower_Base : MonoBehaviour
     {
 
     }
-    public virtual void Upgrade()
-    {
-        _TowerLevel++;
-    }
+
     void OnMouseEnter()
     {
         //gameObject.GetComponentInParent<TowerBase>().hoveredOver = true;
@@ -202,10 +220,6 @@ public class Tower_Base : MonoBehaviour
     {
         Destroy(this);
     }
-    public float GetDamagenValue()
-    {
-        return _DamageValue;
-    }
 
     public virtual void EnableTargetDetection()
     {
@@ -219,16 +233,90 @@ public class Tower_Base : MonoBehaviour
         targets.Clear();
     }
 
+    /// <summary>
+    /// Applies a level up to this tower.
+    /// </summary>
+    /// <remarks>
+    /// This function only handles stats that are common to all tower types.
+    /// Each tower type has an override of this function that will call this base class version
+    /// first, and then once that returns it will then handle all stats specific to that tower type.
+    /// </remarks>
+    /// <param name="upgradeDef"></param>
+    public virtual void Upgrade(TowerUpgradeDefinition upgradeDef)
+    {
+        // Increment the tower's level.
+        _TowerLevel++;
+
+        // Iterate through all of the stat upgrades in this tower upgrade definition.
+        foreach (TowerStatUpgradeDefinition statUpgradeDef in upgradeDef.StatUpgradeDefinitions)
+        {
+            // Check which stat needs to be updated next.
+            switch (statUpgradeDef.TowerStat)
+            {
+                case TowerStats.DamageValue:
+                    _DamageValue += statUpgradeDef.UpgradeAmount;
+                    break;
+                case TowerStats.FireRate:
+                    _FireRate += statUpgradeDef.UpgradeAmount;
+                    break;
+                case TowerStats.MaxHealth:
+                    _MaxHealth += statUpgradeDef.UpgradeAmount;
+                    _Health += statUpgradeDef.UpgradeAmount;
+                    break;
+                case TowerStats.NumberOfTargets:
+                    _NumberOfTargets += (int) statUpgradeDef.UpgradeAmount;
+                    break;
+                case TowerStats.RefundPercentage:
+                    _RefundPercentage += statUpgradeDef.UpgradeAmount;
+                    break;
+
+
+                default:
+                    // If we encountered a stat type that isn't common to all tower types, then simply do nothing.
+                    // The subclass' version of this function will handle it after calling this base class method.
+                    break;
+
+            } // end switch
+
+        } // end foreach TowerStatUpgradeDefinition
+    }
+
 
 
     public float BuildCost { get { return _TowerInfo.BuildCost; } }
-    public float RefundPercentage { get { return _TowerInfo.RefundPercentage; } }
-    public float UpgradeCost { get { return _TowerInfo.UpgradeCost; } }
-    public float DamageValue { get { return _TowerInfo.DamageValue; } }
-    public float FireRate { get { return _TowerInfo.FireRate; } }
+    public float RefundPercentage { get { return _RefundPercentage; } }
+
+    public float RefundAmount {  get { return _RefundAmount; } }
+    public float NextUpgradeCost { get { return _NextUpgradeCost; } }
+    public float Health 
+    { 
+        get { return _Health; } 
+        set 
+        { 
+            _Health = value; 
+
+            // Is this tower dead?
+            if (_Health <= 0)
+            {
+                // If this tower is selected in the TowerUI, then close the UI.
+                if (TowerUI.Instance.ClickedTower == this)
+                {
+                    TowerUI.HideTowerUI();
+                }
+
+                // Destroy this tower.
+                Destroy(gameObject);                
+            }
+        } 
+    }
+
+    public float MaxHealth { get { return _MaxHealth; } }
+
+    public float DamageValue { get { return _DamageValue; } }
+    public float FireRate { get { return _FireRate; } }
     public TowerInfo_Base TowerInfo { get { return _TowerInfo; } }
 
-    public int NumberOfTargets { get { return _TowerInfo.NumberOfTargets; } }
+    public int NumberOfTargets { get { return _NumberOfTargets; } }
     public bool IsTargetDetectionEnabled { get { return _Collider.enabled; } }
     public int TowerLevel { get { return _TowerLevel; } }
 
@@ -242,7 +330,7 @@ public class Tower_Base : MonoBehaviour
                 throw new Exception($"The passed in enemy type is not a subclass of EnemyBase! The tower in question is \"{gameObject.name}\" of type {this.GetType()}");
             }
 
-            _TargetEnemyType = value; 
+            _TargetEnemyType = value;
         }
     }
 
