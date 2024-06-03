@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8506309540444449502}
-  - component: {fileID: 5520567506159590566}
+  - component: {fileID: 3548275353814993158}
   m_Layer: 0
   m_Name: Placer
   m_TagString: Placer
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5520567506159590566
+--- !u!114 &3548275353814993158
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -50,4 +50,4 @@ MonoBehaviour:
   badMat: {fileID: 2100000, guid: cc15eff887c24d84587575a9db7db042, type: 2}
   layerToCheck:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
