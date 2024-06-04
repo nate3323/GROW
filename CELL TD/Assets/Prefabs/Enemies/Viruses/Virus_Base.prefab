@@ -61,6 +61,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _EnemyInfo: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
+  slowingEntities: []
+  stoppingEntities: []
   isATarget: 0
 --- !u!195 &6997892578297157759
 NavMeshAgent:
