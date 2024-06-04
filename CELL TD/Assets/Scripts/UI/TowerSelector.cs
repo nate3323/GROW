@@ -55,7 +55,7 @@ public class TowerSelector : MonoBehaviour
         for (int i = 0; i < _TowerInfosCollection.Count; i++)
         {
             TowerSelectorButton button = Instantiate(_TowerSelectorButtonPrefab, _ButtonsParent).GetComponent<TowerSelectorButton>();
-            button.image.sprite = _TowerInfosCollection[i].UiIcon;
+            button.image.sprite = _TowerInfosCollection[i].DisplayIcon;
 
             // Store the tower type in the button's TowerType property.
             button.TowerType = _TowerInfosCollection[i].TowerType;

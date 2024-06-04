@@ -1,3 +1,5 @@
+using Assets.Scripts.Towers;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -12,10 +14,10 @@ using UnityEngine;
 public class TowerInfo_Base : ScriptableObject
 {
     [Header("General Tower Info")]
-    
+
     public string DisplayName; // The name displayed for this tower in the UI
     public TowerTypes TowerType; // The type of this tower.
-    public Sprite UiIcon; // The icon used for this tower in the UI
+    public Sprite DisplayIcon; // The icon used for this tower in the UI
     public GameObject Prefab; // The prefab for this tower type
 
 
@@ -28,22 +30,52 @@ public class TowerInfo_Base : ScriptableObject
     [Tooltip("This is the percentage of the cost that is refunded when the player destroys the tower.")]
     [Range(0f, 1f)]
     [SerializeField]
-    public float RefundPercentage = 0.85f;
+    public float BaseRefundPercentage = 0.85f;
 
-    [Tooltip("How much it costs the player to upgrade this tower.")]
-    [SerializeField, Min(0)] 
+    [Tooltip("How much it costs the player to upgrade this tower the first time.")]
+    [SerializeField, Min(0)]
+    public float BaseUpgradeCost;
+
+    [Tooltip("The starting max health of this tower.")]
+    [SerializeField, Min(0)]
+    public float BaseMaxHealth = 100f;
+
+    [Tooltip("The base damage done by this tower if it has direct attacks.")]
+    [SerializeField, Min(0)]
+    public float BaseDamageValue;
+
+    [Tooltip("The base fire rate of this tower if it has direct attacks.")]
+    [SerializeField, Min(0)]
+    public float BaseFireRate;
+
+    [Tooltip("How many targets a level 1 instance of this tower can have at one time.")]
+    [SerializeField, Min(0)]
+    public int BaseNumberOfTargets;
+
+    [Header("Tower Upgrades")]
+
+    [Tooltip("Defines the upgrades for this tower type. The first item in the list represents the first level up, the next one the 2nd, and so on.")]
+    public List<TowerUpgradeDefinition> LevelUpDefinitions;
+}
+
+[Serializable]
+public class TowerUpgradeDefinition
+{
+    [Tooltip("How much this upgrade costs the player.")]
     public float UpgradeCost;
 
-    [Tooltip("The damage done by this tower if it has direct attacks.")]
-    [SerializeField, Min(0)]
-    public float DamageValue;
+    [Space(10)]
 
-    [Tooltip("The fire rate of this tower if it has direct attacks.")]
-    [SerializeField, Min(0)]
-    public float FireRate;
+    [Tooltip("This list defines which stats get upgraded by this level up for this tower type, and by how much.")]
+    public List<TowerStatUpgradeDefinition> StatUpgradeDefinitions;
+}
 
-    [Tooltip("How many targets this tower can have at one time.")]
-    [SerializeField, Min(0)]
-    public int NumberOfTargets;
+[Serializable]
+public class TowerStatUpgradeDefinition
+{
+    [Tooltip("The stat to upgrade.")]
+    public TowerStats TowerStat;
 
+    [Tooltip("How much this stat increases by.")]
+    public float UpgradeAmount;
 }

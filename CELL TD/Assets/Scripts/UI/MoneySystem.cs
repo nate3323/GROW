@@ -43,15 +43,23 @@ public class MoneySystem : MonoBehaviour
         //If negative, subtract but make sure that money can be subtracted
         else
         {
-            if (_moneyAmount + amount >= 0)
-            {
-                StartCoroutine(AnimateText(Color.red));
-                _moneyAmount += amount;
-                return true;
-            }
-            StartCoroutine(AnimateText(Color.red));
+            SubtractCurrency(Mathf.Abs(amount));
             return false;
         }
+    }
+
+    public bool SubtractCurrency(int amount)
+    {
+        if (_moneyAmount - amount >= 0)
+        {
+            StartCoroutine(AnimateText(Color.red));
+            _moneyAmount -= amount;
+            return true;
+        }
+
+        StartCoroutine(AnimateText(Color.red));
+        return false;
+        
     }
 
     [ContextMenu("AddCurrency")]
