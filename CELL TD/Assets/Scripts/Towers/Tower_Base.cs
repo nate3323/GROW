@@ -31,6 +31,7 @@ public class Tower_Base : MonoBehaviour
     protected float _MaxHealth;
     protected float _DamageValue;
     protected float _FireRate;
+    protected float _Range;
     protected int _NumberOfTargets;
     protected float _NextUpgradeCost;
     protected float _RefundPercentage; // The percentage of the build cost that is recovered when you destroy the tower.
@@ -41,6 +42,11 @@ public class Tower_Base : MonoBehaviour
     private void Start()
     {
         InitTowerStats();
+    }
+
+    protected void Update()
+    {
+        
     }
 
     private void OnEnable()
@@ -106,8 +112,9 @@ public class Tower_Base : MonoBehaviour
         _MaxHealth = _TowerInfo.BaseMaxHealth;
         _DamageValue = _TowerInfo.BaseDamageValue;
         _FireRate = _TowerInfo.BaseFireRate;
+        _Range = _TowerInfo.BaseRange;
         _NumberOfTargets = _TowerInfo.BaseNumberOfTargets;
-        _NextUpgradeCost = _TowerInfo.BaseUpgradeCost;
+        _NextUpgradeCost = _TowerInfo.LevelUpDefinitions[0].UpgradeCost;
         _RefundPercentage = _TowerInfo.BaseRefundPercentage;
         _RefundAmount = _TowerInfo.BuildCost * _RefundPercentage;
 

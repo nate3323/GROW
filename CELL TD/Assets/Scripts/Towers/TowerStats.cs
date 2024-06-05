@@ -22,21 +22,10 @@ namespace Assets.Scripts.Towers
         MaxHealth = 0,
         DamageValue,
         FireRate,
+        Range,
         NumberOfTargets,
         RefundPercentage,
         UpgradeCost,
-
-        // Bacteria-Specific Stats
-        // ----------------------------------------------------------------------------------------------------
-
-
-        // Fungi-Specific Stats
-        // ----------------------------------------------------------------------------------------------------
-
-
-        // Virus-Specific Stats
-        // ----------------------------------------------------------------------------------------------------
-
 
     }
 
@@ -58,20 +47,10 @@ namespace Assets.Scripts.Towers
             { TowerStats.MaxHealth,         "Max Health" },
             { TowerStats.DamageValue,       "Damage" },
             { TowerStats.FireRate,          "Fire Rate" },
+            { TowerStats.Range,             "Range" },
             { TowerStats.NumberOfTargets,   "Number of Targets" },
             { TowerStats.UpgradeCost,       "Upgrade Cost" },
             { TowerStats.RefundPercentage,  "Refund Percentage" },
-
-            // Bacteria-Specific Stats
-            // ----------------------------------------------------------------------------------------------------
-
-
-            // Fungi-Specific Stats
-            // ----------------------------------------------------------------------------------------------------
-
-
-            // Virus-Specific Stats
-            // ----------------------------------------------------------------------------------------------------
 
         };
 

@@ -14,6 +14,7 @@ public class EnemyInfo_Base : ScriptableObject
     [Header("General Enemy Info")]
     
     public string DisplayName; // The name displayed for this enemy in the UI
+    public string Description; // The description displayed in the UI
     public EnemyTypes Type; // The type of this enemy.
     public Sprite UiIcon; // The icon used for this enemy in the UI
     public GameObject Prefab; // The prefab for this enemy type
