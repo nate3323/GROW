@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7ba8130b6bc92e439f32f9a096d4e76, type: 3}
   m_Name: TowerInfo_Macrophage_UnitSpawnerTower
   m_EditorClassIdentifier: 
-  DisplayName: 
+  DisplayName: Macrophage (Unit Spawner Tower)
   Description: 
-  TowerType: 0
-  DisplayIcon: {fileID: 0}
-  Prefab: {fileID: 0}
-  TargetingType: 0
+  TowerType: 1
+  DisplayIcon: {fileID: 21300000, guid: 2427d3a17b5b2b94b959c6d0ebdd6792, type: 3}
+  Prefab: {fileID: 6176236417056638460, guid: 1a9cb39fcfc7ad84baf11535f92106c3, type: 3}
+  TargetingType: 2
   TargetedEnemyTypes: 
   BuildCost: 0
   BaseRefundPercentage: 0.85
@@ -27,4 +27,4 @@ MonoBehaviour:
   BaseRange: 3
   BaseNumberOfTargets: 0
   LevelUpDefinitions: []
-  DummyState: {fileID: 0}
+  DummyStat: 0

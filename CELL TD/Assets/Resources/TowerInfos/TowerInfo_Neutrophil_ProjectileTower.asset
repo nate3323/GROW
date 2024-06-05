@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75dce88525f59ae42975f55d5e2cf194, type: 3}
   m_Name: TowerInfo_Neutrophil_ProjectileTower
   m_EditorClassIdentifier: 
-  DisplayName: 
+  DisplayName: Neutrophil (Projectile Tower)
   Description: 
-  TowerType: 0
-  DisplayIcon: {fileID: 0}
-  Prefab: {fileID: 0}
-  TargetingType: 0
+  TowerType: 2
+  DisplayIcon: {fileID: 21300000, guid: 620d5a8b81ca46c47884cdc2974e70db, type: 3}
+  Prefab: {fileID: 5880325033198506782, guid: 1dbbb514d98788a4db9001999afe0718, type: 3}
+  TargetingType: 1
   TargetedEnemyTypes: 
   BuildCost: 0
   BaseRefundPercentage: 0.85
