@@ -19,7 +19,8 @@ public class DestroyEnemy : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            Destroy(other.gameObject);
+            //other.gameObject.GetComponent<Enemy_Base>().ApplyDamage(999999, null);
+            //Destroy(other.gameObject);
         }
     }
 }

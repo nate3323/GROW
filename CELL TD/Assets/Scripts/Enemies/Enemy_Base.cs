@@ -171,7 +171,12 @@ public class Enemy_Base : MonoBehaviour, IEnemy
         {
             StartCoroutine(PlayDeathSound());
 
-            targetingTower.targets.Remove(this.gameObject);                       
+            if (targetingTower)
+            {
+                targetingTower.targets.Remove(this.gameObject);
+            }
+
+            KillEnemy(1);
         }
     }
 
