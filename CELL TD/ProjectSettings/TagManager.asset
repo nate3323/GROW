@@ -6,13 +6,13 @@ TagManager:
   tags:
   - Enemy Spawn Point
   - Enemy Spawner
-  - Enemy
-  - Goal
+  - Placer
+  - Money
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Enemy
+  - Tower
   - Water
   - UI
   - 
