@@ -19,7 +19,7 @@ public class WaveManager : MonoBehaviour
 
     public static WaveManager Instance;
 
-    private int _TotalWavesInLevel;
+    private int _TotalWavesInLevel = 20; //TODO: Change Later
 
     private List<EnemySpawner> _EnemySpawners;
     private int _TotalEnemiesInWave;
@@ -60,7 +60,7 @@ public class WaveManager : MonoBehaviour
             EnemySpawner enemySpawner = spawner.GetComponent<EnemySpawner>();
             if(spawner.GetComponent<EnemySpawner>().NumberOfWaves > _TotalWavesInLevel)
             {
-                _TotalWavesInLevel = spawner.GetComponent<EnemySpawner>().NumberOfWaves;
+                //_TotalWavesInLevel = spawner.GetComponent<EnemySpawner>().NumberOfWaves;
                 _EnemySpawners.Add(spawner.GetComponent<EnemySpawner>());
             }
             else
