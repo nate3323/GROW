@@ -72,8 +72,9 @@ public class Enemy_Base : MonoBehaviour, IEnemy
     protected void Start()    
     {
         // Find the closest WayPoint and start moving there.
-        //FindNearestWayPoint();
-        //agent.SetDestination(_NextWayPoint.transform.position);
+        FindNearestWayPoint();
+
+        _NavMeshAgent.SetDestination(_NextWayPoint.transform.position);
     }
 
     /// <summary>
@@ -170,7 +171,12 @@ public class Enemy_Base : MonoBehaviour, IEnemy
         {
             StartCoroutine(PlayDeathSound());
 
-            targetingTower.targets.Remove(this.gameObject);                       
+            if (targetingTower)
+            {
+                targetingTower.targets.Remove(this.gameObject);
+            }
+
+            KillEnemy(1);
         }
     }
 
