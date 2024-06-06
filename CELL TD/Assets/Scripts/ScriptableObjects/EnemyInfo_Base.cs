@@ -23,6 +23,8 @@ public class EnemyInfo_Base : ScriptableObject
     [Min(0)]
     public float AttackDamage = 2f;
     [Min(0)]
+    public float AttackSpeed = 1f;
+    [Min(0)]
     public float BaseMovementSpeed = 1f;
     [Min(0)]
     public float MaxHealth = 50f;

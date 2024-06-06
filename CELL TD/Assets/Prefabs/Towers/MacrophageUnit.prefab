@@ -9,6 +9,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 47a1813355a6d5243802fa334f50b741, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 47a1813355a6d5243802fa334f50b741, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 47a1813355a6d5243802fa334f50b741, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 47a1813355a6d5243802fa334f50b741, type: 3}
       propertyPath: m_LocalPosition.x
       value: 31.8452
       objectReference: {fileID: 0}
@@ -102,3 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 797ec044f0cae5c4c95421ec73144dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
+  attackSpeed: 1
+  damage: 5
+  movementSpeed: 1
