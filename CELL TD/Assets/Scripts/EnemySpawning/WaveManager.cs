@@ -19,7 +19,7 @@ public class WaveManager : MonoBehaviour
 
     public static WaveManager Instance;
 
-    private int _TotalWavesInLevel;
+    private int _TotalWavesInLevel = 20; //TODO: Change Later
 
     private List<EnemySpawner> _EnemySpawners;
     private int _TotalEnemiesInWave;
@@ -37,10 +37,9 @@ public class WaveManager : MonoBehaviour
     private int _WaveNumber = 0;
     private bool _WaveInProgress = false;
 
-
-
-    private void Awake()
+    private void Start()
     {
+        Debug.Log(gameObject);
         if (Instance != null)
         {
             Debug.LogError("There is already a WaveManager in this scene. Self destructing!");
@@ -61,7 +60,7 @@ public class WaveManager : MonoBehaviour
             EnemySpawner enemySpawner = spawner.GetComponent<EnemySpawner>();
             if(spawner.GetComponent<EnemySpawner>().NumberOfWaves > _TotalWavesInLevel)
             {
-                _TotalWavesInLevel = spawner.GetComponent<EnemySpawner>().NumberOfWaves;
+                //_TotalWavesInLevel = spawner.GetComponent<EnemySpawner>().NumberOfWaves;
                 _EnemySpawners.Add(spawner.GetComponent<EnemySpawner>());
             }
             else
@@ -139,6 +138,7 @@ public class WaveManager : MonoBehaviour
             _WaveInProgress = false;
 
             WaveEnded?.Invoke(this, EventArgs.Empty);
+            OnWaveEnded(this, EventArgs.Empty);
 
             if (_WaveNumber >= _TotalWavesInLevel /* && player.IsDead */)
             {
@@ -150,6 +150,7 @@ public class WaveManager : MonoBehaviour
     public void OnEnemyReachedGoal(object Sender, EventArgs e)
     {
         _EnemiesRemainingInWave--;
+        Debug.Log(WaveNumber);
         _EnemiesReachedGoal++;
         _TotalEnemiesReachedGoal++;
 
@@ -161,6 +162,7 @@ public class WaveManager : MonoBehaviour
             _WaveInProgress = false;
 
             WaveEnded?.Invoke(this, EventArgs.Empty);
+            OnWaveEnded(this, EventArgs.Empty);
 
             if (_WaveNumber >= _TotalWavesInLevel)
             {
@@ -189,7 +191,13 @@ public class WaveManager : MonoBehaviour
 
     private void OnWaveEnded(object sender, EventArgs e)
     {
-        
+        Debug.Log("Wave Ended");
+        if (_WaveNumber >= _TotalWavesInLevel)
+        {
+            //TODO: Add game win state
+            return;
+        }
+        NextWave.Instance.EnableButton();
     }
 
 

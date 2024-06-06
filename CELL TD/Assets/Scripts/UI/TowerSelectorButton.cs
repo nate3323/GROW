@@ -13,4 +13,6 @@ public class TowerSelectorButton : Button
 {
     // The tower type associated with this button
     public TowerTypes TowerType;
+    public GameObject TowerPrefab;
+    public TowerInfo_Base TowerInfo;
 }

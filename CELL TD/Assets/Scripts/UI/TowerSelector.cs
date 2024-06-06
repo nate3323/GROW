@@ -19,6 +19,9 @@ public class TowerSelector : MonoBehaviour
     [SerializeField]
     private GameObject _TowerSelectorButtonPrefab;
 
+    [SerializeField]
+    private GameObject _placer;
+
 
     private List<TowerInfo_Base> _TowerInfosCollection;
 
@@ -56,6 +59,8 @@ public class TowerSelector : MonoBehaviour
 
             // Store the tower type in the button's TowerType property.
             button.TowerType = _TowerInfosCollection[i].TowerType;
+            button.TowerPrefab = _TowerInfosCollection[i].Prefab;
+            button.TowerInfo = _TowerInfosCollection[i];
 
             button.onClick.AddListener(() =>
             {
@@ -67,19 +72,22 @@ public class TowerSelector : MonoBehaviour
 
     private void OnTowerSelectButtonClicked(TowerSelectorButton button)
     {
-        switch(button.TowerType)
+        Debug.Log(button.TowerInfo.BuildCost);
+
+        if (button.TowerPrefab && button.TowerInfo)
         {
-            case TowerTypes.Lymphocyte_SlowingAOETower:
-                break;
-            case TowerTypes.Macrophage_UnitSpawnerTower:
-                break;
-            case TowerTypes.Neutrophil_ProjectileTower:
-                break;
-
-            default:
-                Debug.LogError($"The tower type \"{Enum.GetName(typeof(TowerTypes), button.TowerType)}\" is not implemented yet in TowerSelector.OnTowerSelectButtonClicked!");
-                break;
-
+            GameObject newPlacer = GameObject.FindGameObjectWithTag("Placer");
+            if (newPlacer)
+            {
+                Destroy(newPlacer);
+            }
+            newPlacer = Instantiate(_placer);
+            newPlacer.GetComponent<Placer>().tower = button.TowerPrefab;
+            newPlacer.GetComponent<Placer>().info = button.TowerInfo;
+        }
+        else
+        {
+            Debug.LogError($"The tower type \"{Enum.GetName(typeof(TowerTypes), button.TowerType)}\" is not implemented yet in TowerSelector.OnTowerSelectButtonClicked!");
         }
     }
 
