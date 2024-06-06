@@ -2,16 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
 
 public class EnemyCounter : MonoBehaviour
 {
-    GameObject[] enemies;
-    public Text enemyCountText;
+    public TMP_Text enemyCountText;
 
     void Update()
     {
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        enemyCountText.text = "Enemies: " + enemies.Length.ToString();
+        enemyCountText.text = "" + WaveManager.Instance.TotalEnemiesInWave;
     }
 }
