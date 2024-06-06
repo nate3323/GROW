@@ -6,13 +6,10 @@ using TMPro;
 
 public class WaveCount : MonoBehaviour
 {
-    public TMP_Text _WaveCountText;
+    public TMP_Text WaveCountText;
 
     void Update()
-    {  
-        if (WaveManager.Instance.IsWaveInProgress == false)
-        {
-            _WaveCountText.text = "" + WaveManager.Instance.WaveNumber;
-        }
+    {
+        WaveCountText.text = "" + WaveManager.Instance.WaveNumber;
     }
 }

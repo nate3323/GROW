@@ -14,6 +14,8 @@ public class WaveManager : MonoBehaviour
 {
     public event EventHandler WaveEnded;
     public event EventHandler LevelCleared;
+    public event EventHandler AnEnemyDied;
+    public event EventHandler AnEnemyReachedGoal;
 
 
 
@@ -131,6 +133,7 @@ public class WaveManager : MonoBehaviour
         _EnemiesKilled++;
         _TotalCatsDistracted++;
 
+        AnEnemyDied?.Invoke(Sender, EventArgs.Empty);
         //HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave);
 
         if (_EnemiesRemainingInWave < 1)
@@ -139,12 +142,14 @@ public class WaveManager : MonoBehaviour
             _WaveInProgress = false;
 
             WaveEnded?.Invoke(this, EventArgs.Empty);
+            
 
             if (_WaveNumber >= _TotalWavesInLevel /* && player.IsDead */)
             {
                 //HUD.RevealVictory();
             }
         }
+        
     }
 
     public void OnEnemyReachedGoal(object Sender, EventArgs e)
@@ -153,6 +158,7 @@ public class WaveManager : MonoBehaviour
         _EnemiesReachedGoal++;
         _TotalEnemiesReachedGoal++;
 
+        AnEnemyReachedGoal?.Invoke(Sender, EventArgs.Empty);
         //HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave);
 
         if (_EnemiesRemainingInWave < 1)
@@ -168,6 +174,7 @@ public class WaveManager : MonoBehaviour
             }
         }
     }
+
 
     private void CalculateTotalEnemiesInWave()
     {
