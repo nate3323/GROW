@@ -11,7 +11,8 @@ public class WaveCount : MonoBehaviour
     [SerializeField]
     private WaveManager _waveCount;
 
-    public TMP_Text WaveCountText;
+    public TMP_Text waveCountText;
+    public int currentWave = 0;
 
     private void Awake()
     {
@@ -20,12 +21,13 @@ public class WaveCount : MonoBehaviour
     }
     void Update()
     {
-        
+        currentWave = _waveCount.WaveNumber;
+        waveCountText.text = "" + currentWave;
     }
 
     void WaveNumber(object Sender, EventArgs a)
     {
-        WaveCountText.text = "" + WaveManager.Instance.WaveNumber;
+        waveCountText.text = "" + WaveManager.Instance.WaveNumber;
     }
 
     void OnDestroy()

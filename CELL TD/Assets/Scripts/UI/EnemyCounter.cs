@@ -25,18 +25,19 @@ public class EnemyCounter : MonoBehaviour
     }
     void Update()
     {
-        
+        enemies = _waveEnemies.TotalEnemiesInWave;
+        enemyCountText.text = "" + enemies;
     }
 
     void EnemyDies(object Sender, EventArgs a)
     {
-       enemies = _waveEnemies.TotalEnemiesInWave - 1;
+       //enemies = _waveEnemies.TotalEnemiesInWave - 1;
        enemyCountText.text = "" + enemies;
     }
 
     void EnemyReachesGoal(object Sender, EventArgs a)
     {
-        enemies = _waveEnemies.TotalEnemiesInWave - 1;
+        //enemies = _waveEnemies.TotalEnemiesInWave - 1;
         enemyCountText.text = "" + enemies;
     }
 
