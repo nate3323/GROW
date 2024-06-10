@@ -31,13 +31,13 @@ public class EnemyCounter : MonoBehaviour
 
     void EnemyDies(object Sender, EventArgs a)
     {
-       //enemies = _waveEnemies.TotalEnemiesInWave - 1;
+       enemies = _waveEnemies.TotalEnemiesInWave - 1;
        enemyCountText.text = "" + enemies;
     }
 
     void EnemyReachesGoal(object Sender, EventArgs a)
     {
-        //enemies = _waveEnemies.TotalEnemiesInWave - 1;
+        enemies = _waveEnemies.TotalEnemiesInWave - 1;
         enemyCountText.text = "" + enemies;
     }
 

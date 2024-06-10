@@ -14,6 +14,7 @@ public class WaveCount : MonoBehaviour
     public TMP_Text waveCountText;
     public int currentWave = 0;
 
+
     private void Awake()
     {
         _waveCount = FindObjectOfType<WaveManager>();
