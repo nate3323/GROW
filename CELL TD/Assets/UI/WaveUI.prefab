@@ -456,6 +456,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1040395271197743207}
+  - component: {fileID: 4655129795002197721}
   m_Layer: 0
   m_Name: WaveUI
   m_TagString: Untagged
@@ -479,3 +480,18 @@ Transform:
   - {fileID: 5183304226975609985}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4655129795002197721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6543001635144039562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d9db9e563773e4f93731014e3e0bbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _waveCount: {fileID: 0}
+  waveCountText: {fileID: 2112838843454846329}
+  currentWave: 0

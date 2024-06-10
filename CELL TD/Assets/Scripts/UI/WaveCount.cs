@@ -24,11 +24,14 @@ public class WaveCount : MonoBehaviour
     {
         currentWave = _waveCount.WaveNumber;
         waveCountText.text = "" + currentWave;
+
+        WaveNumber(this, EventArgs.Empty);
     }
 
     void WaveNumber(object Sender, EventArgs a)
     {
-        waveCountText.text = "" + WaveManager.Instance.WaveNumber;
+        currentWave = _waveCount.WaveNumber;
+        waveCountText.text = "" + currentWave;
     }
 
     void OnDestroy()

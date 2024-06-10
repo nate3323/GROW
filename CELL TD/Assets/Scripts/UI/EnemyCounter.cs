@@ -27,17 +27,21 @@ public class EnemyCounter : MonoBehaviour
     {
         enemies = _waveEnemies.TotalEnemiesInWave;
         enemyCountText.text = "" + enemies;
+        
+        EnemyDies(this, EventArgs.Empty);
+        EnemyReachesGoal(this, EventArgs.Empty);
+        
     }
 
     void EnemyDies(object Sender, EventArgs a)
     {
-       enemies = _waveEnemies.TotalEnemiesInWave - 1;
+       enemies = _waveEnemies.TotalEnemiesInWave - _waveEnemies.TotalEnemiesKilledInLevel;
        enemyCountText.text = "" + enemies;
     }
 
     void EnemyReachesGoal(object Sender, EventArgs a)
     {
-        enemies = _waveEnemies.TotalEnemiesInWave - 1;
+        enemies = _waveEnemies.TotalEnemiesInWave - _waveEnemies.TotalEnemiesReachedGoalInLevel;
         enemyCountText.text = "" + enemies;
     }
 
