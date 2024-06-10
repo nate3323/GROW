@@ -141,7 +141,7 @@ public class WaveManager : MonoBehaviour
             _WaveInProgress = false;
 
             WaveEnded?.Invoke(this, EventArgs.Empty);
- 
+
             
 
             OnWaveEnded(this, EventArgs.Empty);
