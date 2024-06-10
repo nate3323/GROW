@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 177431105812118031}
   - component: {fileID: 6185479786023097}
   - component: {fileID: 966830470925580528}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TowerSelectorButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,6 +92,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   TowerType: 0
+  TowerPrefab: {fileID: 0}
+  TowerInfo: {fileID: 0}
 --- !u!114 &966830470925580528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +135,7 @@ GameObject:
   - component: {fileID: 631777595920493369}
   - component: {fileID: 5369596482920220640}
   - component: {fileID: 7745908724588326215}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
