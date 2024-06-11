@@ -14,6 +14,7 @@ using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(StateMachine))]
+[RequireComponent(typeof(StatusEffectsManager))]
 public class Enemy_Base : MonoBehaviour, IEnemy
 {
     public static bool ShowDistractednessBar = true;
@@ -48,6 +49,7 @@ public class Enemy_Base : MonoBehaviour, IEnemy
     public bool isATarget = false;
 
     private StateMachine _StateMachine;
+
 
 
     protected void Awake()
@@ -160,7 +162,7 @@ public class Enemy_Base : MonoBehaviour, IEnemy
         }
 
     }
-    
+
     //I am intending this function to be called from either the tower or the projectile that the tower fires
     public void ApplyDamage(float damageValue, Tower_Base targetingTower)
     {

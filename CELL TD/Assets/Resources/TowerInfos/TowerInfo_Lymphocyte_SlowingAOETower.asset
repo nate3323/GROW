@@ -9,19 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22b57cdc9ae37de43a74f2792df16fb7, type: 3}
+  m_Script: {fileID: 11500000, guid: a2329030b78a8a74089458c7a895ef80, type: 3}
   m_Name: TowerInfo_Lymphocyte_SlowingAOETower
   m_EditorClassIdentifier: 
   DisplayName: Lymphocyte (Slowing AOE Tower)
+  Description: 
   TowerType: 0
   DisplayIcon: {fileID: 21300000, guid: 8b0a5690c759617499729adf2baa1447, type: 3}
   Prefab: {fileID: 4332558166208827867, guid: 7e288c9bc752a9047b3f9fa96b1590e2, type: 3}
+  TargetingType: 0
+  TargetedEnemyTypes: 00000000
   BuildCost: 50
   BaseRefundPercentage: 0.5
-  BaseUpgradeCost: 10
   BaseMaxHealth: 100
   BaseDamageValue: 0
-  BaseFireRate: 0
+  BaseFireRate: 3
+  BaseRange: 5
   BaseNumberOfTargets: 0
   LevelUpDefinitions:
   - UpgradeCost: 20
@@ -30,3 +33,4 @@ MonoBehaviour:
       UpgradeAmount: 15
     - TowerStat: 2
       UpgradeAmount: 8
+  StatusEffect: {fileID: 11400000, guid: fbc34d9540f384444a4889d9f85537db, type: 2}
