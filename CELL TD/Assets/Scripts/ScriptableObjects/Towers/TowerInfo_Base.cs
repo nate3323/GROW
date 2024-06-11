@@ -16,7 +16,10 @@ public class TowerInfo_Base : ScriptableObject
     [Header("General Tower Info")]
 
     public string DisplayName; // The name displayed for this tower in the UI
+
+    [TextArea(3, 10)]
     public string Description; // The description displayed in the UI
+
     public TowerTypes TowerType; // The type of this tower.
     public Sprite DisplayIcon; // The icon used for this tower in the UI
     public GameObject Prefab; // The prefab for this tower type
