@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,18 +8,23 @@ using UnityEngine.AI;
 public class SpawnedUnit : MonoBehaviour
 {
 
-    // Variables
-    [Header("Unit Information")]
-    [SerializeField, Tooltip("The starting health of the spawned unit")]
-    private float health;
-    [SerializeField, Tooltip("The attack speed of the spawned unit")]
-    private float attackSpeed;
-    [SerializeField, Tooltip("The attack damage of the spawned unit")]
-    private float damage;
-    [SerializeField, Tooltip("The movement of the spawned unit")]
-    private float movementSpeed;
+    [Tooltip("This spawned unit's stats information")]
+    [SerializeField] protected SpawnedUnitInfo_Base _SpawnedUnitInfo;
 
-    private NavMeshAgent agent;
+
+    protected NavMeshAgent _NavMeshAgent;
+
+    protected float _AttackDamage;
+    protected float _AttackSpeed;
+    protected float _BaseMovementSpeed;
+    protected float _RewardAmount;
+    protected float _WayPointArrivedDistance;
+
+    protected float _Health; // This enemy's current health.
+
+    protected float _DistanceFromNextWayPoint = 0f;
+    protected WayPoint _NextWayPoint;
+
     private Tower_Base tower;
     private bool isAttacking = false;
     private Enemy_Base target;
@@ -31,8 +37,8 @@ public class SpawnedUnit : MonoBehaviour
     }
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        agent.speed = movementSpeed;
+        _NavMeshAgent = GetComponent<NavMeshAgent>();
+        _NavMeshAgent.speed = _BaseMovementSpeed;
         tower = transform.parent.gameObject.GetComponent<Tower_Base>();
 
     }
@@ -53,7 +59,7 @@ public class SpawnedUnit : MonoBehaviour
         }
         if (target != null && tower.targets.Contains(target.gameObject))
         {
-            agent.SetDestination(target.transform.position);
+            _NavMeshAgent.SetDestination(target.transform.position);
             if(!(target.stoppingEntities.Count > 0) && !isAttacking)
             {
                 target.stoppingEntities.Add(gameObject);
@@ -86,7 +92,7 @@ public class SpawnedUnit : MonoBehaviour
         if (target != null)
         {
             target.GetComponent<Enemy_Base>().SetAsTarget(this);
-            agent.SetDestination(target.transform.position);
+            _NavMeshAgent.SetDestination(target.transform.position);
         }
     }
     //Finds the distance between the person and the cat
@@ -97,6 +103,52 @@ public class SpawnedUnit : MonoBehaviour
         float yDist = Mathf.Pow(transform.position.x - enemy.transform.position.x, 2);
         distance = Mathf.Sqrt(xDist + yDist);
         return distance;
+    }
+    protected void GetNextWaypoint()
+    {
+        int count = _NextWayPoint.NextWayPoints.Count;
+
+        if (count == 0)
+        {
+            _NextWayPoint = null;
+        }
+        else if (count == 1)
+        {
+            _NextWayPoint = _NextWayPoint.NextWayPoints[0];
+        }
+        else // count is greater than 1
+        {
+            // The current waypoint has multiple next waypoints, so we will
+            // select one at random.
+            _NextWayPoint = _NextWayPoint.NextWayPoints[UnityEngine.Random.Range(0, count)];
+        }
+
+    }
+
+    protected void FindNearestWayPoint()
+    {
+        float minDistance = float.MaxValue;
+        WayPoint nearestWayPoint = null;
+
+        foreach (WayPoint wayPoint in FindObjectsByType<WayPoint>(FindObjectsSortMode.None))
+        {
+            float distance = Vector3.Distance(transform.position, wayPoint.transform.position);
+
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                nearestWayPoint = wayPoint;
+            }
+        }
+
+
+        _NextWayPoint = nearestWayPoint;
+    }
+
+    public bool HasReachedDestination()
+    {
+        return _DistanceFromNextWayPoint <= _WayPointArrivedDistance &&
+               _NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete;
     }
 
     public void RemoveTarget()
@@ -114,12 +166,12 @@ public class SpawnedUnit : MonoBehaviour
 
     public void ApplyDamage(float damage)
     {
-        health -= damage;
-        if(health < 0f)
+        _Health -= damage;
+        if(_Health < 0f)
         {
             RemoveTarget();
             // Fire the OnUnitDied event.
-            if( health <= 0 )
+            if( _Health <= 0 )
             {
                 UnitDied?.Invoke(this, EventArgs.Empty);
                 Destroy(gameObject);
@@ -129,9 +181,9 @@ public class SpawnedUnit : MonoBehaviour
 
     IEnumerator OnAttack()
     {
-        target.ApplyDamage(damage, tower);
-        health -= target.AttackDamage;
-        yield return new WaitForSeconds(attackSpeed);
+        target.ApplyDamage(_AttackDamage, tower);
+        _Health -= target.AttackDamage;
+        yield return new WaitForSeconds(_AttackSpeed);
     }
 
 
