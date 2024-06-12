@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class MoneySystem : MonoBehaviour
 {
+    public static MoneySystem Instance;
+
     //Vars
     private int _moneyAmount = 0;
 

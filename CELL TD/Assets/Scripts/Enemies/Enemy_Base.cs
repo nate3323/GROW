@@ -205,6 +205,7 @@ public class Enemy_Base : MonoBehaviour, IEnemy
         if(type == 1)
         {
             // Fire the OnCatDied event.
+            GameManager.Instance.MoneySystem.AddCurrency(_EnemyInfo.CurrencyGain);
             OnEnemyDied?.Invoke(this, EventArgs.Empty);
         }
         else if(type == 2)  
