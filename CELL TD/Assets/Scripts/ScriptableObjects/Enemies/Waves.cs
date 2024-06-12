@@ -15,6 +15,7 @@ public class Waves : ScriptableObject
 public class Wave
 {
     public List<SpawnInfo> Enemies = new List<SpawnInfo>();
+    public int WaveReward = 100;
 }
 
 [System.Serializable]

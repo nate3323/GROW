@@ -31,4 +31,6 @@ public class EnemyInfo_Base : ScriptableObject
     public float RewardAmount = 20f; // How much nutrients the player gets when this enemy is destroyed
     [Min(0)]
     public float WayPointArrivedDistance = 2f; // This is how close this enemy must get to the next waypoint for it to be considered as having arrived there
+    [Min(0)]
+    public int CurrencyGain = 15; // This is how close this enemy must get to the next waypoint for it to be considered as having arrived there
 }
