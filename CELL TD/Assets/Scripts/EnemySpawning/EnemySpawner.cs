@@ -97,7 +97,11 @@ public class EnemySpawner : MonoBehaviour
         return tally;
     }
 
-
+    public int WaveReward()
+    {
+        Wave current = _Waves[_CurrentWaveInfo].WaveInfo[_CurrentWave - 1];
+        return current.WaveReward;
+    }
 
     public int NumberOfWaves { get { return _Waves.Count; } }
 }
