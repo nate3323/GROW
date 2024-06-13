@@ -10,8 +10,8 @@ public class WaveCount : MonoBehaviour
 {
     [SerializeField]
     private WaveManager _waveCount;
-
-    public TMP_Text waveCountText;
+    
+    public TextMeshProUGUI waveCountText;
     public int currentWave = 0;
 
 
@@ -22,16 +22,16 @@ public class WaveCount : MonoBehaviour
     }
     void Update()
     {
-        currentWave = _waveCount.WaveNumber;
-        waveCountText.text = "" + currentWave;
-
+        //currentWave = _waveCount.WaveNumber;
+        //waveCountText.text = "" + currentWave;
         WaveNumber(this, EventArgs.Empty);
+        
     }
 
     void WaveNumber(object Sender, EventArgs a)
     {
         currentWave = _waveCount.WaveNumber;
-        waveCountText.text = "" + currentWave;
+        waveCountText.text = "" + currentWave;      
     }
 
     void OnDestroy()

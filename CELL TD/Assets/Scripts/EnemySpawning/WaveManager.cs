@@ -114,6 +114,7 @@ public class WaveManager : MonoBehaviour
         _EnemiesKilled = 0;
         _EnemiesReachedGoal = 0;
 
+        
         //HUD.ShowWaveDisplay();
         //HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave);
     }
@@ -207,6 +208,7 @@ public class WaveManager : MonoBehaviour
             //TODO: Add game win state
             return;
         }
+        
         NextWave.Instance.EnableButton();
     }
 

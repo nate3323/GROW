@@ -13,8 +13,8 @@ public class EnemyCounter : MonoBehaviour
 {
     [SerializeField]
     private WaveManager _waveEnemies;
-
-    public TMP_Text enemyCountText;
+    
+    public TextMeshProUGUI enemyCountText;
     public int enemies = 0;
     private void Awake()
     {
@@ -44,6 +44,7 @@ public class EnemyCounter : MonoBehaviour
         enemies = _waveEnemies.TotalEnemiesInWave - _waveEnemies.TotalEnemiesReachedGoalInLevel;
         enemyCountText.text = "" + enemies;
     }
+
 
     void OnDestroy()
     {

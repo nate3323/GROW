@@ -456,7 +456,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1040395271197743207}
-  - component: {fileID: 4655129795002197721}
+  - component: {fileID: 8765906635577473257}
   m_Layer: 0
   m_Name: WaveUI
   m_TagString: Untagged
@@ -480,7 +480,7 @@ Transform:
   - {fileID: 5183304226975609985}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4655129795002197721
+--- !u!114 &8765906635577473257
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
