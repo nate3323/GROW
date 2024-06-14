@@ -22,6 +22,7 @@ public class WaveManager : MonoBehaviour
     public static WaveManager Instance;
 
     private int _TotalWavesInLevel = 20; //TODO: Change Later
+    private int _WaveReward = 0; //TODO: Change Later
 
     private List<EnemySpawner> _EnemySpawners;
     private int _TotalEnemiesInWave;
@@ -109,6 +110,7 @@ public class WaveManager : MonoBehaviour
         }
 
         CalculateTotalEnemiesInWave();
+        CalculateWaveReward();
 
         _EnemiesRemainingInWave = _TotalEnemiesInWave;
         _EnemiesKilled = 0;
@@ -159,7 +161,6 @@ public class WaveManager : MonoBehaviour
     public void OnEnemyReachedGoal(object Sender, EventArgs e)
     {
         _EnemiesRemainingInWave--;
-        Debug.Log(WaveNumber);
         _EnemiesReachedGoal++;
         _TotalEnemiesReachedGoal++;
 
@@ -194,6 +195,14 @@ public class WaveManager : MonoBehaviour
         //Debug.Log($"Total: {_TotalCatsInWave}");
     }
 
+    private void CalculateWaveReward()
+    {
+        if (_EnemySpawners.Count > 0)
+        {
+            _WaveReward = _EnemySpawners[0].WaveReward(); //TODO: This needs to be changed when we update the wave system.
+        }
+    }
+
     private void FindAllSpawners()
     {
         _EnemySpawners = FindObjectsByType<EnemySpawner>(FindObjectsSortMode.None).ToList();
@@ -208,7 +217,11 @@ public class WaveManager : MonoBehaviour
             //TODO: Add game win state
             return;
         }
+ HEAD
         
+
+        GameManager.Instance.MoneySystem.AddCurrency(_WaveReward);
+ main
         NextWave.Instance.EnableButton();
     }
 

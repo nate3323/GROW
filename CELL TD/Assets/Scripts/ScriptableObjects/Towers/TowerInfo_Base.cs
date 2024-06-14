@@ -16,9 +16,15 @@ public class TowerInfo_Base : ScriptableObject
     [Header("General Tower Info")]
 
     public string DisplayName; // The name displayed for this tower in the UI
+
+    [TextArea(3, 10)]
+    public string Description; // The description displayed in the UI
+
     public TowerTypes TowerType; // The type of this tower.
     public Sprite DisplayIcon; // The icon used for this tower in the UI
     public GameObject Prefab; // The prefab for this tower type
+    public TargetingTypes TargetingType; // The targeting type of this tower
+    public List<EnemyTypes> TargetedEnemyTypes; // The types of enemies this tower affects
 
 
     [Header("Tower Stats")]
@@ -32,10 +38,6 @@ public class TowerInfo_Base : ScriptableObject
     [SerializeField]
     public float BaseRefundPercentage = 0.85f;
 
-    [Tooltip("How much it costs the player to upgrade this tower the first time.")]
-    [SerializeField, Min(0)]
-    public float BaseUpgradeCost;
-
     [Tooltip("The starting max health of this tower.")]
     [SerializeField, Min(0)]
     public float BaseMaxHealth = 100f;
@@ -47,6 +49,11 @@ public class TowerInfo_Base : ScriptableObject
     [Tooltip("The base fire rate of this tower if it has direct attacks.")]
     [SerializeField, Min(0)]
     public float BaseFireRate;
+
+    [Tooltip("The range of this tower.")]
+    [SerializeField, Min(0)]
+    public float BaseRange = 3f;
+
 
     [Tooltip("How many targets a level 1 instance of this tower can have at one time.")]
     [SerializeField, Min(0)]

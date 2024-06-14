@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 5978193586923462565}
   - component: {fileID: 7462320511586244341}
   - component: {fileID: 4169471069120849201}
+  - component: {fileID: 6964826748674158132}
   - component: {fileID: 2649205116014454359}
-  - component: {fileID: 3925780484345142893}
-  - component: {fileID: 5860359632333863118}
-  m_Layer: 3
+  - component: {fileID: -2875291498919000579}
+  - component: {fileID: 8620744429889027611}
+  m_Layer: 6
   m_Name: Bacteria_Base
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -66,6 +67,18 @@ MonoBehaviour:
   slowingEntities: []
   stoppingEntities: []
   isATarget: 0
+--- !u!114 &6964826748674158132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5423161611289648773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0d02f057c1a662429af66fa766c48e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!195 &2649205116014454359
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -88,8 +101,8 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!65 &3925780484345142893
-BoxCollider:
+--- !u!135 &-2875291498919000579
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -107,9 +120,9 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.5799061, z: 1.2670993}
-  m_Center: {x: 0, y: -0.2899531, z: -0.37132287}
---- !u!54 &5860359632333863118
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &8620744429889027611
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 5725606974885969176}
   - component: {fileID: 5889148623237003109}
   - component: {fileID: 6997892578297157759}
-  - component: {fileID: 8608379163167438365}
-  - component: {fileID: 8408400759448000188}
-  m_Layer: 3
+  - component: {fileID: 8491613332043398743}
+  - component: {fileID: -8202714543645676103}
+  - component: {fileID: 6830745061349836233}
+  m_Layer: 6
   m_Name: Virus_Base
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -88,8 +89,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!65 &8608379163167438365
-BoxCollider:
+--- !u!114 &8491613332043398743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6136908343629277562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0d02f057c1a662429af66fa766c48e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &-8202714543645676103
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -103,13 +116,13 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.93994874, z: 1}
-  m_Center: {x: 0, y: 0.43185, z: 0}
---- !u!54 &8408400759448000188
+  m_Radius: 0.75
+  m_Center: {x: 0, y: 0.25, z: 0}
+--- !u!54 &6830745061349836233
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -10,7 +10,7 @@ using UnityEngine.UI;
 /// <summary>
 /// This class manages the Tower Selector panel.
 /// </summary>
-public class TowerSelector : MonoBehaviour
+public class TowerSelectorPanel : MonoBehaviour
 {
     [Tooltip("This is the UI element that the buttons will be placed in.")]
     [SerializeField]
@@ -25,10 +25,36 @@ public class TowerSelector : MonoBehaviour
 
     private List<TowerInfo_Base> _TowerInfosCollection;
 
+    /// <summary>
+    /// This holds a reference to the tower selector UI's panel.
+    /// </summary>
+    private Transform _TowerSelectorPanel;
+
+    /// <summary>
+    /// This holds a reference to the tower info popup object.
+    /// </summary>
+    private TowerInfoPopup _TowerInfoPopupUI;
+
+    /// <summary>
+    /// This holds a reference to whichever tower button the mouse
+    /// is on. This is used to position the tower info popup properly.
+    /// </summary>
+    private TowerSelectorButton _HoveredButton;
+
+    /// <summary>
+    /// This holds a reference to the tower info for whichever tower type the mouse is on.
+    /// If the mouse is not on any of the buttons, this field will be null.
+    /// </summary>
+    private TowerInfo_Base _PopupTowerInfo;
+
 
 
     private void Awake()
     {
+        _TowerSelectorPanel = transform.Find("Panel");
+
+        _TowerInfoPopupUI = GetComponentInChildren<TowerInfoPopup>();
+
         // Load all of the TowerInfo_Base scriptable objects (including ones that are
         // subclasses of TowerInfo_Base) in the project, even if they
         // aren't inside the TowerInfos folder.
@@ -67,6 +93,14 @@ public class TowerSelector : MonoBehaviour
                 OnTowerSelectButtonClicked(button);
             });
             
+            button.OnMouseEnter += (sender, eventData) =>
+            {
+                OnMouseOverTowerButton(button);
+            };
+            button.OnMouseExit += (sender, eventData) =>
+            {
+                OnMouseExitedTowerButton(button);
+            };
         }
     }
 
@@ -90,5 +124,23 @@ public class TowerSelector : MonoBehaviour
             Debug.LogError($"The tower type \"{Enum.GetName(typeof(TowerTypes), button.TowerType)}\" is not implemented yet in TowerSelector.OnTowerSelectButtonClicked!");
         }
     }
+
+    private void OnMouseOverTowerButton(TowerSelectorButton button)
+    {
+        _HoveredButton = button;
+
+        _TowerInfoPopupUI.ShowPopup(button);
+    }
+
+    private void OnMouseExitedTowerButton(TowerSelectorButton button)
+    {
+        _PopupTowerInfo = null;
+
+        _TowerInfoPopupUI.ClosePopup();
+    }
+
+
+
+    public Rect PanelSize { get { return _TowerSelectorPanel.GetComponent<RectTransform>().rect; } }
 
 }
