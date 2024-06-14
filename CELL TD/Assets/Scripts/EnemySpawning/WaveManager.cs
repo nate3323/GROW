@@ -217,11 +217,11 @@ public class WaveManager : MonoBehaviour
             //TODO: Add game win state
             return;
         }
- HEAD
+ 
         
 
         GameManager.Instance.MoneySystem.AddCurrency(_WaveReward);
- main
+ 
         NextWave.Instance.EnableButton();
     }
 

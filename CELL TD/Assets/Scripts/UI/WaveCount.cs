@@ -20,12 +20,12 @@ public class WaveCount : MonoBehaviour
         _waveCount = FindObjectOfType<WaveManager>();
         _waveCount.WaveEnded += WaveCounter;
     }
-    void Update()
+    private void Update()
     {
         WaveCounter(this, EventArgs.Empty);
     }
 
-    void WaveCounter(object Sender, EventArgs a)
+    public void WaveCounter(object Sender, EventArgs a)
     {     
         currentWave = _waveCount.WaveNumber;
         waveCountText.text = "" + currentWave;
