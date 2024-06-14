@@ -16,7 +16,7 @@ public class WaveManager : MonoBehaviour
     public event EventHandler LevelCleared;
     public event EventHandler AnEnemyDied;
     public event EventHandler AnEnemyReachedGoal;
-
+    
 
 
     public static WaveManager Instance;
@@ -99,7 +99,7 @@ public class WaveManager : MonoBehaviour
         _WaveInProgress = true;
 
         _WaveNumber++;
-
+        
 
         FindAllSpawners();
 
