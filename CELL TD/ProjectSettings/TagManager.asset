@@ -8,6 +8,10 @@ TagManager:
   - Enemy Spawner
   - Placer
   - Money
+  - Goal
+  - Undefined
+  - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX

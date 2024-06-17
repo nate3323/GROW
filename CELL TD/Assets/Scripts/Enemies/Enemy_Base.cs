@@ -189,6 +189,15 @@ public class Enemy_Base : MonoBehaviour, IEnemy
         {           
             KillEnemy(2);
         }
+
+        if (other.gameObject.CompareTag("Bullet"))
+        {
+            SimpleProjectile projRef = other.gameObject.GetComponent<SimpleProjectile>();
+            ApplyDamage(projRef._damage,projRef._owner);
+
+            //Subtract piercing
+            projRef._piercing -= 1;
+        }
     }
     protected void KillEnemy(int type)
     {
