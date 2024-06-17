@@ -6,9 +6,6 @@ using TMPro;
 
 using System;
 
-
-
-
 public class EnemyCounter : MonoBehaviour
 {
     [SerializeField]
@@ -44,7 +41,6 @@ public class EnemyCounter : MonoBehaviour
         enemies = _waveEnemies.TotalEnemiesInWave - _waveEnemies.TotalEnemiesReachedGoalInLevel;
         enemyCountText.text = "" + enemies;
     }
-
 
     void OnDestroy()
     {
