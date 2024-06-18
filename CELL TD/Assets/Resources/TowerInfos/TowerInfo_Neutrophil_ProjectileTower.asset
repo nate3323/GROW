@@ -19,7 +19,7 @@ MonoBehaviour:
   Prefab: {fileID: 5880325033198506782, guid: 1dbbb514d98788a4db9001999afe0718, type: 3}
   TargetingType: 1
   TargetedEnemyTypes: 
-  BuildCost: 0
+  BuildCost: 75
   BaseRefundPercentage: 0.85
   BaseMaxHealth: 100
   BaseDamageValue: 5
@@ -27,8 +27,18 @@ MonoBehaviour:
   BaseRange: 3
   BaseNumberOfTargets: 1
   LevelUpDefinitions:
-  - UpgradeCost: 25
+  - UpgradeCost: 50
     StatUpgradeDefinitions:
-    - TowerStat: 0
-      UpgradeAmount: 25
+    - TowerStat: 2
+      UpgradeAmount: -0.1
+  - UpgradeCost: 75
+    StatUpgradeDefinitions:
+    - TowerStat: 2
+      UpgradeAmount: -0.1
+    - TowerStat: 1
+      UpgradeAmount: 2
+  - UpgradeCost: 100
+    StatUpgradeDefinitions:
+    - TowerStat: 1
+      UpgradeAmount: 5
   DummyStat: 0

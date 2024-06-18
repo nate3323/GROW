@@ -60,8 +60,9 @@ public class Placer : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             Debug.Log(info.BuildCost);
-            if (tower && GameObject.FindGameObjectWithTag("Money").GetComponent<MoneySystem>().AddCurrency((int)info.BuildCost) && !overlapping && !IsOverUI())
+            if (tower && GameManager.Instance.MoneySystem.MoneyAmount >= info.BuildCost && !overlapping && !IsOverUI())
             {
+                GameManager.Instance.MoneySystem.SubtractCurrency((int)info.BuildCost);
                 PlaceTower();
             }
         }

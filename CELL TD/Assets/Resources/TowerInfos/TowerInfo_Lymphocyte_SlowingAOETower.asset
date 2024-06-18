@@ -28,10 +28,18 @@ MonoBehaviour:
   BaseRange: 5
   BaseNumberOfTargets: 0
   LevelUpDefinitions:
-  - UpgradeCost: 20
+  - UpgradeCost: 50
     StatUpgradeDefinitions:
-    - TowerStat: 0
-      UpgradeAmount: 15
     - TowerStat: 2
-      UpgradeAmount: 8
+      UpgradeAmount: -0.1
+  - UpgradeCost: 75
+    StatUpgradeDefinitions:
+    - TowerStat: 2
+      UpgradeAmount: -0.1
+    - TowerStat: 1
+      UpgradeAmount: 2
+  - UpgradeCost: 100
+    StatUpgradeDefinitions:
+    - TowerStat: 1
+      UpgradeAmount: 5
   StatusEffect: {fileID: 11400000, guid: fbc34d9540f384444a4889d9f85537db, type: 2}
