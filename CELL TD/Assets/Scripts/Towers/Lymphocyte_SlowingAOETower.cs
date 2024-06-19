@@ -8,7 +8,7 @@ public class Lymphocyte_SlowingAOETower : Tower_Base
     float _EnemySearchTimer;
 
 
-    new void Update()
+    public override void Update()
     {
         base.Update();
 
