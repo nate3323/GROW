@@ -19,11 +19,13 @@ public class EnemyState_Stopped : EnemyState_Base
     public override void OnEnter()
     {
         _parent.gameObject.GetComponent<NavMeshAgent>().speed = 0;
+        Debug.Log("Speed should be zero");
     }
 
     public override void OnExit()
     {
         _parent.gameObject.GetComponent<NavMeshAgent>().speed = _parent.GetComponent<Enemy_Base>().BaseMovementSpeed;
+        Debug.Log("Speed should be regular");
     }
 
     public override void OnUpdate()
