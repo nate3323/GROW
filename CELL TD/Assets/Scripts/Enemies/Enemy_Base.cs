@@ -32,21 +32,24 @@ public class Enemy_Base : MonoBehaviour, IEnemy
     protected NavMeshAgent _NavMeshAgent;
 
     protected float _AttackDamage;
+    protected float _AttackSpeed;
     protected float _BaseMovementSpeed;
     protected float _RewardAmount;
     protected float _WayPointArrivedDistance;
 
-    protected float _Health; // This enemy's current health.
+    [SerializeField] protected float _Health; // This enemy's current health.
     protected bool _IsDead = false; // If this enemy has been defeated or not.
 
     protected float _DistanceFromNextWayPoint = 0f;
     protected WayPoint _NextWayPoint;
 
+    protected bool _isATarget = false;
+    [SerializeField] protected SpawnedUnit _TargetUnit;
+
     private AudioSource enemyAudio;
 
     public List<GameObject> slowingEntities;
     public List<GameObject> stoppingEntities;
-    public bool isATarget = false;
 
     private StateMachine _StateMachine;
 
@@ -89,6 +92,7 @@ public class Enemy_Base : MonoBehaviour, IEnemy
     protected virtual void InitEnemyStats()
     {
         _AttackDamage = _EnemyInfo.AttackDamage;
+        _AttackSpeed = _EnemyInfo.AttackSpeed;
         _BaseMovementSpeed = _EnemyInfo.BaseMovementSpeed;
         _Health = _EnemyInfo.MaxHealth;
         _RewardAmount = _EnemyInfo.RewardAmount;
@@ -145,7 +149,7 @@ public class Enemy_Base : MonoBehaviour, IEnemy
             IsDead = true;
             return;
         }
-        if (_NextWayPoint != null)
+        if (_NextWayPoint != null && stoppingEntities.Count <= 0)
         {
             _DistanceFromNextWayPoint = Vector3.Distance(transform.position, _NextWayPoint.transform.position);
 
@@ -169,9 +173,8 @@ public class Enemy_Base : MonoBehaviour, IEnemy
     //I am intending this function to be called from either the tower or the projectile that the tower fires
     public void ApplyDamage(float damageValue, Tower_Base targetingTower)
     {
-
         _Health -= damageValue;
-
+        Debug.Log(_Health);
         if (_Health <= 0 && !_IsDead)
         {
             StartCoroutine(PlayDeathSound());
@@ -276,7 +279,40 @@ public class Enemy_Base : MonoBehaviour, IEnemy
                _NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete;
     }
 
+    public void SetAsTarget(SpawnedUnit unit)
+    {
+        _isATarget = true;
+        stoppingEntities.Add(unit.gameObject);
+        _TargetUnit = unit;
+        StartCoroutine(Attack());
+    }
 
+    public void SetNotTarget(SpawnedUnit unit)
+    {
+        stoppingEntities.Remove(unit.gameObject);
+        _isATarget = false;
+        _TargetUnit = null;
+    }
+
+    public void SetMovementSpeed(float speed)
+    {
+        _BaseMovementSpeed = speed;
+    }
+
+    public void ResetMovementSpeed()
+    {
+        _BaseMovementSpeed = _EnemyInfo.BaseMovementSpeed;
+    }
+
+    IEnumerator Attack()
+    {
+        _TargetUnit.ApplyDamage(AttackDamage);
+        yield return new WaitForSeconds(_AttackSpeed);
+        if (_TargetUnit != null)
+        {
+            StartCoroutine(Attack());
+        }
+    }
 
     IEnumerator PlayDeathSound()
     {
@@ -301,6 +337,8 @@ public class Enemy_Base : MonoBehaviour, IEnemy
     public bool IsVirus { get; protected set; } = false;
     public float MaxHealth { get { return _EnemyInfo.MaxHealth; } }
     public float RewardAmount { get { return _EnemyInfo.RewardAmount; } }
+
+    public bool IsATarget {  get { return _isATarget;  } }
 
     public WayPoint NextWayPoint 
     { 

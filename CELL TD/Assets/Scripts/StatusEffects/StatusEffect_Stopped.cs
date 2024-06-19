@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-public class StatusEffect_SlowedMoveSpeed : StatusEffect_Base
+public class StatusEffect_Stopped : StatusEffect_Base
 {
     private Enemy_Base target;
 
@@ -14,7 +14,7 @@ public class StatusEffect_SlowedMoveSpeed : StatusEffect_Base
     /// </summary>
     public override void OnEffectStart()
     {
-
+        
     }
 
     /// <summary>
@@ -30,14 +30,14 @@ public class StatusEffect_SlowedMoveSpeed : StatusEffect_Base
     /// Default constructor
     /// </summary>
     /// <param name="statusEffectInfo">The definition containing the details about this status effect.</param>
-    public StatusEffect_SlowedMoveSpeed(StatusEffectInfo_SlowedMovement statusEffectInfo)
+    public StatusEffect_Stopped(StatusEffectInfo_Stopped statusEffectInfo)
         : base(statusEffectInfo)
     {
         if (statusEffectInfo == null)
             throw new ArgumentNullException(nameof(statusEffectInfo));
 
         // Make sure the passed in StatusEffectInfo is of the correct type.
-        if (statusEffectInfo.Type != StatusEffectTypes.SlowedMoveSpeed)
+        if (statusEffectInfo.Type != StatusEffectTypes.Stopped)
             throw new ArgumentException(nameof(statusEffectInfo.Type));
     }
 
@@ -55,7 +55,6 @@ public class StatusEffect_SlowedMoveSpeed : StatusEffect_Base
         {
             targetEnemy.SetMovementSpeed(StatusEffectInfo.MaxMoveSpeed);
         }
-            
     }
 
     /// <summary>
@@ -81,11 +80,11 @@ public class StatusEffect_SlowedMoveSpeed : StatusEffect_Base
     /// Gets the StatusEffectInfo of this status effect.
     /// This property uses the new keyword to intentionally hide the base class version of this property.
     /// </summary>
-    new public StatusEffectInfo_SlowedMovement StatusEffectInfo
+    new public StatusEffectInfo_Stopped StatusEffectInfo
     {
         get
         {
-            return _StatusEffectInfo as StatusEffectInfo_SlowedMovement;
+            return _StatusEffectInfo as StatusEffectInfo_Stopped;
         }
     }
 }
