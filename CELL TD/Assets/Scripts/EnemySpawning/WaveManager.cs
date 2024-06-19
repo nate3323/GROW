@@ -40,6 +40,13 @@ public class WaveManager : MonoBehaviour
     private int _WaveNumber = 0;
     private bool _WaveInProgress = false;
 
+
+
+    private void Awake()
+    {
+
+    }
+
     private void Start()
     {
         Debug.Log(gameObject);
@@ -86,7 +93,7 @@ public class WaveManager : MonoBehaviour
         {
             LevelCleared?.Invoke(this, EventArgs.Empty);
 
-            //HUD.RevealVictory();
+            VictoryScreen.Show();
         }
     }
 

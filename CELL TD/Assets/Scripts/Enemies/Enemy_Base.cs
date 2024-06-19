@@ -50,6 +50,7 @@ public class Enemy_Base : MonoBehaviour, IEnemy
 
     private StateMachine _StateMachine;
 
+    private HealthSystem _PlayerHealthSystem;
 
 
     protected void Awake()
@@ -57,6 +58,8 @@ public class Enemy_Base : MonoBehaviour, IEnemy
         InitEnemyStats();
 
         IsDead = false;
+
+        _PlayerHealthSystem = FindAnyObjectByType<HealthSystem>();
 
         _NavMeshAgent = GetComponent<NavMeshAgent>();
 
@@ -186,17 +189,28 @@ public class Enemy_Base : MonoBehaviour, IEnemy
     {
         // Did this enemy reach the goal?
         if (other.gameObject.CompareTag("Goal"))
-        {           
+        {
+            _PlayerHealthSystem.TakeDamage((int) _AttackDamage);
             KillEnemy(2);
         }
+
+        if (other.gameObject.CompareTag("Bullet"))
+        {
+            SimpleProjectile projRef = other.gameObject.GetComponent<SimpleProjectile>();
+            ApplyDamage(projRef._damage,projRef._owner);
+
+            //Subtract piercing
+            projRef._piercing -= 1;
+        }
     }
+
     protected void KillEnemy(int type)
     {
         if (IsDead)
             return;
 
 
-        // Prevents this function from running twice in rare cases, causing this cat's death to count as more than one.
+        // Prevents this function from running twice in rare cases, causing this enemy's death to count as more than one.
         IsDead = true;
         if(type == 1)
         {

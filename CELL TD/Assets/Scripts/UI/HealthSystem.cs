@@ -6,22 +6,32 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
-    //Vars
-    private int _health = 100;
+    [SerializeField]
+    private int _MaxHealth = 100; // This is just the default value; change it in the inspector instead.
+
+
+    //Vars    
+    private int _CurrentHealth;
 
     //Getters
     public int HealthAmount
     {
-        get { return _health; }
+        get { return _CurrentHealth; }
     }
 
     //References
     [SerializeField]
     private TMP_Text _healthText;
 
+
+    void Awake()
+    {
+        _CurrentHealth = _MaxHealth;
+    }
+
     void Start()
     {
-        UpdateDisplay(_health);
+        UpdateDisplay(_CurrentHealth);
     }
 
     //Change the text to display how much health the player has
@@ -31,48 +41,53 @@ public class HealthSystem : MonoBehaviour
     }
 
     //Money Logic
-    public bool AddCurrency(int amount)
+    public bool AddHealth(int amount)
     {
-        //If value is positive, add
-        if (amount >= 0)
+        int oldHealthValue = _CurrentHealth;
+
+
+        // Change the health by the specified amount.
+        _CurrentHealth = Mathf.Clamp(_CurrentHealth + amount, 0, _MaxHealth);
+
+        //If value is positive, update the screen.
+        if (_CurrentHealth > 0)
         {
-            StartCoroutine(AnimateText(Color.blue));
-            _health += amount;
+            StartCoroutine(AnimateText(Color.blue, oldHealthValue, _CurrentHealth));
             return true;
         }
-        //If negative, call a function for gameover
-        else
+        else // The player's health has reached 0.
         {
-            if (_health + amount > 0)
-            {
-                StartCoroutine(AnimateText(Color.red));
-                _health += amount;
-                return true;
-            }
-            StartCoroutine(AnimateText(Color.red));
-            //TODO Gameover function
-            _health = 0;
+            StartCoroutine(AnimateText(Color.red, oldHealthValue, _CurrentHealth));
+
+            GameOverScreen.Show();
+
             return false;
         }
     }
 
-    [ContextMenu("AddCurrency")]
+    [ContextMenu("AddHealth")]
     public void Add()
     {
-        AddCurrency(10);
+        AddHealth(10);
     }
 
-    [ContextMenu("SubCurrency")]
+    [ContextMenu("SubHealth")]
     public void Sub()
     {
-        AddCurrency(-10);
+        AddHealth(-10);
+    }
+
+    public void TakeDamage(int amount)
+    {
+        amount = Mathf.Abs(amount);
+
+        AddHealth(-amount);
     }
 
     //This visually changes the text
-    private IEnumerator AnimateText(Color referenceColor)
+    private IEnumerator AnimateText(Color referenceColor, int initialAmount, int finalAmount)
     {
         Color intialColor = _healthText.color;
-        int initialAmount = _health;
         float elapsedTime = 0.0f;
         float duration = 0.5f; //Change this for longer animation
 
@@ -83,7 +98,7 @@ public class HealthSystem : MonoBehaviour
             float t = elapsedTime / duration;
 
             _healthText.color = Color.Lerp(intialColor, referenceColor, t);
-            UpdateDisplay((int)Mathf.Lerp((float)initialAmount,(float)_health,t));
+            UpdateDisplay((int)Mathf.Lerp((float)initialAmount,(float)finalAmount,t));
 
             yield return null;
         }
@@ -91,6 +106,6 @@ public class HealthSystem : MonoBehaviour
         _healthText.color = referenceColor;
 
         //This calls the same function, but returns the text to white. This may need to be changed if the text color is no longer white.
-        StartCoroutine(AnimateText(Color.white));
+        StartCoroutine(AnimateText(Color.white, _CurrentHealth, _CurrentHealth));
     }
 }
