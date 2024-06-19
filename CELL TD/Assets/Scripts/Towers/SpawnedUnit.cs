@@ -3,31 +3,30 @@ using System.Collections;
 
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.EventSystems.EventTrigger;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class SpawnedUnit : MonoBehaviour
 {
 
-    [Tooltip("This spawned unit's stats information")]
-    [SerializeField] protected SpawnedUnitInfo_Base _SpawnedUnitInfo;
-
-
     protected NavMeshAgent _NavMeshAgent;
 
-    protected float _AttackDamage;
-    protected float _AttackSpeed;
-    protected float _BaseMovementSpeed;
-    protected float _RewardAmount;
-    protected float _WayPointArrivedDistance;
+    [SerializeField] protected float _AttackDamage = 10f;
+    [SerializeField] protected float _AttackSpeed = 1f;
+    [SerializeField] protected float _BaseMovementSpeed = 3f;
+    [SerializeField] protected float _WayPointArrivedDistance = 2f;
 
-    protected float _Health; // This enemy's current health.
+    [SerializeField] protected float _Health = 50f; // This unit's current health.
+
+    public SpawnedUnitInfo_Base unitInfo;
 
     protected float _DistanceFromNextWayPoint = 0f;
     protected WayPoint _NextWayPoint;
 
-    private Tower_Base tower;
+    public Macrophage_UnitSpawnerTower tower;
+    public GameObject parent;
     private bool isAttacking = false;
-    private Enemy_Base target;
+    [SerializeField] private Enemy_Base target;
 
     public event EventHandler UnitDied;
 
@@ -39,20 +38,33 @@ public class SpawnedUnit : MonoBehaviour
     {
         _NavMeshAgent = GetComponent<NavMeshAgent>();
         _NavMeshAgent.speed = _BaseMovementSpeed;
-        tower = transform.parent.gameObject.GetComponent<Tower_Base>();
+        tower = parent.GetComponent<Macrophage_UnitSpawnerTower>();
+    }
 
+    /// <summary>
+    /// Initializes the stats for this enemy.
+    /// Subclasses should override this function to init stats specific to that enemy type.
+    /// Note: Will be utilized later, had some bugs to get it functioning correctly that are related to prefab instantiation
+    /// </summary>
+    protected virtual void InitUnitStats()
+    {
+        _AttackDamage = tower._SpawnedUnitInfo.AttackDamage;
+        _AttackSpeed = tower._SpawnedUnitInfo.AttackSpeed;
+        _BaseMovementSpeed = tower._SpawnedUnitInfo.BaseMovementSpeed;
+        _Health = tower._SpawnedUnitInfo.MaxHealth;
+        _WayPointArrivedDistance = tower._SpawnedUnitInfo.WayPointArrivedDistance;
     }
 
     void Update()
     {
 
-        //If the person has a target that is not in the list, the person does not have a target
+        //If the unit has a target that is not in the list, the unit does not have a target
         if (target != null && !tower.targets.Contains(target.gameObject))
         {
             RemoveTarget();
 
         }
-        //If there are cats in range and the person does not have a target, find a target
+        //If there are enemies in range and the unit does not have a target, find a target
         if (tower.targets.Count > 0 && target == null)
         {
             FindClosestAvailableEnemy();
@@ -60,12 +72,6 @@ public class SpawnedUnit : MonoBehaviour
         if (target != null && tower.targets.Contains(target.gameObject))
         {
             _NavMeshAgent.SetDestination(target.transform.position);
-            if(!(target.stoppingEntities.Count > 0) && !isAttacking)
-            {
-                target.stoppingEntities.Add(gameObject);
-                isAttacking = true;
-                OnAttack();
-            }
         }
     }
 
@@ -88,11 +94,17 @@ public class SpawnedUnit : MonoBehaviour
             }
 
         }
-        target = closestEnemy.GetComponent<Enemy_Base>(); //Sets the target to the closest enemy
-        if (target != null)
-        {
-            target.GetComponent<Enemy_Base>().SetAsTarget(this);
+        if (closestEnemy != null) { 
+            target = closestEnemy.GetComponent<Enemy_Base>(); //Sets the target to the closest enemy
+            //StatusEffectsManager effectsMgr = target.GetComponent<StatusEffectsManager>();
+            //if (effectsMgr != null)
+            //{
+            //    effectsMgr.ApplyStatusEffect(new StatusEffect_Stopped(tower._SpawnedUnitInfo.StatusEffect));
+            //}
+            target.stoppingEntities.Add(gameObject);
             _NavMeshAgent.SetDestination(target.transform.position);
+            target.GetComponent<Enemy_Base>().SetAsTarget(this);
+            StartCoroutine(Attack());
         }
     }
     //Finds the distance between the person and the cat
@@ -156,7 +168,7 @@ public class SpawnedUnit : MonoBehaviour
         StopAllCoroutines();
         if (target != null)
         {
-            target.SetNotTarget();
+            target.SetNotTarget(this);
             target.stoppingEntities.Remove(gameObject);
             target = null;
 
@@ -167,23 +179,33 @@ public class SpawnedUnit : MonoBehaviour
     public void ApplyDamage(float damage)
     {
         _Health -= damage;
-        if(_Health < 0f)
+        if (_Health < 0f)
         {
             RemoveTarget();
             // Fire the OnUnitDied event.
-            if( _Health <= 0 )
-            {
-                UnitDied?.Invoke(this, EventArgs.Empty);
-                Destroy(gameObject);
-            }
+            UnitDied?.Invoke(this, EventArgs.Empty);
+            Destroy(gameObject);
         }
     }
 
-    IEnumerator OnAttack()
+    IEnumerator Attack()
     {
-        target.ApplyDamage(_AttackDamage, tower);
-        _Health -= target.AttackDamage;
-        yield return new WaitForSeconds(_AttackSpeed);
+        if(target == null)
+        {
+            RemoveTarget();
+        } else
+        {
+            target.ApplyDamage(_AttackDamage, tower);
+            StatusEffectsManager effectsMgr = target.GetComponent<StatusEffectsManager>();
+            if (effectsMgr != null)
+            {
+                effectsMgr.ApplyStatusEffect(new StatusEffect_Stopped(unitInfo.StatusEffect));
+            }
+            _Health -= target.AttackDamage;
+            yield return new WaitForSeconds(_AttackSpeed);
+            StartCoroutine(Attack());
+        }
+        
     }
 
 

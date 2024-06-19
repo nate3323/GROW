@@ -85,7 +85,7 @@ public class Tower_Base : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.CompareTag("Enemy"))
+        if (collider.gameObject.layer == 6)
         {
             OnNewTargetEnteredRange(collider.gameObject);
         }
@@ -93,7 +93,7 @@ public class Tower_Base : MonoBehaviour
 
     private void OnTriggerExit(Collider collider)
     {
-        if (collider.CompareTag("Enemy"))
+        if (collider.gameObject.layer == 6)
         {
             OnTargetWentOutOfRange(collider.gameObject);
 

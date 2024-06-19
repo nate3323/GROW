@@ -10,14 +10,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New CelInfo_Base", menuName = "Spawned Unit Info Assets/New SpawnedUnitInfo_Base Asset")]
 public class SpawnedUnitInfo_Base : ScriptableObject
 {
-    [Header("General Enemy Info")]
+    [Header("General Unit Info")]
 
     public string DisplayName; // The name displayed for this Spawned Unit in the UI
     public SpawnedUnitTypes Type; // The type of this Spawned Unit.
     public Sprite UiIcon; // The icon used for this Spawned Unit in the UI
     public GameObject Prefab; // The prefab for this SpawnedUnit type
 
-    [Header("Enemy Stats")]
+    [Header("Unit Stats")]
 
     [Min(0)]
     public float AttackDamage = 2f;
@@ -30,4 +30,7 @@ public class SpawnedUnitInfo_Base : ScriptableObject
     [Min(0)]
     public float WayPointArrivedDistance = 2f; // This is how close this unit must get to the next waypoint for it to be considered as having arrived there
 
+    [Tooltip("The status effect applied by this unit.")]
+    [SerializeField]
+    public StatusEffectInfo_Stopped StatusEffect;
 }

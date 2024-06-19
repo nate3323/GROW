@@ -15,7 +15,10 @@ public class Macrophage_UnitSpawnerTower : Tower_Base
     [SerializeField, Tooltip("Unit spawn point")]
     private GameObject spawnPoint;
 
-    private void Start()
+    [Tooltip("This spawned unit's stats information")]
+    [SerializeField] public SpawnedUnitInfo_Base _SpawnedUnitInfo;
+
+    public override void Start()
     {
         currentUnits = 0;
         StartCoroutine(Spawner());
@@ -31,8 +34,9 @@ public class Macrophage_UnitSpawnerTower : Tower_Base
         }
         else if (currentUnits < maxUnits)
         {
-            GameObject newPerson = Instantiate(unitPrefab, spawnPoint.transform.position, Quaternion.identity, gameObject.transform);
-            newPerson.GetComponent<SpawnedUnit>().UnitDied += OnUnitDied;
+            GameObject newUnit = Instantiate(unitPrefab, spawnPoint.transform.position, Quaternion.identity, gameObject.transform);
+            newUnit.GetComponent<SpawnedUnit>().parent = gameObject;
+            newUnit.GetComponent<SpawnedUnit>().UnitDied += OnUnitDied;
             currentUnits++;
         }
         yield return new WaitForSeconds(FireRate);

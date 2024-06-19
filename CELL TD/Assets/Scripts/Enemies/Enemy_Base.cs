@@ -37,14 +37,14 @@ public class Enemy_Base : MonoBehaviour, IEnemy
     protected float _RewardAmount;
     protected float _WayPointArrivedDistance;
 
-    protected float _Health; // This enemy's current health.
+    [SerializeField] protected float _Health; // This enemy's current health.
     protected bool _IsDead = false; // If this enemy has been defeated or not.
 
     protected float _DistanceFromNextWayPoint = 0f;
     protected WayPoint _NextWayPoint;
 
     protected bool _isATarget = false;
-    protected SpawnedUnit _TargetUnit;
+    [SerializeField] protected SpawnedUnit _TargetUnit;
 
     private AudioSource enemyAudio;
 
@@ -149,7 +149,7 @@ public class Enemy_Base : MonoBehaviour, IEnemy
             IsDead = true;
             return;
         }
-        if (_NextWayPoint != null)
+        if (_NextWayPoint != null && stoppingEntities.Count <= 0)
         {
             _DistanceFromNextWayPoint = Vector3.Distance(transform.position, _NextWayPoint.transform.position);
 
@@ -173,9 +173,8 @@ public class Enemy_Base : MonoBehaviour, IEnemy
     //I am intending this function to be called from either the tower or the projectile that the tower fires
     public void ApplyDamage(float damageValue, Tower_Base targetingTower)
     {
-
         _Health -= damageValue;
-
+        Debug.Log(_Health);
         if (_Health <= 0 && !_IsDead)
         {
             StartCoroutine(PlayDeathSound());
@@ -283,21 +282,36 @@ public class Enemy_Base : MonoBehaviour, IEnemy
     public void SetAsTarget(SpawnedUnit unit)
     {
         _isATarget = true;
+        stoppingEntities.Add(unit.gameObject);
         _TargetUnit = unit;
         StartCoroutine(Attack());
     }
 
-    public void SetNotTarget()
+    public void SetNotTarget(SpawnedUnit unit)
     {
+        stoppingEntities.Remove(unit.gameObject);
         _isATarget = false;
         _TargetUnit = null;
+    }
+
+    public void SetMovementSpeed(float speed)
+    {
+        _BaseMovementSpeed = speed;
+    }
+
+    public void ResetMovementSpeed()
+    {
+        _BaseMovementSpeed = _EnemyInfo.BaseMovementSpeed;
     }
 
     IEnumerator Attack()
     {
         _TargetUnit.ApplyDamage(AttackDamage);
         yield return new WaitForSeconds(_AttackSpeed);
-        StartCoroutine(Attack());
+        if (_TargetUnit != null)
+        {
+            StartCoroutine(Attack());
+        }
     }
 
     IEnumerator PlayDeathSound()
