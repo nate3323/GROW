@@ -22,9 +22,13 @@ MonoBehaviour:
   BuildCost: 0
   BaseRefundPercentage: 0.85
   BaseMaxHealth: 100
-  BaseDamageValue: 0
-  BaseFireRate: 0
+  BaseDamageValue: 5
+  BaseFireRate: 0.5
   BaseRange: 3
-  BaseNumberOfTargets: 0
-  LevelUpDefinitions: []
+  BaseNumberOfTargets: 1
+  LevelUpDefinitions:
+  - UpgradeCost: 25
+    StatUpgradeDefinitions:
+    - TowerStat: 0
+      UpgradeAmount: 25
   DummyStat: 0

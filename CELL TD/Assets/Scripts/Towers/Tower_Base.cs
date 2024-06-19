@@ -39,14 +39,21 @@ public class Tower_Base : MonoBehaviour
 
 
     
-    private void Start()
+    public virtual void Start()
     {
         InitTowerStats();
     }
 
-    protected void Update()
+    public virtual void Update()
     {
-        
+        //Remove duds
+        if (targets.Count > 0)
+        {
+            if (!targets[0].gameObject)
+            {
+                targets.Remove(targets[0]);
+            }
+        }
     }
 
     private void OnEnable()
