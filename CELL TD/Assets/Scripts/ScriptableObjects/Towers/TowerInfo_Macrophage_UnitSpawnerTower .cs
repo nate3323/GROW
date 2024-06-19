@@ -15,9 +15,10 @@ public class TowerInfo_Macrophage_UnitSpawnerTower : TowerInfo_Base
 {
     [Header("Macrophage (Unit Spawner Tower)-Specific Stats")]
 
-    [Tooltip("The status effect applied by this tower.")]
+    // A dummy setting. The header causes an error if there are no properties here.
+    [Tooltip("Dummy Stat")]
     [SerializeField]
-    public StatusEffectInfo_Stopped StatusEffect;
+    public int DummyStat;
 
 }
 

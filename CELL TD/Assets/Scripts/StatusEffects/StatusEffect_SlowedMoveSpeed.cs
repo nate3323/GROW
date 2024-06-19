@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class StatusEffect_SlowedMoveSpeed : StatusEffect_Base
 {
-    private Enemy_Base target;
-
     /// <summary>
     /// This method is called when the status effect is first applied, making it a great place
     /// to initialize it, for example setting up visual effects created by this status effect.
@@ -23,7 +21,7 @@ public class StatusEffect_SlowedMoveSpeed : StatusEffect_Base
     /// </summary>
     public override void OnEffectEnd()
     {
-        target.ResetMovementSpeed();
+
     }
 
     /// <summary>
@@ -51,11 +49,8 @@ public class StatusEffect_SlowedMoveSpeed : StatusEffect_Base
     {
         // The code below is pseudocode for what should happen here
 
-        if (targetEnemy.BaseMovementSpeed > StatusEffectInfo.MaxMoveSpeed)
-        {
-            targetEnemy.SetMovementSpeed(StatusEffectInfo.MaxMoveSpeed);
-        }
-            
+        //if (targetEnemy.MovementSpeed > StatusEffectInfo.MaxMoveSpeed)
+        //    targetEnemy.MovementSpeed = StatusEffectInfo.MaxMoveSpeed;
     }
 
     /// <summary>

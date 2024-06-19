@@ -78,7 +78,7 @@ Transform:
   m_GameObject: {fileID: 3273052641148002110}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -139,9 +139,8 @@ MonoBehaviour:
   range: {fileID: 7847912624285093134}
   targets: []
   unitPrefab: {fileID: 4808694354577833756, guid: 2eed3cd9977a85949ad2a42bcde5fe8a, type: 3}
-  maxUnits: 3
+  maxUnits: 0
   spawnPoint: {fileID: 3273052641148002110}
-  _SpawnedUnitInfo: {fileID: 11400000, guid: 13e0147f95c6d7e48a7ae08f146b6ab4, type: 2}
 --- !u!33 &8369317793551279664
 MeshFilter:
   m_ObjectHideFlags: 0

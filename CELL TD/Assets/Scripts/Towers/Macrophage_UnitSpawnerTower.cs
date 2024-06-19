@@ -1,5 +1,5 @@
 using System.Collections;
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Macrophage_UnitSpawnerTower : Tower_Base
@@ -15,14 +15,6 @@ public class Macrophage_UnitSpawnerTower : Tower_Base
     [SerializeField, Tooltip("Unit spawn point")]
     private GameObject spawnPoint;
 
-    [Tooltip("This spawned unit's stats information")]
-    [SerializeField] public SpawnedUnitInfo_Base _SpawnedUnitInfo;
-
-    public override void Start()
-    {
-        currentUnits = 0;
-        StartCoroutine(Spawner());
-    }
 
 
     IEnumerator Spawner()
@@ -34,9 +26,7 @@ public class Macrophage_UnitSpawnerTower : Tower_Base
         }
         else if (currentUnits < maxUnits)
         {
-            GameObject newUnit = Instantiate(unitPrefab, spawnPoint.transform.position, Quaternion.identity, gameObject.transform);
-            newUnit.GetComponent<SpawnedUnit>().parent = gameObject;
-            newUnit.GetComponent<SpawnedUnit>().UnitDied += OnUnitDied;
+            GameObject newPerson = Instantiate(unitPrefab, spawnPoint.transform.position, Quaternion.identity, gameObject.transform);    
             currentUnits++;
         }
         yield return new WaitForSeconds(FireRate);
@@ -73,11 +63,6 @@ public class Macrophage_UnitSpawnerTower : Tower_Base
             } // end switch
 
         } // end foreach TowerStatUpgradeDefinition
-    }
-
-    private void OnUnitDied(object sender, EventArgs e)
-    {
-        currentUnits--;
     }
 
 
