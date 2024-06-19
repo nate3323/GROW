@@ -20,7 +20,7 @@ MonoBehaviour:
   AttackDamage: 100
   AttackSpeed: 0.1
   BaseMovementSpeed: 0.1
-  MaxHealth: 1500
+  MaxHealth: 8000
   RewardAmount: 250
   WayPointArrivedDistance: 3
   CurrencyGain: 250
