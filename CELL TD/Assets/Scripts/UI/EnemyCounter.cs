@@ -22,16 +22,10 @@ public class EnemyCounter : MonoBehaviour
     }
     void Update()
     {
-        
-        
-        EnemyDies(this, EventArgs.Empty);
-        EnemyReachesGoal(this, EventArgs.Empty);
-
-        if(_waveEnemies.IsWaveInProgress == false)
+        while(_waveEnemies.WaveNumber <= _waveEnemies.TotalWavesInLevel)
         {
-            enemies = _waveEnemies.TotalEnemiesInWave;
-            enemyCountText.text = "" + enemies;
-        }       
+            EnemyReset();
+        }
     }
 
     void EnemyDies(object Sender, EventArgs a)
@@ -48,7 +42,11 @@ public class EnemyCounter : MonoBehaviour
 
     void EnemyReset()
     {
-        
+        if (_waveEnemies.IsWaveInProgress)
+        {
+            EnemyDies(this, EventArgs.Empty);
+            EnemyReachesGoal(this, EventArgs.Empty);
+        }
     }
     void OnDestroy()
     {
