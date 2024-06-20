@@ -27,7 +27,8 @@ public class EnemyCounter : MonoBehaviour
         
         EnemyDies(this, EventArgs.Empty);
         EnemyReachesGoal(this, EventArgs.Empty);
-        
+
+        _waveEnemies.StartNextWave();
     }
 
     void EnemyDies(object Sender, EventArgs a)
@@ -42,6 +43,10 @@ public class EnemyCounter : MonoBehaviour
         enemyCountText.text = "" + enemies;
     }
 
+    void EnemyReset()
+    {
+        
+    }
     void OnDestroy()
     {
         _waveEnemies.AnEnemyDied -= EnemyDies;
