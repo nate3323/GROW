@@ -22,13 +22,16 @@ public class EnemyCounter : MonoBehaviour
     }
     void Update()
     {
-        enemies = _waveEnemies.TotalEnemiesInWave;
-        enemyCountText.text = "" + enemies;
+        
         
         EnemyDies(this, EventArgs.Empty);
         EnemyReachesGoal(this, EventArgs.Empty);
 
-        _waveEnemies.StartNextWave();
+        if(_waveEnemies.IsWaveInProgress == false)
+        {
+            enemies = _waveEnemies.TotalEnemiesInWave;
+            enemyCountText.text = "" + enemies;
+        }       
     }
 
     void EnemyDies(object Sender, EventArgs a)
