@@ -22,10 +22,8 @@ public class EnemyCounter : MonoBehaviour
     }
     void Update()
     {
-        while(_waveEnemies.WaveNumber <= _waveEnemies.TotalWavesInLevel)
-        {
-            EnemyReset();
-        }
+        EnemyDies(this, EventArgs.Empty);
+        EnemyReachesGoal(this, EventArgs.Empty);
     }
 
     void EnemyDies(object Sender, EventArgs a)
@@ -40,14 +38,6 @@ public class EnemyCounter : MonoBehaviour
         enemyCountText.text = "" + enemies;
     }
 
-    void EnemyReset()
-    {
-        if (_waveEnemies.IsWaveInProgress)
-        {
-            EnemyDies(this, EventArgs.Empty);
-            EnemyReachesGoal(this, EventArgs.Empty);
-        }
-    }
     void OnDestroy()
     {
         _waveEnemies.AnEnemyDied -= EnemyDies;
