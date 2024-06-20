@@ -85,7 +85,7 @@ public class Placer : MonoBehaviour
 
     private void CheckOverlap()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.1f, layerToCheck);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.5f, layerToCheck);
         if (colliders.Length > 0)
         {
             overlapping = true;
