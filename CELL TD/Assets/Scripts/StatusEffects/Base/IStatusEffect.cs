@@ -25,8 +25,9 @@ public interface IStatusEffect
     /// The StatusEffectsManager script on an enemy object will call this function to apply the status effect.
     /// It gets called once per frame as long as the status effect is active.
     /// </summary>
+    /// <param name="targetEnemy">The enemy the effect is being applied to.</param>
     /// <exception cref=">ArgumentNullException">if targetEnemy is null</exception>
-    abstract void Update();
+    abstract void ApplyStatusEffect(Enemy_Base targetEnemy);
 
     /// <summary>
     /// This method stacks another status effect instance on top of this one.

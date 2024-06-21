@@ -33,7 +33,7 @@ public class Enemy_Base : MonoBehaviour, IEnemy
 
     protected float _AttackDamage;
     protected float _AttackSpeed;
-    protected float _MovementSpeed;
+    protected float _BaseMovementSpeed;
     protected float _RewardAmount;
     protected float _WayPointArrivedDistance;
 
@@ -82,15 +82,7 @@ public class Enemy_Base : MonoBehaviour, IEnemy
         // Find the closest WayPoint and start moving there.
         FindNearestWayPoint();
 
-        // This prevents an issue where if the enemy spawns to close to the nearest waypoint, then he won't move since he is already at his next node.
-        // This catches that and tells him to go to the next node.
-        if (HasReachedDestination())
-        {
-            GetNextWaypoint();
-        }
-
         _NavMeshAgent.SetDestination(_NextWayPoint.transform.position);
-        _NavMeshAgent.speed = _EnemyInfo.MovementSpeed;
     }
 
     /// <summary>
@@ -101,7 +93,7 @@ public class Enemy_Base : MonoBehaviour, IEnemy
     {
         _AttackDamage = _EnemyInfo.AttackDamage;
         _AttackSpeed = _EnemyInfo.AttackSpeed;
-        _MovementSpeed = _EnemyInfo.MovementSpeed;
+        _BaseMovementSpeed = _EnemyInfo.BaseMovementSpeed;
         _Health = _EnemyInfo.MaxHealth;
         _RewardAmount = _EnemyInfo.RewardAmount;
         _WayPointArrivedDistance = _EnemyInfo.WayPointArrivedDistance;
@@ -157,12 +149,9 @@ public class Enemy_Base : MonoBehaviour, IEnemy
             IsDead = true;
             return;
         }
-
-
         if (_NextWayPoint != null && stoppingEntities.Count <= 0)
         {
-            // I'm subtracting 1 at the end here to account for the fact that the enemy is just over 1 unit away from the waypoint when directly on top of it.
-            _DistanceFromNextWayPoint = Vector3.Distance(transform.position, _NextWayPoint.transform.position) - 1f;
+            _DistanceFromNextWayPoint = Vector3.Distance(transform.position, _NextWayPoint.transform.position);
 
             if (HasReachedDestination())
             {
@@ -286,8 +275,8 @@ public class Enemy_Base : MonoBehaviour, IEnemy
 
     public bool HasReachedDestination()
     {
-        return _DistanceFromNextWayPoint <= _WayPointArrivedDistance;// &&
-               //_NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete;
+        return _DistanceFromNextWayPoint <= _WayPointArrivedDistance &&
+               _NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete;
     }
 
     public void SetAsTarget(SpawnedUnit unit)
@@ -305,9 +294,14 @@ public class Enemy_Base : MonoBehaviour, IEnemy
         _TargetUnit = null;
     }
 
+    public void SetMovementSpeed(float speed)
+    {
+        _BaseMovementSpeed = speed;
+    }
+
     public void ResetMovementSpeed()
     {
-        MovementSpeed = _EnemyInfo.MovementSpeed;
+        _BaseMovementSpeed = _EnemyInfo.BaseMovementSpeed;
     }
 
     IEnumerator Attack()
@@ -334,15 +328,7 @@ public class Enemy_Base : MonoBehaviour, IEnemy
 
 
     public float AttackDamage { get { return _EnemyInfo.AttackDamage; } }
-    public float MovementSpeed 
-    { 
-        get { return _MovementSpeed; } 
-        set 
-        { 
-            _MovementSpeed = value; 
-            _NavMeshAgent.speed = _MovementSpeed;
-        } 
-    }
+    public float BaseMovementSpeed { get { return _BaseMovementSpeed; } }
     public EnemyTypes EnemyType { get { return _EnemyInfo.Type; } }    
     public float Health { get { return _Health; } }
     public bool IsBacteria { get; protected set; } = false;

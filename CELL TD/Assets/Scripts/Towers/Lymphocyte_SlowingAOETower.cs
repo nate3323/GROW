@@ -30,14 +30,9 @@ public class Lymphocyte_SlowingAOETower : Tower_Base
     /// Find all enemies within range of the tower.
     /// </summary>
     private void FindEnemiesInRange()
-    {       
+    {
         // Find all enemies withint range. We use a layer mask for the Enemies layer since we only care about enemies.
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, 
-                                                  _Range, 
-                                                  Vector3.up, 
-                                                  0, 
-                                                  LayerMask.GetMask("Enemies"), 
-                                                  QueryTriggerInteraction.Collide);
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, _Range, Vector3.up, 0, LayerMask.GetMask("Enemies"));
         for (int i = 0; i < hits.Length; i++)
         {
             //Debug.Log("Hit: " + hits[i].collider.gameObject.name);
@@ -49,7 +44,7 @@ public class Lymphocyte_SlowingAOETower : Tower_Base
                 StatusEffectsManager effectsMgr = enemy.GetComponent<StatusEffectsManager>();
                 if (effectsMgr != null)
                 {
-                    effectsMgr.ApplyStatusEffect(new StatusEffect_SlowedMoveSpeed(TowerInfo.StatusEffect, enemy));
+                    effectsMgr.ApplyStatusEffect(new StatusEffect_SlowedMoveSpeed(TowerInfo.StatusEffect));
                 }
             }
 

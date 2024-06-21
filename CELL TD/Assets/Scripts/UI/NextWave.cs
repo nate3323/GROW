@@ -18,6 +18,9 @@ public class NextWave : MonoBehaviour
         }
 
         Instance = this;
+
+        _btn.enabled = false;
+        _btn.transform.localScale = Vector3.zero;
     }
     public void StartNextWave()
     {

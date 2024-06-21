@@ -6,18 +6,7 @@ using UnityEngine;
 
 public class StatusEffect_SlowedMoveSpeed : StatusEffect_Base
 {
-    /// <summary>
-    /// Default constructor
-    /// </summary>
-    /// <param name="statusEffectInfo">The definition containing the details about this status effect.</param>
-    /// <param name="target">The target object of this status effect.</param>
-    public StatusEffect_SlowedMoveSpeed(StatusEffectInfo_SlowedMovement statusEffectInfo, object target)
-        : base(statusEffectInfo, target)
-    {
-        // Make sure the passed in StatusEffectInfo is of the correct type.
-        if (statusEffectInfo.Type != StatusEffectTypes.SlowedMoveSpeed)
-            throw new ArgumentException(nameof(statusEffectInfo.Type));
-    }
+    private Enemy_Base target;
 
     /// <summary>
     /// This method is called when the status effect is first applied, making it a great place
@@ -25,7 +14,7 @@ public class StatusEffect_SlowedMoveSpeed : StatusEffect_Base
     /// </summary>
     public override void OnEffectStart()
     {
-        TargetEnemy.MovementSpeed = TargetEnemy.MovementSpeed * StatusEffectInfo.SlowdownPercentage;
+
     }
 
     /// <summary>
@@ -35,7 +24,22 @@ public class StatusEffect_SlowedMoveSpeed : StatusEffect_Base
     public override void OnEffectEnd()
     {
         // I added the ? here so it won't try to call the method if target is null, which happens sometimes when an enemy is destroyed.
-        TargetEnemy?.ResetMovementSpeed();
+        target?.ResetMovementSpeed();
+    }
+
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    /// <param name="statusEffectInfo">The definition containing the details about this status effect.</param>
+    public StatusEffect_SlowedMoveSpeed(StatusEffectInfo_SlowedMovement statusEffectInfo)
+        : base(statusEffectInfo)
+    {
+        if (statusEffectInfo == null)
+            throw new ArgumentNullException(nameof(statusEffectInfo));
+
+        // Make sure the passed in StatusEffectInfo is of the correct type.
+        if (statusEffectInfo.Type != StatusEffectTypes.SlowedMoveSpeed)
+            throw new ArgumentException(nameof(statusEffectInfo.Type));
     }
 
     /// <summary>
@@ -44,9 +48,15 @@ public class StatusEffect_SlowedMoveSpeed : StatusEffect_Base
     /// </summary>
     /// <param name="targetEnemy">The enemy the effect is being applied to.</param>
     /// <exception cref=">ArgumentNullException">if targetEnemy is null</exception>
-    public override void Update()
+    public override void ApplyStatusEffect(Enemy_Base targetEnemy)
     {
+        // The code below is pseudocode for what should happen here
 
+        if (targetEnemy.BaseMovementSpeed > StatusEffectInfo.MaxMoveSpeed)
+        {
+            targetEnemy.SetMovementSpeed(StatusEffectInfo.MaxMoveSpeed);
+        }
+            
     }
 
     /// <summary>
@@ -79,7 +89,4 @@ public class StatusEffect_SlowedMoveSpeed : StatusEffect_Base
             return _StatusEffectInfo as StatusEffectInfo_SlowedMovement;
         }
     }
-
-
-    public Enemy_Base TargetEnemy { get { return (Enemy_Base)_Target; } }
 }
