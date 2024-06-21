@@ -13,12 +13,15 @@ MonoBehaviour:
   m_Name: EnemyInfo_Bacteria_Test
   m_EditorClassIdentifier: 
   DisplayName: Test Bacteria
+  Description: 
   Type: 0
   UiIcon: {fileID: 21300000, guid: f0ebbbeef99115040951c713d6768606, type: 3}
   Prefab: {fileID: 5423161611289648773, guid: 01793a8bdc76baa4fbe4cf1006d1b2ed, type: 3}
   AttackDamage: 2
-  BaseMovementSpeed: 1
+  AttackSpeed: 1
+  MovementSpeed: 3
   MaxHealth: 50
   RewardAmount: 20
-  WayPointArrivedDistance: 2
+  WayPointArrivedDistance: 1
+  CurrencyGain: 15
   OffspringPerMitosis: 2

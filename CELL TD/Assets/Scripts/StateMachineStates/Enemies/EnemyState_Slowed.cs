@@ -23,7 +23,7 @@ public class EnemyState_Slowed : EnemyState_Base
 
     public override void OnExit()
     {
-        _parent.gameObject.GetComponent<NavMeshAgent>().speed = _parent.GetComponent<Enemy_Base>().BaseMovementSpeed;
+        _parent.gameObject.GetComponent<NavMeshAgent>().speed = _parent.GetComponent<Enemy_Base>().MovementSpeed;
     }
 
     public override void OnUpdate()
@@ -43,7 +43,7 @@ public class EnemyState_Slowed : EnemyState_Base
                 
             }
         }
-        _parent.GetComponent<NavMeshAgent>().speed = enemy.BaseMovementSpeed / modifier;
+        _parent.GetComponent<NavMeshAgent>().speed = enemy.MovementSpeed / modifier;
     }
 
 }

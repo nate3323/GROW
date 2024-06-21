@@ -10,6 +10,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New StatusEffectInfo_SlowedMovement", menuName = "Status Effect Info Assets/New StatusEffectInfo_SlowedMovement Asset")]
 public class StatusEffectInfo_SlowedMovement : StatusEffectInfo_Base
 {   
-    [Tooltip("The maximum speed the enemy can move at while this status effect is active")]
-    public float MaxMoveSpeed;
+    [Tooltip("This sets how much the target will be slowed down. For example, value of 0.25 means that this status effect will limit the target to 25% of its normal speed.")]
+    [Range(0f, 1f)]
+    public float SlowdownPercentage = 0.5f;
 }

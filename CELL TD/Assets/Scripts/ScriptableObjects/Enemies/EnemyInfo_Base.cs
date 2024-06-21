@@ -19,14 +19,14 @@ public class EnemyInfo_Base : ScriptableObject
     public Sprite UiIcon; // The icon used for this enemy in the UI
     public GameObject Prefab; // The prefab for this enemy type
 
-    [Header("Enemy Stats")]
+    [Header("Enemy Base Stats")]
 
     [Min(0)]
     public float AttackDamage = 2f;
     [Min(0)]
     public float AttackSpeed = 1f;
     [Min(0)]
-    public float BaseMovementSpeed = 1f;
+    public float MovementSpeed = 1f;
     [Min(0)]
     public float MaxHealth = 50f;
     [Min(0)]
