@@ -88,7 +88,9 @@ public class EnemySpawner : MonoBehaviour
 
     public int EnemiesInCurrentWave()
     {
-        Wave current = _Waves[_CurrentWaveInfo].WaveInfo[_CurrentWave-1];
+        Debug.Log(_CurrentWave);
+        Debug.Log(_CurrentWaveInfo);
+        Wave current = _Waves[_CurrentWaveInfo].WaveInfo[_CurrentWave - 1];
         int tally = 0;
         foreach(SpawnInfo enemy in current.Enemies)
         {

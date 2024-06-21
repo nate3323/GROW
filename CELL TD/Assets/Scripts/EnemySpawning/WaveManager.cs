@@ -14,7 +14,9 @@ public class WaveManager : MonoBehaviour
 {
     public event EventHandler WaveEnded;
     public event EventHandler LevelCleared;
-
+    public event EventHandler AnEnemyDied;
+    public event EventHandler AnEnemyReachedGoal;
+    
 
 
     public static WaveManager Instance;
@@ -105,7 +107,7 @@ public class WaveManager : MonoBehaviour
         _WaveInProgress = true;
 
         _WaveNumber++;
-
+        
 
         FindAllSpawners();
 
@@ -121,6 +123,7 @@ public class WaveManager : MonoBehaviour
         _EnemiesKilled = 0;
         _EnemiesReachedGoal = 0;
 
+        
         //HUD.ShowWaveDisplay();
         //HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave);
     }
@@ -139,6 +142,7 @@ public class WaveManager : MonoBehaviour
         _EnemiesKilled++;
         _TotalCatsDistracted++;
 
+        AnEnemyDied?.Invoke(Sender, EventArgs.Empty);
         //HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave);
 
         if (_EnemiesRemainingInWave < 1)
@@ -147,13 +151,18 @@ public class WaveManager : MonoBehaviour
             _WaveInProgress = false;
 
             WaveEnded?.Invoke(this, EventArgs.Empty);
+
+            
+
             OnWaveEnded(this, EventArgs.Empty);
+
 
             if (_WaveNumber >= _TotalWavesInLevel /* && player.IsDead */)
             {
                 //HUD.RevealVictory();
             }
         }
+        
     }
 
     public void OnEnemyReachedGoal(object Sender, EventArgs e)
@@ -162,6 +171,7 @@ public class WaveManager : MonoBehaviour
         _EnemiesReachedGoal++;
         _TotalEnemiesReachedGoal++;
 
+        AnEnemyReachedGoal?.Invoke(Sender, EventArgs.Empty);
         //HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave);
 
         if (_EnemiesRemainingInWave < 1)
@@ -178,6 +188,7 @@ public class WaveManager : MonoBehaviour
             }
         }
     }
+
 
     private void CalculateTotalEnemiesInWave()
     {
@@ -213,7 +224,11 @@ public class WaveManager : MonoBehaviour
             //TODO: Add game win state
             return;
         }
+ 
+        
+
         GameManager.Instance.MoneySystem.AddCurrency(_WaveReward);
+ 
         NextWave.Instance.EnableButton();
     }
 
