@@ -19,10 +19,10 @@ MonoBehaviour:
   Prefab: {fileID: 3937515291007552044, guid: b14af337bce4c7b4fbf7462d5790b178, type: 3}
   AttackDamage: 100
   AttackSpeed: 0.1
-  BaseMovementSpeed: 0.1
+  MovementSpeed: 2
   MaxHealth: 8000
   RewardAmount: 250
-  WayPointArrivedDistance: 3
+  WayPointArrivedDistance: 1
   CurrencyGain: 250
   spawnableEnemies:
   - {fileID: 5423161611289648773, guid: 01793a8bdc76baa4fbe4cf1006d1b2ed, type: 3}

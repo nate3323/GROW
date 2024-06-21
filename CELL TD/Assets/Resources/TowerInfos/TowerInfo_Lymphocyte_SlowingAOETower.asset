@@ -24,7 +24,7 @@ MonoBehaviour:
   BaseRefundPercentage: 0.5
   BaseMaxHealth: 100
   BaseDamageValue: 0
-  BaseFireRate: 3
+  BaseFireRate: 1
   BaseRange: 5
   BaseNumberOfTargets: 0
   LevelUpDefinitions:

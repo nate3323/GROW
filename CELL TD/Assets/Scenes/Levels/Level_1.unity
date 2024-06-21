@@ -401,6 +401,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lymphocyte (SlowingAOETower)
       objectReference: {fileID: 0}
+    - target: {fileID: 5241760635518110145, guid: 7e288c9bc752a9047b3f9fa96b1590e2, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6697603382973408571, guid: 7e288c9bc752a9047b3f9fa96b1590e2, type: 3}
+      propertyPath: targets.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6697603382973408571, guid: 7e288c9bc752a9047b3f9fa96b1590e2, type: 3}
+      propertyPath: targets.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -937,11 +949,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d3a2383d44a71c847a0aa3c20260a1a5, type: 3}
   m_PrefabInstance: {fileID: 444557386}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &456964151 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5149f605b0ec7cd4cba27677c5347f7d, type: 3}
-  m_PrefabInstance: {fileID: 1943582830}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &493147177 stripped
 GameObject:
@@ -5277,10 +5284,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d3a2383d44a71c847a0aa3c20260a1a5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1947249977}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3a2383d44a71c847a0aa3c20260a1a5, type: 3}
 --- !u!4 &1724123603 stripped
 Transform:
@@ -5323,7 +5327,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1757126977}
-  - component: {fileID: 1757126978}
   - component: {fileID: 1757126976}
   m_Layer: 0
   m_Name: WaveManager
@@ -5359,18 +5362,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1757126978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1757126975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16d48579871f3a84983243055d047c37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1767330741
 GameObject:
   m_ObjectHideFlags: 0
@@ -6646,10 +6637,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5149f605b0ec7cd4cba27677c5347f7d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1943582834}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5149f605b0ec7cd4cba27677c5347f7d, type: 3}
 --- !u!4 &1943582831 stripped
 Transform:
@@ -7658,38 +7646,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d3a2383d44a71c847a0aa3c20260a1a5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2130346772}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3a2383d44a71c847a0aa3c20260a1a5, type: 3}
 --- !u!4 &2130346769 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d3a2383d44a71c847a0aa3c20260a1a5, type: 3}
   m_PrefabInstance: {fileID: 2130346768}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &2130346772
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1947329714}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -7903523551490901366, guid: d3a2383d44a71c847a0aa3c20260a1a5, type: 3}
 --- !u!1001 &1431087844914014550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8484,6 +8447,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5575219611191600096, guid: b19c84abe8209af44980157310ea08e3, type: 3}
+      propertyPath: m_text
+      value: 'Refund Amount:'
+      objectReference: {fileID: 0}
     - target: {fileID: 5714324813264278679, guid: b19c84abe8209af44980157310ea08e3, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -8931,10 +8898,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 150313733353579793, guid: 49184e43947d2d241ad9bf0182720e1b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 150313733353579793, guid: 49184e43947d2d241ad9bf0182720e1b, type: 3}
-      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 150313733353579793, guid: 49184e43947d2d241ad9bf0182720e1b, type: 3}

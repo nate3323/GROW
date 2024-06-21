@@ -10,7 +10,7 @@ public interface IEnemy
 {
     public float AttackDamage { get; }
 
-    public float BaseMovementSpeed { get; }
+    public float MovementSpeed { get; }
 
     public EnemyTypes EnemyType { get; }
 
