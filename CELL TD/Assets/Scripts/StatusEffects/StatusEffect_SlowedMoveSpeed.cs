@@ -23,7 +23,7 @@ public class StatusEffect_SlowedMoveSpeed : StatusEffect_Base
     /// </summary>
     public override void OnEffectEnd()
     {
-        // I added the ? here to stop this causing a null reference error. This occurs sometimes when this code runs just after an enemy was killed.
+        // I added the ? here so it won't try to call the method if target is null, which happens sometimes when an enemy is destroyed.
         target?.ResetMovementSpeed();
     }
 
