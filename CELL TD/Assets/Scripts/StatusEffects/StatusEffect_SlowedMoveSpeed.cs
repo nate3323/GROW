@@ -23,7 +23,8 @@ public class StatusEffect_SlowedMoveSpeed : StatusEffect_Base
     /// </summary>
     public override void OnEffectEnd()
     {
-        target.ResetMovementSpeed();
+        // I added the ? here so it won't try to call the method if target is null, which happens sometimes when an enemy is destroyed.
+        target?.ResetMovementSpeed();
     }
 
     /// <summary>

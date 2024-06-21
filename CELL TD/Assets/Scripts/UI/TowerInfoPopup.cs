@@ -12,6 +12,8 @@ public class TowerInfoPopup : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _NameText;
     [SerializeField]
+    private TextMeshProUGUI _CostText;
+    [SerializeField]
     private TextMeshProUGUI _TargetingTypeText;
     [SerializeField]
     private TextMeshProUGUI _AttackDamageText;
@@ -69,6 +71,7 @@ public class TowerInfoPopup : MonoBehaviour
         gameObject.SetActive(true);
 
         _NameText.text = towerInfo.DisplayName;
+        _CostText.text = towerInfo.BuildCost.ToString();
         _TargetingTypeText.text = InsertSpacesBeforeAllCapitalLetters(InsertSpacesBeforeAllCapitalLetters(Enum.GetName(typeof(TargetingTypes), towerInfo.TargetingType)));
         _AttackDamageText.text = towerInfo.BaseDamageValue.ToString();
 
