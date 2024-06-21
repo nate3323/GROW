@@ -98,7 +98,7 @@ MonoBehaviour:
       amount: 25
       timeBetween: 0.1
     - Enemy: {fileID: 11400000, guid: 8a9f3b71638dc434fa1011806a4e7d7a, type: 2}
-      amount: 25
+      amount: 1
       timeBetween: 0.1
     WaveReward: 100
   - Enemies:
