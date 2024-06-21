@@ -7,19 +7,9 @@ using TMPro;
 using System;
 
 public class EnemyCounter : MonoBehaviour
-{
-    [SerializeField]
-    private WaveManager _waveEnemies;
-    
+{   
     public TextMeshProUGUI enemyCountText;
     public int enemies = 0;
-    private void Awake()
-    {
-        _waveEnemies = FindObjectOfType<WaveManager>();
-        _waveEnemies.AnEnemyDied += EnemyDies;
-        _waveEnemies.AnEnemyReachedGoal += EnemyReachesGoal;
-        
-    }
     void Update()
     {
         EnemyDies(this, EventArgs.Empty);
@@ -28,19 +18,17 @@ public class EnemyCounter : MonoBehaviour
 
     void EnemyDies(object Sender, EventArgs a)
     {
-       enemies = _waveEnemies.TotalEnemiesInWave - _waveEnemies.TotalEnemiesKilledInLevel;
-       enemyCountText.text = "" + enemies;
+        UpdateEnemies();
     }
 
     void EnemyReachesGoal(object Sender, EventArgs a)
     {
-        enemies = _waveEnemies.TotalEnemiesInWave - _waveEnemies.TotalEnemiesReachedGoalInLevel;
-        enemyCountText.text = "" + enemies;
+        UpdateEnemies();
     }
 
-    void OnDestroy()
+    void UpdateEnemies()
     {
-        _waveEnemies.AnEnemyDied -= EnemyDies;
-        _waveEnemies.AnEnemyReachedGoal -= EnemyReachesGoal;
+        enemies = WaveManager.Instance.TotalEnemiesInWave - WaveManager.Instance.NumEnemiesKilledInWave - WaveManager.Instance.NumEnemiesReachedGoalInWave;
+        enemyCountText.text = "" + enemies;
     }
 }
