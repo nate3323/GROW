@@ -57,6 +57,11 @@ public class StatusEffectsManager : MonoBehaviour
 
                 _StatusEffects.RemoveAt(i);
             }
+            else
+            {
+                // This status effect has not updated, so call its Update() method.
+                statusEffect.Update();
+            }
 
         } // end for i
     }
@@ -76,6 +81,7 @@ public class StatusEffectsManager : MonoBehaviour
         {
             IStatusEffect statusEffect = _StatusEffects[i];
 
+            // Does this target already have an active status effect of this type?
             if (statusEffect.StatusEffectInfo.Type == statusEffectInstance.StatusEffectInfo.Type)
             {
                 // The new status effect is the same type as the one at this index. So check if stacking is enabled?
@@ -92,6 +98,7 @@ public class StatusEffectsManager : MonoBehaviour
             }
 
         } // end for i
+
 
         // This enemy does not already have an instance of this type of status effect on it, so just add it.
         _StatusEffects.Add((StatusEffect_Base) statusEffectInstance);

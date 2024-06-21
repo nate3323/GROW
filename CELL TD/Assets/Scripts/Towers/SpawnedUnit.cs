@@ -199,7 +199,7 @@ public class SpawnedUnit : MonoBehaviour
             StatusEffectsManager effectsMgr = target.GetComponent<StatusEffectsManager>();
             if (effectsMgr != null)
             {
-                effectsMgr.ApplyStatusEffect(new StatusEffect_Stopped(unitInfo.StatusEffect));
+                effectsMgr.ApplyStatusEffect(new StatusEffect_Stopped(unitInfo.StatusEffect, target));
             }
             _Health -= target.AttackDamage;
             yield return new WaitForSeconds(_AttackSpeed);

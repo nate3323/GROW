@@ -10,6 +10,11 @@ using UnityEngine;
 public abstract class StatusEffect_Base : IStatusEffect
 {
     /// <summary>
+    /// The target of this status effect.
+    /// </summary>
+    protected object _Target;
+
+    /// <summary>
     /// Contains the definition of this status effect.
     /// </summary>
     protected StatusEffectInfo_Base _StatusEffectInfo;
@@ -34,12 +39,16 @@ public abstract class StatusEffect_Base : IStatusEffect
     /// Default constructor
     /// </summary>
     /// <param name="statusEffectInfo">The definition containing the details about this status effect.</param>
-    public StatusEffect_Base(StatusEffectInfo_Base statusEffectInfo)
+    /// <param name="target">The target object of this status effect.</param>
+    public StatusEffect_Base(StatusEffectInfo_Base statusEffectInfo, object target)
     {
         if (statusEffectInfo == null)
             throw new ArgumentNullException(nameof(statusEffectInfo));
+        if (target == null)
+            throw new ArgumentNullException(nameof(target));
 
 
+        _Target = target;
         _StatusEffectInfo = statusEffectInfo;
         _Duration = statusEffectInfo.Duration;
     }
@@ -59,10 +68,15 @@ public abstract class StatusEffect_Base : IStatusEffect
     public abstract void OnEffectEnd();
 
     /// <summary>
-    /// The StatusEffectsManager script on an enemy object will call this function to apply the status effect.
+    /// The StatusEffectsManager script on an enemy object will call this function to update the status effect once every frame.
+    /// This is basically the same as the Update() method of a MonoBehaviour.
     /// </summary>
+    /// <remarks>
+    /// For example, a status effect that does damage over time might override this method to implement a simple
+    /// timer that damages the target once every second.
+    /// </remarks>
     /// <param name="targetEnemy">The enemy the effect is being applied to.</param>
-    public abstract void ApplyStatusEffect(Enemy_Base targetEnemy);
+    public abstract void Update();
 
     /// <summary>
     /// This method stacks another status effect instance on top of this one.    
