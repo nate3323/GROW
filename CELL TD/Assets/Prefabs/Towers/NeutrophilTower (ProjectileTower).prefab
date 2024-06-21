@@ -51,7 +51,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 2}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6726818356700081743
 PrefabInstance:
@@ -198,7 +198,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.55
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0.05}
 --- !u!135 &1430105784308127383
 SphereCollider:
@@ -219,7 +219,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.055
+  m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0.05}
 --- !u!4 &6543955498550561188 stripped
 Transform:
