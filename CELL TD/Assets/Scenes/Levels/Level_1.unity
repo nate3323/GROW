@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 42734536}
   m_Layer: 0
   m_Name: Spawner 1
-  m_TagString: Untagged
+  m_TagString: Enemy Spawn Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

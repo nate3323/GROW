@@ -177,7 +177,7 @@ public class Tower_Base : MonoBehaviour
 
     /// <summary>
     /// This function is just an event hander that subclasses can override to be notified when
-    /// a target moves out of range. So it's like NewTargetEnteredRange(), but the opposite.
+    /// a target moves out of range. So it's like OnNewTargetEnteredRange(), but the opposite.
     /// </summary>
     /// <remarks>
     /// 
