@@ -218,7 +218,7 @@ public class Enemy_Base : MonoBehaviour, IEnemy
         }
     }
 
-    protected void KillEnemy(int type)
+    protected virtual void KillEnemy(int type)
     {
         if (IsDead)
             return;

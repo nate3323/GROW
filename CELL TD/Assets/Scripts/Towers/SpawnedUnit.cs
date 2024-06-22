@@ -101,9 +101,9 @@ public class SpawnedUnit : MonoBehaviour
             //{
             //    effectsMgr.ApplyStatusEffect(new StatusEffect_Stopped(tower._SpawnedUnitInfo.StatusEffect));
             //}
-            target.stoppingEntities.Add(gameObject);
+            //target.stoppingEntities.Add(gameObject);
             _NavMeshAgent.SetDestination(target.transform.position);
-            target.GetComponent<Enemy_Base>().SetAsTarget(this);
+            //target.GetComponent<Enemy_Base>().SetAsTarget(this);
             StartCoroutine(Attack());
         }
     }
@@ -199,7 +199,7 @@ public class SpawnedUnit : MonoBehaviour
             StatusEffectsManager effectsMgr = target.GetComponent<StatusEffectsManager>();
             if (effectsMgr != null)
             {
-                effectsMgr.ApplyStatusEffect(new StatusEffect_Stopped(unitInfo.StatusEffect, target));
+                //effectsMgr.ApplyStatusEffect(new StatusEffect_Stopped(unitInfo.StatusEffect, target));
             }
             _Health -= target.AttackDamage;
             yield return new WaitForSeconds(_AttackSpeed);

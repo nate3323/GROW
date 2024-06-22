@@ -15,221 +15,105 @@ MonoBehaviour:
   WaveInfo:
   - Enemies:
     - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
-      amount: 8
-      timeBetween: 1
-    WaveReward: 100
-  - Enemies:
-    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
-      amount: 16
-      timeBetween: 0.8
-    WaveReward: 100
-  - Enemies:
-    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
-      amount: 20
-      timeBetween: 0.8
-    WaveReward: 100
+      amount: 10
+      timeBetween: 2.5
+    WaveReward: 50
   - Enemies:
     - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
       amount: 10
-      timeBetween: 1
-    - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
-      amount: 3
+      timeBetween: 2.5
+    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
+      amount: 10
+      timeBetween: 1.5
+    WaveReward: 150
+  - Enemies:
+    - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
+      amount: 10
+      timeBetween: 3
+    WaveReward: 200
+  - Enemies:
+    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
+      amount: 10
+      timeBetween: 1.5
+    - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
+      amount: 5
+      timeBetween: 2.5
+    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
+      amount: 5
       timeBetween: 2
-    WaveReward: 100
+    WaveReward: 300
   - Enemies:
-    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
-      amount: 25
-      timeBetween: 1
-    WaveReward: 100
-  - Enemies:
-    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
+    - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
       amount: 10
-      timeBetween: 0.8
-    - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
-      amount: 2
-      timeBetween: 1
-    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
-      amount: 10
-      timeBetween: 0.8
-    - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
-      amount: 5
-      timeBetween: 1
-    WaveReward: 100
+      timeBetween: 4
+    WaveReward: 350
   - Enemies:
     - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
-      amount: 10
-      timeBetween: 0.8
-    - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
-      amount: 5
-      timeBetween: 1
-    - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
-      amount: 3
-      timeBetween: 1
-    WaveReward: 100
-  - Enemies:
-    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
-      amount: 10
-      timeBetween: 0.5
-    - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
-      amount: 4
-      timeBetween: 0.5
-    - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
-      amount: 3
-      timeBetween: 0.5
-    - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
-      amount: 2
-      timeBetween: 1
-    WaveReward: 100
-  - Enemies:
-    - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
       amount: 20
       timeBetween: 1
-    WaveReward: 100
+    - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
+      amount: 5
+      timeBetween: 3
+    - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
+      amount: 5
+      timeBetween: 4
+    - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
+      amount: 5
+      timeBetween: 2.5
+    WaveReward: 450
   - Enemies:
     - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
       amount: 35
-      timeBetween: 0.5
-    WaveReward: 100
-  - Enemies:
+      timeBetween: 1.5
     - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
-      amount: 10
-      timeBetween: 1
-    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
-      amount: 25
-      timeBetween: 0.1
-    - Enemy: {fileID: 11400000, guid: 8a9f3b71638dc434fa1011806a4e7d7a, type: 2}
-      amount: 1
-      timeBetween: 0.1
-    WaveReward: 100
-  - Enemies:
+      amount: 8
+      timeBetween: 5.5
     - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
-      amount: 25
-      timeBetween: 0.5
-    - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
-      amount: 10
-      timeBetween: 0.5
-    WaveReward: 100
-  - Enemies:
-    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
-      amount: 20
-      timeBetween: 0.1
-    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
-      amount: 10
-      timeBetween: 1
-    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
-      amount: 20
-      timeBetween: 0.1
-    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
-      amount: 10
-      timeBetween: 1
-    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
-      amount: 40
-      timeBetween: 0.1
-    WaveReward: 100
-  - Enemies:
+      amount: 3
+      timeBetween: 5
     - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
-      amount: 5
-      timeBetween: 0.1
-    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
-      amount: 10
-      timeBetween: 1
-    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
-      amount: 25
-      timeBetween: 0.5
-    - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
-      amount: 5
-      timeBetween: 1
-    WaveReward: 100
+      amount: 3
+      timeBetween: 2
+    WaveReward: 550
   - Enemies:
-    - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
+    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
       amount: 25
-      timeBetween: 0.5
+      timeBetween: 1.5
+    - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
+      amount: 14
+      timeBetween: 1.5
     - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
       amount: 15
-      timeBetween: 1
-    WaveReward: 100
+      timeBetween: 3
+    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
+      amount: 10
+      timeBetween: 5
+    WaveReward: 700
   - Enemies:
     - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
-      amount: 100
-      timeBetween: 0.5
-    WaveReward: 100
-  - Enemies:
-    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
-      amount: 15
-      timeBetween: 0.5
-    - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
       amount: 20
       timeBetween: 0.5
     - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
-      amount: 25
-      timeBetween: 0.4
+      amount: 20
+      timeBetween: 4
+    - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
+      amount: 10
+      timeBetween: 2
+    - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
+      amount: 5
+      timeBetween: 6
+    WaveReward: 800
+  - Enemies:
     - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
       amount: 50
-      timeBetween: 0.1
-    WaveReward: 100
-  - Enemies:
-    - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
-      amount: 25
-      timeBetween: 0.5
-    - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
-      amount: 5
       timeBetween: 2
-    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
+    - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
       amount: 25
+      timeBetween: 3.5
+    - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
+      amount: 15
+      timeBetween: 5
+    - Enemy: {fileID: 11400000, guid: 8a9f3b71638dc434fa1011806a4e7d7a, type: 2}
+      amount: 1
       timeBetween: 1
-    - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
-      amount: 10
-      timeBetween: 0.5
-    WaveReward: 100
-  - Enemies:
-    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
-      amount: 5
-      timeBetween: 0.5
-    - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
-      amount: 5
-      timeBetween: 0.5
-    - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
-      amount: 5
-      timeBetween: 0.5
-    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
-      amount: 5
-      timeBetween: 0.5
-    - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
-      amount: 5
-      timeBetween: 0.5
-    - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
-      amount: 5
-      timeBetween: 0.5
-    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
-      amount: 5
-      timeBetween: 0.5
-    - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
-      amount: 5
-      timeBetween: 0.5
-    - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
-      amount: 5
-      timeBetween: 0.5
-    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
-      amount: 10
-      timeBetween: 0.5
-    - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
-      amount: 10
-      timeBetween: 0.5
-    - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
-      amount: 10
-      timeBetween: 0.5
-    WaveReward: 100
-  - Enemies:
-    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
-      amount: 30
-      timeBetween: 0.1
-    - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
-      amount: 30
-      timeBetween: 0.1
-    - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
-      amount: 30
-      timeBetween: 0.1
-    - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
-      amount: 30
-      timeBetween: 2
-    WaveReward: 100
+    WaveReward: 0

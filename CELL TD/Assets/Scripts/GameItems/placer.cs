@@ -49,6 +49,7 @@ public class Placer : MonoBehaviour
     {
         // Get the mouse position in screen space
         Vector3 mouseScreenPos = Input.mousePosition;
+        mouseScreenPos.y -= 25.0f; //Offset
         mouseScreenPos.z = Camera.main.transform.position.y;
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
 
@@ -60,7 +61,7 @@ public class Placer : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             Debug.Log(info.BuildCost);
-            if (tower && GameObject.FindGameObjectWithTag("Money").GetComponent<MoneySystem>().AddCurrency((int)info.BuildCost) && !overlapping && !IsOverUI())
+            if (tower && GameManager.Instance.MoneySystem.SubtractCurrency((int)info.BuildCost) && !overlapping && !IsOverUI())
             {
                 PlaceTower();
             }
@@ -85,7 +86,7 @@ public class Placer : MonoBehaviour
 
     private void CheckOverlap()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.5f, layerToCheck);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 1.0f, layerToCheck);
         if (colliders.Length > 0)
         {
             overlapping = true;
