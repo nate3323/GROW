@@ -17,10 +17,10 @@ MonoBehaviour:
   Type: 2000
   UiIcon: {fileID: 0}
   Prefab: {fileID: 0}
-  AttackDamage: 1
+  AttackDamage: 3
   AttackSpeed: 2.5
   MovementSpeed: 2.5
-  MaxHealth: 50
+  MaxHealth: 5
   RewardAmount: 20
   WayPointArrivedDistance: 0.1
-  CurrencyGain: 15
+  CurrencyGain: 1

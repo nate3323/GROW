@@ -22,7 +22,7 @@ MonoBehaviour:
   MovementSpeed: 2
   MaxHealth: 8000
   RewardAmount: 250
-  WayPointArrivedDistance: 1
+  WayPointArrivedDistance: 2
   CurrencyGain: 250
   spawnableEnemies:
   - {fileID: 5423161611289648773, guid: 01793a8bdc76baa4fbe4cf1006d1b2ed, type: 3}

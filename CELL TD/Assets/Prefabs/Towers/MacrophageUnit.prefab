@@ -122,11 +122,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 797ec044f0cae5c4c95421ec73144dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _AttackDamage: 5
+  _AttackDamage: 1
   _AttackSpeed: 1
   _BaseMovementSpeed: 3
   _WayPointArrivedDistance: 2
-  _Health: 50
+  _Health: 5
   unitInfo: {fileID: 11400000, guid: 13e0147f95c6d7e48a7ae08f146b6ab4, type: 2}
   tower: {fileID: 0}
   parent: {fileID: 0}

@@ -21,7 +21,7 @@ MonoBehaviour:
   - Enemies:
     - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
       amount: 10
-      timeBetween: 2.5
+      timeBetween: 2
     - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
       amount: 10
       timeBetween: 1.5
@@ -29,7 +29,7 @@ MonoBehaviour:
   - Enemies:
     - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
       amount: 10
-      timeBetween: 3
+      timeBetween: 2
     WaveReward: 200
   - Enemies:
     - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
@@ -37,7 +37,7 @@ MonoBehaviour:
       timeBetween: 1.5
     - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
       amount: 5
-      timeBetween: 2.5
+      timeBetween: 2
     - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
       amount: 5
       timeBetween: 2
@@ -45,7 +45,7 @@ MonoBehaviour:
   - Enemies:
     - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
       amount: 10
-      timeBetween: 4
+      timeBetween: 1
     WaveReward: 350
   - Enemies:
     - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
@@ -53,41 +53,41 @@ MonoBehaviour:
       timeBetween: 1
     - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
       amount: 5
-      timeBetween: 3
+      timeBetween: 2
     - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
       amount: 5
-      timeBetween: 4
+      timeBetween: 1.5
     - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
       amount: 5
-      timeBetween: 2.5
+      timeBetween: 1
     WaveReward: 450
   - Enemies:
     - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
       amount: 35
-      timeBetween: 1.5
+      timeBetween: 0.5
     - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
       amount: 8
-      timeBetween: 5.5
-    - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
-      amount: 3
-      timeBetween: 5
+      timeBetween: 1
     - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
       amount: 3
       timeBetween: 2
+    - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
+      amount: 3
+      timeBetween: 1
     WaveReward: 550
   - Enemies:
     - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
       amount: 25
-      timeBetween: 1.5
+      timeBetween: 0.7
     - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
       amount: 14
-      timeBetween: 1.5
+      timeBetween: 0.8
     - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
       amount: 15
-      timeBetween: 3
+      timeBetween: 0.6
     - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
       amount: 10
-      timeBetween: 5
+      timeBetween: 1
     WaveReward: 700
   - Enemies:
     - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
@@ -95,24 +95,24 @@ MonoBehaviour:
       timeBetween: 0.5
     - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
       amount: 20
-      timeBetween: 4
+      timeBetween: 0.5
     - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
       amount: 10
-      timeBetween: 2
+      timeBetween: 0.5
     - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
       amount: 5
-      timeBetween: 6
+      timeBetween: 1
     WaveReward: 800
   - Enemies:
     - Enemy: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
       amount: 50
-      timeBetween: 2
+      timeBetween: 0.5
     - Enemy: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
       amount: 25
-      timeBetween: 3.5
+      timeBetween: 0.5
     - Enemy: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
       amount: 15
-      timeBetween: 5
+      timeBetween: 1
     - Enemy: {fileID: 11400000, guid: 8a9f3b71638dc434fa1011806a4e7d7a, type: 2}
       amount: 1
       timeBetween: 1

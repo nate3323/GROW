@@ -16,5 +16,5 @@ MonoBehaviour:
   Description: Slows an enemy's movement speed
   Type: 0
   Icon: {fileID: 0}
-  Duration: 5
+  Duration: 1.5
   SlowdownPercentage: 0.5

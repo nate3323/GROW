@@ -31,6 +31,7 @@ public class BossSpawner_Base : Enemy_Base
     {
         GameObject newEnemy = Instantiate(_infoRef.spawnableEnemies[Random.Range(0,_infoRef.spawnableEnemies.Length-1)]);
         newEnemy.transform.position = _startPos;
+        WaveManager.Instance.EnemyAdded();
     }
 
     protected override void InitEnemyStats()

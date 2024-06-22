@@ -35,6 +35,8 @@ public class Fungi_Base : Enemy_Base, IFungi
         {
             var newEnemy = Instantiate(_sporeEnemy);
             newEnemy.transform.position = new Vector3(transform.position.x+Random.Range(-1.0f,1.0f), transform.position.y, transform.position.z + Random.Range(-1.0f, 1.0f));
+            newEnemy.GetComponent<Enemy_Base>()._NextWayPoint = _NextWayPoint;
+            WaveManager.Instance.EnemyAdded();
         }
         base.KillEnemy(type);
     }

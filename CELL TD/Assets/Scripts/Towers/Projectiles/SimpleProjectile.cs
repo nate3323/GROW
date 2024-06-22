@@ -21,7 +21,10 @@ public class SimpleProjectile : MonoBehaviour
     {
         transform.rotation = _direction;
         transform.Translate(Vector3.forward * _speed * Time.deltaTime);
+    }
 
+    private void Update()
+    {
         if (_piercing <= 0 || (transform.position - _owner.transform.position).sqrMagnitude > 500.0f)
         {
             Destroy(gameObject);

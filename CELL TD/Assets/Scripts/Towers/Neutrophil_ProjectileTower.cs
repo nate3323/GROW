@@ -52,7 +52,7 @@ public class Neutrophil_ProjectileTower : Tower_Base
             GameObject newProjectile = Instantiate(projectile, transform);
             SimpleProjectile newInfo = newProjectile.GetComponent<SimpleProjectile>();
 
-            newInfo._damage = 15.0f;
+            newInfo._damage = DamageValue;
             newInfo._direction = Quaternion.LookRotation(targets[0].transform.position - transform.position, Vector3.up);
             newInfo._size = 1.0f;
             newInfo._speed = 35.0f;

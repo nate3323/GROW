@@ -21,8 +21,8 @@ public class WaveManager : MonoBehaviour
 
     public static WaveManager Instance;
 
-    private int _TotalWavesInLevel = 20; //TODO: Change Later
-    private int _WaveReward = 0; //TODO: Change Later
+    private int _TotalWavesInLevel = 10; //TODO: Change Later
+    private int _WaveReward = 0;
 
     private List<EnemySpawner> _EnemySpawners;
     private int _TotalEnemiesInWave;
@@ -134,6 +134,11 @@ public class WaveManager : MonoBehaviour
         {
             spawner.StopSpawner();
         }
+    }
+
+    public void EnemyAdded()
+    {
+        _EnemiesRemainingInWave++;
     }
 
     public void OnEnemyDied(object Sender, EventArgs e)
