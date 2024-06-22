@@ -127,7 +127,6 @@ public class TowerUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.MoneySystem.AddCurrency(50);   
     }
 
     // Update is called once per frame

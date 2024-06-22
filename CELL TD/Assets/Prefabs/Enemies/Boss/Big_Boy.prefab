@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2649205116014454359, guid: 01793a8bdc76baa4fbe4cf1006d1b2ed, type: 3}
       propertyPath: m_Speed
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2649205116014454359, guid: 01793a8bdc76baa4fbe4cf1006d1b2ed, type: 3}
       propertyPath: m_ObstacleAvoidanceType
@@ -116,6 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _EnemyInfo: {fileID: 11400000, guid: 8a9f3b71638dc434fa1011806a4e7d7a, type: 2}
   _Health: 1000
+  _NextWayPoint: {fileID: 0}
   _TargetUnit: {fileID: 0}
   slowingEntities: []
   stoppingEntities: []

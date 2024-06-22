@@ -27,8 +27,16 @@ MonoBehaviour:
   BaseRange: 3
   BaseNumberOfTargets: 1
   LevelUpDefinitions:
-  - UpgradeCost: 25
+  - UpgradeCost: 50
     StatUpgradeDefinitions:
-    - TowerStat: 0
-      UpgradeAmount: 25
+    - TowerStat: 1
+      UpgradeAmount: 2
+  - UpgradeCost: 150
+    StatUpgradeDefinitions:
+    - TowerStat: 2
+      UpgradeAmount: -0.5
+  - UpgradeCost: 300
+    StatUpgradeDefinitions:
+    - TowerStat: 1
+      UpgradeAmount: 5
   DummyStat: 0

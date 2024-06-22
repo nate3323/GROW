@@ -261,6 +261,12 @@ public class Tower_Base : MonoBehaviour
         // Increment the tower's level.
         _TowerLevel++;
 
+        //Update Cost
+        if (_TowerLevel < _TowerInfo.LevelUpDefinitions.Count)
+        {
+            _NextUpgradeCost = _TowerInfo.LevelUpDefinitions[_TowerLevel - 1].UpgradeCost;
+        }
+
         // Iterate through all of the stat upgrades in this tower upgrade definition.
         foreach (TowerStatUpgradeDefinition statUpgradeDef in upgradeDef.StatUpgradeDefinitions)
         {
