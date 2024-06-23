@@ -43,8 +43,7 @@ public class Lymphocyte_SlowingAOETower : Tower_Base
             //Debug.Log("Hit: " + hits[i].collider.gameObject.name);
 
             Enemy_Base enemy = hits[i].collider.gameObject.GetComponent<Enemy_Base>();
-            if (enemy != null && 
-                TowerInfo.TargetedEnemyTypes.Contains(enemy.EnemyType))
+            if (enemy != null)
             {
                 StatusEffectsManager effectsMgr = enemy.GetComponent<StatusEffectsManager>();
                 if (effectsMgr != null)

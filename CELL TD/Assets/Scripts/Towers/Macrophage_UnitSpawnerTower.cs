@@ -22,6 +22,7 @@ public class Macrophage_UnitSpawnerTower : Tower_Base
     {
         currentUnits = 0;
         StartCoroutine(Spawner());
+        base.Start();
     }
 
 

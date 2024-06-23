@@ -103,7 +103,7 @@ public class SpawnedUnit : MonoBehaviour
             //}
             //target.stoppingEntities.Add(gameObject);
             _NavMeshAgent.SetDestination(target.transform.position);
-            //target.GetComponent<Enemy_Base>().SetAsTarget(this);
+            target.GetComponent<Enemy_Base>().SetAsTarget(this);
             StartCoroutine(Attack());
         }
     }

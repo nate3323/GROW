@@ -266,9 +266,9 @@ public class TowerUI : MonoBehaviour
     {
         if (GameManager.Instance.MoneySystem.MoneyAmount > ClickedTower.NextUpgradeCost)
         {
-            ClickedTower.Upgrade(ClickedTower.TowerInfo.LevelUpDefinitions[ClickedTower.TowerLevel - 1]);
+            GameManager.Instance.MoneySystem.SubtractCurrency((int)ClickedTower.NextUpgradeCost);
 
-            GameManager.Instance.MoneySystem.SubtractCurrency((int) ClickedTower.NextUpgradeCost);
+            ClickedTower.Upgrade(ClickedTower.TowerInfo.LevelUpDefinitions[ClickedTower.TowerLevel - 1]);
 
             HideTowerUI();
         }

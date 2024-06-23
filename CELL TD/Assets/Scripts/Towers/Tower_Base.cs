@@ -262,7 +262,7 @@ public class Tower_Base : MonoBehaviour
         _TowerLevel++;
 
         //Update Cost
-        if (_TowerLevel < _TowerInfo.LevelUpDefinitions.Count)
+        if (_TowerLevel-1 < _TowerInfo.LevelUpDefinitions.Count)
         {
             _NextUpgradeCost = _TowerInfo.LevelUpDefinitions[_TowerLevel - 1].UpgradeCost;
         }
