@@ -139,6 +139,7 @@ public class WaveManager : MonoBehaviour
     public void EnemyAdded()
     {
         _EnemiesRemainingInWave++;
+        _TotalEnemiesInWave++;
     }
 
     public void OnEnemyDied(object Sender, EventArgs e)

@@ -9,7 +9,7 @@ public class MoneySystem : MonoBehaviour
     public static MoneySystem Instance;
 
     //Vars
-    private int _moneyAmount = 350;
+    private int _moneyAmount = 1000;
 
     //Getters
     public int MoneyAmount
