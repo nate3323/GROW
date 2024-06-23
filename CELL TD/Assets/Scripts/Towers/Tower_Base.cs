@@ -290,15 +290,13 @@ public class Tower_Base : MonoBehaviour
                     _RefundPercentage += statUpgradeDef.UpgradeAmount;
                     break;
 
-
                 default:
                     // If we encountered a stat type that isn't common to all tower types, then simply do nothing.
                     // The subclass' version of this function will handle it after calling this base class method.
                     break;
+            }
 
-            } // end switch
-
-        } // end foreach TowerStatUpgradeDefinition
+        }
     }
 
 

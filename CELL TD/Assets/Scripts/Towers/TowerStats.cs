@@ -26,7 +26,10 @@ namespace Assets.Scripts.Towers
         NumberOfTargets,
         RefundPercentage,
         UpgradeCost,
-
+        UnitAmount,
+        UnitDamage,
+        UnitHealth,
+        EffectStrength,
     }
 
 
@@ -52,6 +55,11 @@ namespace Assets.Scripts.Towers
             { TowerStats.UpgradeCost,       "Upgrade Cost" },
             { TowerStats.RefundPercentage,  "Refund Percentage" },
 
+            { TowerStats.UnitAmount,        "Amount of Units to Spawn" },
+            { TowerStats.UnitDamage,        "Amount of Damage from Units" },
+            { TowerStats.UnitHealth,        "Amount of Health per Unit" },
+
+            { TowerStats.EffectStrength,    "Controls Effect Strength"},
         };
 
 

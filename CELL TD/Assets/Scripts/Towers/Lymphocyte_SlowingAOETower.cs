@@ -1,3 +1,4 @@
+using Assets.Scripts.Towers;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,7 +7,7 @@ using UnityEngine;
 public class Lymphocyte_SlowingAOETower : Tower_Base
 {
     float _EnemySearchTimer;
-
+    private int effectStrength = 0;
 
     public override void Update()
     {
@@ -48,7 +49,24 @@ public class Lymphocyte_SlowingAOETower : Tower_Base
                 StatusEffectsManager effectsMgr = enemy.GetComponent<StatusEffectsManager>();
                 if (effectsMgr != null)
                 {
-                    effectsMgr.ApplyStatusEffect(new StatusEffect_SlowedMoveSpeed(TowerInfo.StatusEffect, enemy));
+                    switch (TowerLevel)
+                    {
+                        case 1:
+                            effectsMgr.ApplyStatusEffect(new StatusEffect_SlowedMoveSpeed(TowerInfo.StatusEffect, enemy));
+                            break;
+                        case 2:
+                            effectsMgr.ApplyStatusEffect(new StatusEffect_SlowedMoveSpeed(TowerInfo.StatusEffect1, enemy));
+                            break;
+                        case 3:
+                            effectsMgr.ApplyStatusEffect(new StatusEffect_SlowedMoveSpeed(TowerInfo.StatusEffect2, enemy));
+                            break;
+                        case 4:
+                            effectsMgr.ApplyStatusEffect(new StatusEffect_SlowedMoveSpeed(TowerInfo.StatusEffect3, enemy));
+                            break;
+                        default:
+                            effectsMgr.ApplyStatusEffect(new StatusEffect_SlowedMoveSpeed(TowerInfo.StatusEffect, enemy));
+                            break;
+                    }
                 }
             }
 
@@ -75,7 +93,9 @@ public class Lymphocyte_SlowingAOETower : Tower_Base
             // Check which stat needs to be updated next.
             switch (statUpgradeDef.TowerStat)
             {
-
+                case TowerStats.EffectStrength:
+                    effectStrength += (int)statUpgradeDef.UpgradeAmount;
+                    break;
 
                 default:
                     // If we encountered a stat type that isn't specific to this tower type, then simply do nothing.

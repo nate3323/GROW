@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2649205116014454359, guid: 01793a8bdc76baa4fbe4cf1006d1b2ed, type: 3}
       propertyPath: m_Speed
-      value: 0.5
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 2649205116014454359, guid: 01793a8bdc76baa4fbe4cf1006d1b2ed, type: 3}
       propertyPath: m_ObstacleAvoidanceType

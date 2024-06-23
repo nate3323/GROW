@@ -1,6 +1,7 @@
 using System.Collections;
 using System;
 using UnityEngine;
+using Assets.Scripts.Towers;
 
 public class Macrophage_UnitSpawnerTower : Tower_Base
 {
@@ -18,8 +19,13 @@ public class Macrophage_UnitSpawnerTower : Tower_Base
     [Tooltip("This spawned unit's stats information")]
     [SerializeField] public SpawnedUnitInfo_Base _SpawnedUnitInfo;
 
+    private float _SpawnedUnitHealth;
+    private float _SpawnedUnitDamage;
+
     public override void Start()
     {
+        _SpawnedUnitHealth = unitPrefab.GetComponent<SpawnedUnit>().unitInfo.MaxHealth;
+        _SpawnedUnitDamage = unitPrefab.GetComponent<SpawnedUnit>().unitInfo.AttackDamage;
         currentUnits = 0;
         StartCoroutine(Spawner());
         base.Start();
@@ -38,6 +44,8 @@ public class Macrophage_UnitSpawnerTower : Tower_Base
             GameObject newUnit = Instantiate(unitPrefab, spawnPoint.transform.position, Quaternion.identity, gameObject.transform);
             newUnit.GetComponent<SpawnedUnit>().parent = gameObject;
             newUnit.GetComponent<SpawnedUnit>().UnitDied += OnUnitDied;
+            newUnit.GetComponent<SpawnedUnit>().unitInfo.AttackDamage = _SpawnedUnitDamage;
+            newUnit.GetComponent<SpawnedUnit>().unitInfo.MaxHealth = _SpawnedUnitHealth;
             currentUnits++;
         }
         yield return new WaitForSeconds(FireRate);
@@ -65,8 +73,15 @@ public class Macrophage_UnitSpawnerTower : Tower_Base
             // Check which stat needs to be updated next.
             switch (statUpgradeDef.TowerStat)
             {
-
-
+                case TowerStats.UnitAmount:
+                    maxUnits += (int)statUpgradeDef.UpgradeAmount;
+                    break;
+                case TowerStats.UnitDamage:
+                    _SpawnedUnitDamage += statUpgradeDef.UpgradeAmount;
+                    break;
+                case TowerStats.UnitHealth:
+                    _SpawnedUnitHealth += statUpgradeDef.UpgradeAmount;
+                    break;
                 default:
                     // If we encountered a stat type that isn't specific to this tower type, then simply do nothing.
                     break;

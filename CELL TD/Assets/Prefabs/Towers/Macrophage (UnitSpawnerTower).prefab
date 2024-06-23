@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d710e7c1c5c77c4280dc180106b03fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _TowerInfo: {fileID: 11400000, guid: 5441e1783949848439bb1c55a7867836, type: 2}
+  _TowerInfo: {fileID: 11400000, guid: eeafe118d46e4b9489dcae502cd28d04, type: 2}
   range: {fileID: 7847912624285093134}
   targets: []
   unitPrefab: {fileID: 4808694354577833756, guid: 2eed3cd9977a85949ad2a42bcde5fe8a, type: 3}

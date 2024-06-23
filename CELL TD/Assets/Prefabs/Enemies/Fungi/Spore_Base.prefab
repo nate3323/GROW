@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 324133424873412927}
-  - component: {fileID: 6482980833301059954}
   m_Layer: 6
   m_Name: Parts
   m_TagString: Untagged
@@ -36,19 +35,6 @@ Transform:
   - {fileID: 7228267390732967428}
   m_Father: {fileID: 5796402691777353342}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6482980833301059954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1873771514182936045}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdd057fcbeda91148ad8d0aa975362c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  partHolder: {fileID: 0}
 --- !u!1 &8988831854884424825
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,6 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _EnemyInfo: {fileID: 11400000, guid: e3fd828c961d9234daa51e071d9a27f8, type: 2}
   _Health: 0
+  _NextWayPoint: {fileID: 0}
   _TargetUnit: {fileID: 0}
   slowingEntities: []
   stoppingEntities: []
