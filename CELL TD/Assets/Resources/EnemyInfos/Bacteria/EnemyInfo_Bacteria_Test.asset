@@ -22,6 +22,6 @@ MonoBehaviour:
   MovementSpeed: 3
   MaxHealth: 20
   RewardAmount: 20
-  WayPointArrivedDistance: 1
+  WayPointArrivedDistance: 0.5
   CurrencyGain: 3
   OffspringPerMitosis: 2

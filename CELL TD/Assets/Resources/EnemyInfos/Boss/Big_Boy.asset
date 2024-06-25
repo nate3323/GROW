@@ -19,7 +19,7 @@ MonoBehaviour:
   Prefab: {fileID: 3937515291007552044, guid: b14af337bce4c7b4fbf7462d5790b178, type: 3}
   AttackDamage: 100
   AttackSpeed: 0.1
-  MovementSpeed: 0.1
+  MovementSpeed: 0.6
   MaxHealth: 2000
   RewardAmount: 250
   WayPointArrivedDistance: 2

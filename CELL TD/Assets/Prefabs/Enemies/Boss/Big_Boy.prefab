@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2649205116014454359, guid: 01793a8bdc76baa4fbe4cf1006d1b2ed, type: 3}
       propertyPath: m_Speed
-      value: 0.1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2649205116014454359, guid: 01793a8bdc76baa4fbe4cf1006d1b2ed, type: 3}
       propertyPath: m_ObstacleAvoidanceType
@@ -77,8 +77,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7231062635057593816, guid: 01793a8bdc76baa4fbe4cf1006d1b2ed, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7231062635057593816, guid: 01793a8bdc76baa4fbe4cf1006d1b2ed, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7231062635057593816, guid: 01793a8bdc76baa4fbe4cf1006d1b2ed, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7231062635057593816, guid: 01793a8bdc76baa4fbe4cf1006d1b2ed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.45
+      value: 0.415
       objectReference: {fileID: 0}
     - target: {fileID: 8363969538712848055, guid: 01793a8bdc76baa4fbe4cf1006d1b2ed, type: 3}
       propertyPath: m_Materials.Array.data[0]

@@ -29,7 +29,7 @@ public class BossSpawner_Base : Enemy_Base
 
     void SpawnEnemy()
     {
-        GameObject newEnemy = Instantiate(_infoRef.spawnableEnemies[Random.Range(0,_infoRef.spawnableEnemies.Length-1)]);
+        GameObject newEnemy = Instantiate(_infoRef.spawnableEnemies[Random.Range(0,_infoRef.spawnableEnemies.Length)]);
         newEnemy.transform.position = _startPos;
         WaveManager.Instance.EnemyAdded();
     }

@@ -22,6 +22,6 @@ MonoBehaviour:
   MovementSpeed: 3
   MaxHealth: 35
   RewardAmount: 20
-  WayPointArrivedDistance: 1.5
+  WayPointArrivedDistance: 0.3
   CurrencyGain: 4
   OffspringPerCellBurst: 4
