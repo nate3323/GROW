@@ -66,6 +66,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _EnemyInfo: {fileID: 11400000, guid: 0cfc0b2a4509aec428609255637a5e20, type: 2}
   _Health: 0
+  _NextWayPoint: {fileID: 0}
   _TargetUnit: {fileID: 0}
   slowingEntities: []
   stoppingEntities: []
@@ -177,15 +178,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 9a8bcd357da360e4fa50284603c591a2, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9a8bcd357da360e4fa50284603c591a2, type: 3}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9a8bcd357da360e4fa50284603c591a2, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9a8bcd357da360e4fa50284603c591a2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -197,7 +198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9a8bcd357da360e4fa50284603c591a2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.973
+      value: -2.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9a8bcd357da360e4fa50284603c591a2, type: 3}
       propertyPath: m_LocalRotation.w

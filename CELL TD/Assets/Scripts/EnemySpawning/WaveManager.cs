@@ -21,8 +21,8 @@ public class WaveManager : MonoBehaviour
 
     public static WaveManager Instance;
 
-    private int _TotalWavesInLevel = 20; //TODO: Change Later
-    private int _WaveReward = 0; //TODO: Change Later
+    private int _TotalWavesInLevel = 10; //TODO: Change Later
+    private int _WaveReward = 0;
 
     private List<EnemySpawner> _EnemySpawners;
     private int _TotalEnemiesInWave;
@@ -89,7 +89,7 @@ public class WaveManager : MonoBehaviour
             _SecondsSinceWaveStart += Time.deltaTime;
 
 
-        if (!_WaveInProgress && WaveNumber == _TotalWavesInLevel)
+        if (!_WaveInProgress && WaveNumber == _TotalWavesInLevel && GameManager.Instance.HealthSystem.HealthAmount > 0)
         {
             LevelCleared?.Invoke(this, EventArgs.Empty);
 
@@ -134,6 +134,12 @@ public class WaveManager : MonoBehaviour
         {
             spawner.StopSpawner();
         }
+    }
+
+    public void EnemyAdded()
+    {
+        _EnemiesRemainingInWave++;
+        _TotalEnemiesInWave++;
     }
 
     public void OnEnemyDied(object Sender, EventArgs e)

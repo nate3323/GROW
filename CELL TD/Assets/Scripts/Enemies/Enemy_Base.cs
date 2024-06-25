@@ -41,7 +41,7 @@ public class Enemy_Base : MonoBehaviour, IEnemy
     protected bool _IsDead = false; // If this enemy has been defeated or not.
 
     protected float _DistanceFromNextWayPoint = 0f;
-    protected WayPoint _NextWayPoint;
+    public WayPoint _NextWayPoint; //Made this public so that spawned spores would stop skipping waypoints
 
     protected bool _isATarget = false;
     [SerializeField] protected SpawnedUnit _TargetUnit;
@@ -218,7 +218,7 @@ public class Enemy_Base : MonoBehaviour, IEnemy
         }
     }
 
-    protected void KillEnemy(int type)
+    protected virtual void KillEnemy(int type)
     {
         if (IsDead)
             return;

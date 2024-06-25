@@ -65,6 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _EnemyInfo: {fileID: 11400000, guid: 058d64c3df161ea43a002ed3f6b3e3fd, type: 2}
   _Health: 0
+  _NextWayPoint: {fileID: 0}
   _TargetUnit: {fileID: 0}
   slowingEntities: []
   stoppingEntities: []
@@ -160,15 +161,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: c37a0f8bf32e89d4faf163ddf66b75a5, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c37a0f8bf32e89d4faf163ddf66b75a5, type: 3}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c37a0f8bf32e89d4faf163ddf66b75a5, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c37a0f8bf32e89d4faf163ddf66b75a5, type: 3}
       propertyPath: m_LocalPosition.x

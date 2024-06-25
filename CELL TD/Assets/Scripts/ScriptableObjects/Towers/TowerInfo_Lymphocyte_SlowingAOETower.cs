@@ -19,5 +19,16 @@ public class TowerInfo_Lymphocyte_SlowingAOETower : TowerInfo_Base
     [SerializeField]
     public StatusEffectInfo_SlowedMovement StatusEffect;
 
+    [Tooltip("The status effect applied by this tower.")]
+    [SerializeField]
+    public StatusEffectInfo_SlowedMovement StatusEffect1;
+
+    [Tooltip("The status effect applied by this tower.")]
+    [SerializeField]
+    public StatusEffectInfo_SlowedMovement StatusEffect2;
+
+    [Tooltip("The status effect applied by this tower.")]
+    [SerializeField]
+    public StatusEffectInfo_SlowedMovement StatusEffect3;
 }
 
