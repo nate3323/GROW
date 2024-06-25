@@ -19,7 +19,7 @@ MonoBehaviour:
   Prefab: {fileID: 6176236417056638460, guid: 1a9cb39fcfc7ad84baf11535f92106c3, type: 3}
   TargetingType: 2
   TargetedEnemyTypes: 
-  BuildCost: 500
+  BuildCost: 350
   BaseRefundPercentage: 0.85
   BaseMaxHealth: 100
   BaseDamageValue: 1

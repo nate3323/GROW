@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d84ea225304fb994caee7fec831be91c, type: 3}
-  m_Name: StatusEffectInfo_SlowedMovement
+  m_Name: StatusEffectInfo_SlowestMovement
   m_EditorClassIdentifier: 
-  DisplayName: Slowed Movement
+  DisplayName: Slowest Movement
   Description: Slows an enemy's movement speed
   Type: 0
   Icon: {fileID: 0}
-  Duration: 0.5
-  SlowdownPercentage: 0.5
+  Duration: 1
+  SlowdownPercentage: 0.4

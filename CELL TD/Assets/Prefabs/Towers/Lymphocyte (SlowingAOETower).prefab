@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eb24dd541293d9e4091ed3d862023cc0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.1014385
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eb24dd541293d9e4091ed3d862023cc0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eb24dd541293d9e4091ed3d862023cc0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.2025404
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eb24dd541293d9e4091ed3d862023cc0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -77,7 +77,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: eb24dd541293d9e4091ed3d862023cc0, type: 3}
-      insertIndex: 1
+      insertIndex: -1
       addedObject: {fileID: 6697603382973408571}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: eb24dd541293d9e4091ed3d862023cc0, type: 3}
       insertIndex: -1
@@ -142,7 +142,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0.05}
+  m_Center: {x: 0, y: 0, z: 0.06}
 --- !u!135 &5662400273850295154
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -163,4 +163,4 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.05
-  m_Center: {x: 0, y: 0, z: 0.05}
+  m_Center: {x: 0, y: 0, z: 0.06}
