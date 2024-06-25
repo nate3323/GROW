@@ -16,7 +16,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;  
+    public static GameManager Instance;
+
+    private SettingsWindow _SettingsWindowInstance;
 
     private StateMachine _StateMachine;
 
@@ -72,7 +74,7 @@ public class GameManager : MonoBehaviour
         // Create in-game states
         GameState_InGame inGameState = new GameState_InGame(this);
         GameState_Victory victoryState = new GameState_Victory(this);
-        GameState_Defeat defeatedState = new GameState_Defeat(this);
+        GameState_GameOver defeatedState = new GameState_GameOver(this);
 
         // Manually register in-game states.
         _StateMachine.AddStates(inGameState,
@@ -93,7 +95,7 @@ public class GameManager : MonoBehaviour
 
 
         // Tell state machine to write in the debug console every time it exits or enters a state.
-        _StateMachine.EnableDebugLogging = true;
+        //_StateMachine.EnableDebugLogging = true;
 
         // Mouse over the AllowUnknownStates property for more info.
         _StateMachine.AllowUnknownStates = true;
@@ -153,7 +155,7 @@ public class GameManager : MonoBehaviour
                 SetGameState(typeof(GameState_MainMenu));
                 return;
 
-            case "LevelSelect":
+            case "LevelSelector":
                 SetGameState(typeof(GameState_LevelSelect));
                 return;            
         }
@@ -174,17 +176,33 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Sets the current state to the state that has the specified type.
     /// </summary>
-    /// <param name="stateClassName"></param>
-    public void SetGameState(Type stateType)
+    /// <param name="stateType">The state to switch to. This will always be one of the GameState_... classes.</param>
+    /// <param name="forceTransitionEvenIfAlreadyInState">If true, then a transition to the specified state will occur even if the state machine is already in that state.</param>
+    public void SetGameState(Type stateType, bool forceTransitionEvenIfAlreadyInState = false)
     {
         _StateMachine.SetState(stateType);       
     }
 
+    /// <summary>
+    /// Returns to the previous game state.
+    /// </summary>
+    /// <param name="reinitializeTheState">If true, then the state machine will call the new state's OnEnter() method, otherwise it won't.</param>
+    public void ReturnToPreviousState(bool reinitializeTheState = true)
+    {
+        _StateMachine.ReturnToPreviousState(reinitializeTheState);
+    }
     
+
 
     public bool IsInitialized { get; private set; }
 
     public int CurrentLevelNumber { get; set; } = 1;
     public HealthSystem HealthSystem { get; private set; }
     public MoneySystem MoneySystem { get; private set; }
+
+    public static SettingsWindow SettingsWindowInstance 
+    {
+        get { return Instance._SettingsWindowInstance; }
+        set { Instance._SettingsWindowInstance = value; }
+    }
 }

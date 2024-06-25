@@ -18,6 +18,7 @@ using UnityEngine.UIElements;
 public class StateMachine : MonoBehaviour
 {
     private IState _currentState;
+    private IState _previousState;
 
 
     // This list holds all transitions that can happen from any state.
@@ -149,8 +150,9 @@ public class StateMachine : MonoBehaviour
     /// Sets the state of the state machine. In practice the SetState() methods should be avoided outside of setting the starting state, as it is better to use the transitions to control state changes.
     /// </summary>
     /// <param name="state">The C# class name of the state to switch to.</param>
+    /// <param name="forceTransitionEvenIfAlreadyInState">If true, then a transition to the specified state will occurr even if it is already in that state.</param>
     /// <returns>True if the state machine has switched states successfully.</returns>
-    public bool SetState(string stateClassName)
+    public bool SetState(string stateClassName, bool forceTransitionEvenIfAlreadyInState = false)
     {
         if (string.IsNullOrWhiteSpace(stateClassName))
             throw new Exception("The passed in state name string is null or empty!");
@@ -159,7 +161,7 @@ public class StateMachine : MonoBehaviour
         _statesByNameLookup.TryGetValue(stateClassName, out IState state);
         if (state != null)
         {
-            return ChangeState(state);
+            return ChangeState(state, forceTransitionEvenIfAlreadyInState);
         }
         else
         {
@@ -173,8 +175,9 @@ public class StateMachine : MonoBehaviour
     /// Sets the state of the state machine. In practice the SetState() methods should be avoided outside of setting the starting state, as it is better to use the transitions to control state changes.
     /// </summary>
     /// <param name="state">The C# class type of the state to switch to.</param>
+    /// <param name="forceTransitionEvenIfAlreadyInState">If true, then a transition to the specified state will occurr even if it is already in that state.</param>
     /// <returns>True if the state machine has switched states successfully.</returns>
-    public bool SetState(Type stateType)
+    public bool SetState(Type stateType, bool forceTransitionEvenIfAlreadyInState = false)
     {
         if (stateType == null)
             throw new Exception("The passed in state type is null!");
@@ -183,7 +186,7 @@ public class StateMachine : MonoBehaviour
         _statesByTypeLookup.TryGetValue(stateType, out IState state);
         if (state != null)
         {
-            return ChangeState(state);
+            return ChangeState(state, forceTransitionEvenIfAlreadyInState);
         }
         else
         {
@@ -196,14 +199,15 @@ public class StateMachine : MonoBehaviour
     /// Changes the state of the state machine.
     /// </summary>
     /// <param name="state">The state to switch to.</param>
+    /// <param name="forceTransitionEvenIfAlreadyInState">If true, then a transition to the specified state will occurr even if it is already in that state.</param>
     /// <returns>True if the state machine has switched states successfully.</returns>
-    private bool ChangeState(IState state)
+    private bool ChangeState(IState state, bool forceTransitionEvenIfAlreadyInState = false)
     {
         bool isInList = _statesByNameLookup.ContainsKey(state.Name);
 
 
-        // If we are already in the specified state, then simply return false.
-        if (_currentState == state)
+        // If we are already in the specified state, then simply return unless forceTransitionEvenIfAlreadyInState is true.
+        if (forceTransitionEvenIfAlreadyInState && _currentState == state)
             return false;
 
 
@@ -218,16 +222,22 @@ public class StateMachine : MonoBehaviour
         // If the passed in state is in the list, then switch to that state.
         if (isInList)
         {
+            // Cache the previous state.
+            _previousState = _currentState;
+
+            // Call the current state's OnExit() method.
             _currentState?.OnExit();
 
-           // if (EnableDebugLogging && _currentState != null)
-           //     Debug.Log($"Exited state \"{CurrentState.Name}\".");
+            if (EnableDebugLogging && _currentState != null)
+                Debug.Log($"Exited state \"{CurrentState.Name}\".");
 
+            // Set the current state to the new State.
             _currentState = state;
+            // Call the new state's OnEnter() method.
             _currentState?.OnEnter();
 
-            //if (EnableDebugLogging)
-            //   Debug.Log($"Entered state \"{state.Name}\".");
+            if (EnableDebugLogging)
+               Debug.Log($"Entered state \"{state.Name}\".");
 
             return true;
         }
@@ -236,6 +246,35 @@ public class StateMachine : MonoBehaviour
             LogUnknownStateError(state.Name);
             return false;
         }
+    }
+
+    /// <summary>
+    /// Returns the state machine to its previous state if there is one.
+    /// Does nothing if the current and previous states are the same.  
+    /// </summary>
+    /// <param name="reinitializeTheState">If true, then the state machine will call the new state's OnEnter() method, otherwise it won't.</param>
+    /// <returns>Returns true if the state reverted successfully, or false otherwise.</returns>
+    public bool ReturnToPreviousState(bool reinitializeTheState = true)
+    {
+        if (_previousState != null)
+        {
+            // Call the current state's OnExit() method.
+            _currentState?.OnExit();
+
+            // Swap the current and previous states.
+            IState temp = _currentState;
+            _currentState = _previousState;
+            _previousState = temp;
+
+            // If reinitializeTheState is true, then call the new state's OnEnter() method.
+            if (reinitializeTheState)
+                _currentState?.OnEnter();
+
+
+            return true;
+        }
+
+        return false;
     }
 
     private void LogUnknownStateError(string stateName)

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -38,6 +39,8 @@ public class VictoryScreen : MonoBehaviour
     public void Open()
     {
         gameObject.SetActive(true);
+
+        GameManager.Instance.SetGameState(typeof(GameState_Victory));
     }
 
     public void Close()
@@ -81,7 +84,7 @@ public class VictoryScreen : MonoBehaviour
     public void LevelSelectionClicked()
     {
         // Load the level selection screen.
-        SceneManager.LoadScene("LevelSelector");
+        GameManager.Instance.SetGameState(typeof(GameState_LevelSelect));
 
         Hide();
     }
@@ -89,7 +92,7 @@ public class VictoryScreen : MonoBehaviour
     public void ReturnToMainMenuClicked()
     {
         // Load the main menu.
-        SceneManager.LoadScene("MainMenu");
+        GameManager.Instance.SetGameState(typeof(GameState_MainMenu));
 
         Hide();
     }

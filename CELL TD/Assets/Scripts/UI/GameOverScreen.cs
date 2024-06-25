@@ -38,6 +38,8 @@ public class GameOverScreen : MonoBehaviour
     public void Open()
     {
         gameObject.SetActive(true);
+
+        GameManager.Instance.SetGameState(typeof(GameState_GameOver));
     }
 
     public void Close()
@@ -67,7 +69,7 @@ public class GameOverScreen : MonoBehaviour
     public void LevelSelectionClicked()
     {
         // Load the level selection screen.
-        SceneManager.LoadScene("LevelSelector");
+        GameManager.Instance.SetGameState(typeof(GameState_LevelSelect));
 
         Hide();
     }
@@ -75,7 +77,7 @@ public class GameOverScreen : MonoBehaviour
     public void ReturnToMainMenuClicked()
     {
         // Load the main menu.
-        SceneManager.LoadScene("MainMenu");
+        GameManager.Instance.SetGameState(typeof(GameState_MainMenu));
 
         Hide();
     }
