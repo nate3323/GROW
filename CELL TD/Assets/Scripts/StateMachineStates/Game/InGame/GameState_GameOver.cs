@@ -7,13 +7,13 @@ using UnityEngine;
 /// <summary>
 /// This state is when the player has been defeated
 /// </summary>
-public class GameState_Defeat : GameState_Base
+public class GameState_GameOver : GameState_Base
 {
     private bool _InitializationComplete;
 
 
 
-    public GameState_Defeat(GameManager parent)
+    public GameState_GameOver(GameManager parent)
         : base(parent)
     {
 

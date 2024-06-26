@@ -9,6 +9,7 @@ public class MapSelector : MonoBehaviour
     private string _mapName;
     public void LoadMap()
     {
+        Debug.Log("1");
         // Set the new current level number.
         GameManager.Instance.CurrentLevelNumber = 1;
 

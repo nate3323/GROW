@@ -20,6 +20,8 @@ public class MainMenu : MonoBehaviour
     //Quit Game
     public void QuitGame()
     {
+        Debug.Log("Exiting game...");
+
         GameManager.Instance.SetGameState(typeof(GameState_ShutDown));
     }
 }

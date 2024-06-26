@@ -341,10 +341,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -3294,7 +3294,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 801145370165494342, guid: b929b3a5e1699704589ea115265de8fa, type: 3}
       propertyPath: m_text
-      value: 'Nutrients Amount:'
+      value: 'Refund Amount:'
       objectReference: {fileID: 0}
     - target: {fileID: 1139897854406101426, guid: b929b3a5e1699704589ea115265de8fa, type: 3}
       propertyPath: m_Name
