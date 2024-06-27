@@ -65,6 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _EnemyInfo: {fileID: 11400000, guid: c688d313afdca964192b5fa4eb4f6efe, type: 2}
   _Health: 0
+  _NextWayPoint: {fileID: 0}
   _TargetUnit: {fileID: 0}
   slowingEntities: []
   stoppingEntities: []
@@ -214,6 +215,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: d0dac77cb2879ed4b9a65a3be126b500, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: d0dac77cb2879ed4b9a65a3be126b500, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d0dac77cb2879ed4b9a65a3be126b500, type: 3}
       propertyPath: m_Name

@@ -30,7 +30,6 @@ public class Fungi_Base : Enemy_Base, IFungi
 
     protected override void KillEnemy(int type)
     {
-        Debug.Log(_infoRef.SporesPerBurst);
         for (int i = 0; i < _infoRef.SporesPerBurst; i++)
         {
             var newEnemy = Instantiate(_sporeEnemy);

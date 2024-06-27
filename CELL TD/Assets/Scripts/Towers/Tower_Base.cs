@@ -189,7 +189,6 @@ public class Tower_Base : MonoBehaviour
     /// <param name="target"></param>
     protected virtual void OnTargetWentOutOfRange(GameObject target)
     {
-        Debug.Log("Out");
     }
 
     /// <summary>

@@ -185,7 +185,6 @@ public class Enemy_Base : MonoBehaviour, IEnemy
     public void ApplyDamage(float damageValue, Tower_Base targetingTower)
     {
         _Health -= damageValue;
-        Debug.Log(_Health);
         if (_Health <= 0 && !_IsDead)
         {
             StartCoroutine(PlayDeathSound());
