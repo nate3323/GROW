@@ -16,6 +16,9 @@ public class Tower_Base : MonoBehaviour
     [SerializeField]
     protected SphereCollider range;
 
+    [SerializeField]
+    protected GameObject rangeShower;//TODO find better option later
+
 
     protected Type _TargetEnemyType = typeof(Enemy_Base);
 
@@ -41,6 +44,7 @@ public class Tower_Base : MonoBehaviour
     
     public virtual void Start()
     {
+        Destroy(rangeShower);
         InitTowerStats();
     }
 

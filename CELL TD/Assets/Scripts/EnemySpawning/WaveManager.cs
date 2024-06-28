@@ -43,20 +43,24 @@ public class WaveManager : MonoBehaviour
 
     private void Awake()
     {
+    }
+
+    private void InitInstance()
+    {
+        Debug.Log("Please Unity");
         if (Instance != null)
         {
             Debug.LogError("There is already a WaveManager in this scene. Self destructing!");
             Destroy(gameObject);
             return;
         }
-        
 
         Instance = this;
     }
 
     private void Start()
     {
-
+        InitInstance();
         Debug.Log(Instance.gameObject);
 
         Enemy_Base.OnEnemyDied += OnEnemyDied;
@@ -99,7 +103,10 @@ public class WaveManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        Debug.Log("Destroyed");
         Instance = null;
+        Enemy_Base.OnEnemyDied -= OnEnemyDied;
+        Enemy_Base.OnEnemyReachedGoal -= OnEnemyReachedGoal;
     }
 
     public void StartNextWave()
