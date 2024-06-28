@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -48,6 +49,7 @@ public class WaveManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        
 
         Instance = this;
     }
@@ -93,6 +95,11 @@ public class WaveManager : MonoBehaviour
 
             VictoryScreen.Show();
         }
+    }
+
+    private void OnDestroy()
+    {
+        Instance = null;
     }
 
     public void StartNextWave()
