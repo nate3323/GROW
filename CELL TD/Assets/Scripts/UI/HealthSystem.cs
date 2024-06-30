@@ -12,6 +12,7 @@ public class HealthSystem : MonoBehaviour
 
     //Vars    
     private int _CurrentHealth;
+    private bool _warning = false;
 
     //Getters
     public int HealthAmount
@@ -22,6 +23,16 @@ public class HealthSystem : MonoBehaviour
     //References
     [SerializeField]
     private TMP_Text _healthText;
+
+    [SerializeField]
+    private AudioSource _audioPlayer;
+
+    [SerializeField]
+    private AudioClip _damageClip;
+    [SerializeField]
+    private AudioClip _fatalClip;
+    [SerializeField]
+    private AudioClip _warningClip;
 
 
     void Awake()
@@ -43,11 +54,24 @@ public class HealthSystem : MonoBehaviour
     //Money Logic
     public bool AddHealth(int amount)
     {
+        //No more logic if health is already 0
+        if (_CurrentHealth <= 0)
+        {
+            return false;
+        }
+
         int oldHealthValue = _CurrentHealth;
 
 
         // Change the health by the specified amount.
         _CurrentHealth = Mathf.Clamp(_CurrentHealth + amount, 0, _MaxHealth);
+
+        if (_CurrentHealth <= 25 && !_warning)
+        {
+            _audioPlayer.clip = _warningClip;
+            _audioPlayer.Play();
+            _warning = true;
+        }
 
         //If value is positive, update the screen.
         if (_CurrentHealth > 0)
@@ -57,6 +81,9 @@ public class HealthSystem : MonoBehaviour
         }
         else // The player's health has reached 0.
         {
+            _audioPlayer.clip = _fatalClip;
+            _audioPlayer.Play();
+
             StartCoroutine(AnimateText(Color.red, oldHealthValue, _CurrentHealth));
 
             GameOverScreen.Show();
@@ -65,21 +92,11 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
-    [ContextMenu("AddHealth")]
-    public void Add()
-    {
-        AddHealth(10);
-    }
-
-    [ContextMenu("SubHealth")]
-    public void Sub()
-    {
-        AddHealth(-10);
-    }
-
     public void TakeDamage(int amount)
     {
         amount = Mathf.Abs(amount);
+        _audioPlayer.clip = _damageClip;
+        _audioPlayer.Play();
 
         AddHealth(-amount);
     }

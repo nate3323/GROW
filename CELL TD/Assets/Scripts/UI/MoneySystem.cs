@@ -21,6 +21,14 @@ public class MoneySystem : MonoBehaviour
     [SerializeField]
     private TMP_Text _moneyText;
 
+    [SerializeField]
+    private AudioSource _audioPlayer;
+    [SerializeField]
+    private AudioClip _notEnough;
+
+    [SerializeField]
+    private GameObject _lowMoneyText;
+
     void Start()
     {
         UpdateDisplay(_moneyAmount);
@@ -58,6 +66,9 @@ public class MoneySystem : MonoBehaviour
             _moneyAmount -= amount;
             return true;
         }
+        StartCoroutine(ShowText());
+        _audioPlayer.clip = _notEnough;
+        _audioPlayer.Play();
 
         StartCoroutine(AnimateText(Color.red));
         return false;
@@ -100,5 +111,12 @@ public class MoneySystem : MonoBehaviour
 
         //This calls the same function, but returns the text to white. This may need to be changed if the text color is no longer white.
         StartCoroutine(AnimateText(Color.white));
+    }
+
+    private IEnumerator ShowText()
+    {
+        _lowMoneyText.SetActive(true);
+        yield return new WaitForSeconds(2);
+        _lowMoneyText.SetActive(false);
     }
 }
