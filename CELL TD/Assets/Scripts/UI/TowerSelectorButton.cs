@@ -34,8 +34,12 @@ public class TowerSelectorButton : Button, IPointerEnterHandler, IPointerExitHan
 
     public override void OnPointerExit(PointerEventData eventData)
     {
+        GameObject newPlacer = GameObject.FindGameObjectWithTag("Placer");
+        if (!newPlacer) //Duct tape solution
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
         OnMouseExit?.Invoke(this, EventArgs.Empty);
-
         base.OnPointerExit(eventData);
     }
 }

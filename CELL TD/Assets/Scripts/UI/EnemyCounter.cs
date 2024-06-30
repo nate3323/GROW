@@ -28,7 +28,10 @@ public class EnemyCounter : MonoBehaviour
 
     void UpdateEnemies()
     {
-        enemies = WaveManager.Instance.TotalEnemiesInWave - WaveManager.Instance.NumEnemiesKilledInWave - WaveManager.Instance.NumEnemiesReachedGoalInWave;
-        enemyCountText.text = "" + enemies;
+        if (WaveManager.Instance)
+        {
+            enemies = WaveManager.Instance.TotalEnemiesInWave - WaveManager.Instance.NumEnemiesKilledInWave - WaveManager.Instance.NumEnemiesReachedGoalInWave;
+            enemyCountText.text = "" + enemies;
+        }
     }
 }

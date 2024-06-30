@@ -55,8 +55,6 @@ public class EnemySpawner : MonoBehaviour
     }
     IEnumerator Spawn(int currentWave)
     {
-        Debug.Log(currentWave);
-        Debug.Log(_Waves[0].WaveInfo[0].Enemies[0].Enemy.name);
         int currentEnemyType = 0;
         EnemyTypes type = _Waves[0].WaveInfo[_CurrentWaveInfo].Enemies[currentEnemyType].Enemy.Type;
         int enemiesOfCurrentType = _Waves[_CurrentWaveInfo].WaveInfo[currentWave].Enemies[currentEnemyType].amount;
@@ -88,8 +86,6 @@ public class EnemySpawner : MonoBehaviour
 
     public int EnemiesInCurrentWave()
     {
-        Debug.Log(_CurrentWave);
-        Debug.Log(_CurrentWaveInfo);
         Wave current = _Waves[_CurrentWaveInfo].WaveInfo[_CurrentWave - 1];
         int tally = 0;
         foreach(SpawnInfo enemy in current.Enemies)

@@ -106,13 +106,16 @@ public class TowerSelectorPanel : MonoBehaviour
 
     private void OnTowerSelectButtonClicked(TowerSelectorButton button)
     {
-        Debug.Log(button.TowerInfo.BuildCost);
-
         if (button.TowerPrefab && button.TowerInfo)
         {
             GameObject newPlacer = GameObject.FindGameObjectWithTag("Placer");
             if (newPlacer)
             {
+                if (newPlacer.GetComponent<Placer>().info == button.TowerInfo)
+                {
+                    Destroy(newPlacer);
+                    return;
+                }
                 Destroy(newPlacer);
             }
             newPlacer = Instantiate(_placer);

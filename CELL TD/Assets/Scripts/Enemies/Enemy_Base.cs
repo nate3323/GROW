@@ -42,6 +42,7 @@ public class Enemy_Base : MonoBehaviour, IEnemy
 
     protected float _DistanceFromNextWayPoint = 0f;
     public WayPoint _NextWayPoint; //Made this public so that spawned spores would stop skipping waypoints
+    public bool _spawnedEnemy = false; //If spawned, uses parent nextWayPoint instead
 
     protected bool _isATarget = false;
     [SerializeField] protected SpawnedUnit _TargetUnit;
@@ -80,13 +81,16 @@ public class Enemy_Base : MonoBehaviour, IEnemy
     protected void Start()    
     {
         // Find the closest WayPoint and start moving there.
-        FindNearestWayPoint();
-
-        // This prevents an issue where if the enemy spawns to close to the nearest waypoint, then he won't move since he is already at his next node.
-        // This catches that and tells him to go to the next node.
-        if (HasReachedDestination())
+        if (!_spawnedEnemy)
         {
-            GetNextWaypoint();
+            FindNearestWayPoint();
+
+            // This prevents an issue where if the enemy spawns to close to the nearest waypoint, then he won't move since he is already at his next node.
+            // This catches that and tells him to go to the next node.
+            if (HasReachedDestination())
+            {
+                GetNextWaypoint();
+            }
         }
 
         _NavMeshAgent.SetDestination(_NextWayPoint.transform.position);
@@ -185,7 +189,6 @@ public class Enemy_Base : MonoBehaviour, IEnemy
     public void ApplyDamage(float damageValue, Tower_Base targetingTower)
     {
         _Health -= damageValue;
-        Debug.Log(_Health);
         if (_Health <= 0 && !_IsDead)
         {
             StartCoroutine(PlayDeathSound());

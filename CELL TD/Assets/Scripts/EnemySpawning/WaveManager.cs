@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -40,16 +41,13 @@ public class WaveManager : MonoBehaviour
     private int _WaveNumber = 0;
     private bool _WaveInProgress = false;
 
-
-
     private void Awake()
     {
-
     }
 
-    private void Start()
+    private void InitInstance()
     {
-        Debug.Log(gameObject);
+        Debug.Log("Please Unity");
         if (Instance != null)
         {
             Debug.LogError("There is already a WaveManager in this scene. Self destructing!");
@@ -58,6 +56,12 @@ public class WaveManager : MonoBehaviour
         }
 
         Instance = this;
+    }
+
+    private void Start()
+    {
+        InitInstance();
+        Debug.Log(Instance.gameObject);
 
         Enemy_Base.OnEnemyDied += OnEnemyDied;
         Enemy_Base.OnEnemyReachedGoal += OnEnemyReachedGoal;
@@ -95,6 +99,14 @@ public class WaveManager : MonoBehaviour
 
             VictoryScreen.Show();
         }
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("Destroyed");
+        Instance = null;
+        Enemy_Base.OnEnemyDied -= OnEnemyDied;
+        Enemy_Base.OnEnemyReachedGoal -= OnEnemyReachedGoal;
     }
 
     public void StartNextWave()
@@ -147,6 +159,8 @@ public class WaveManager : MonoBehaviour
         _EnemiesRemainingInWave--;
         _EnemiesKilled++;
         _TotalCatsDistracted++;
+
+        Debug.Log(_EnemiesRemainingInWave);
 
         AnEnemyDied?.Invoke(Sender, EventArgs.Empty);
         //HUD.UpdateWaveInfoDisplay(_WaveNumber, _CatsRemainingInWave);
@@ -201,11 +215,8 @@ public class WaveManager : MonoBehaviour
         _TotalEnemiesInWave = 0;
         foreach (EnemySpawner spawner in _EnemySpawners)
         {
-            //Debug.Log($"Spawner: {spawner.CatsInCurrentWave}");
             _TotalEnemiesInWave += spawner.EnemiesInCurrentWave();
         }
-
-        //Debug.Log($"Total: {_TotalCatsInWave}");
     }
 
     private void CalculateWaveReward()
@@ -224,7 +235,6 @@ public class WaveManager : MonoBehaviour
 
     private void OnWaveEnded(object sender, EventArgs e)
     {
-        Debug.Log("Wave Ended");
         if (_WaveNumber >= _TotalWavesInLevel)
         {
             //TODO: Add game win state

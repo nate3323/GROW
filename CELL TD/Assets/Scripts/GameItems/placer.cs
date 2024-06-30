@@ -36,6 +36,8 @@ public class Placer : MonoBehaviour
             MeshFilter newMeshFilter = newModel.GetComponent<MeshFilter>();
             MeshRenderer newMeshRenderer = newModel.GetComponent<MeshRenderer>();
 
+            newMeshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+
             newMeshFilter.sharedMesh = sourceMeshFilter.sharedMesh;
 
             newMeshFilter.transform.localScale = sourceMeshFilter.transform.localScale;
@@ -60,11 +62,15 @@ public class Placer : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1"))
         {
-            Debug.Log(info.BuildCost);
-            if (tower && GameManager.Instance.MoneySystem.MoneyAmount >= (int)info.BuildCost && !overlapping && !IsOverUI())
+            if (tower && GameManager.Instance.MoneySystem.MoneyAmount >= (int)info.BuildCost && !overlapping)
             {
-                PlaceTower();
+                if (IsOverUI())
+                {
+                    Destroy(gameObject);
+                    return;
+                }
                 GameManager.Instance.MoneySystem.SubtractCurrency((int)info.BuildCost);
+                PlaceTower();
             }
         }
     }
@@ -78,11 +84,7 @@ public class Placer : MonoBehaviour
     {
         var newTower = Instantiate(tower);
         newTower.transform.position = transform.position;
-        foreach (Transform child in transform)
-        {
-            Destroy(child.gameObject);
-        }
-        Destroy(this);
+        Destroy(gameObject);
     }
 
     private void CheckOverlap()

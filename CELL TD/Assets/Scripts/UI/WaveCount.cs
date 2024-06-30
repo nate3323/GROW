@@ -17,7 +17,10 @@ public class WaveCount : MonoBehaviour
     }
 
     public void WaveCounter(object Sender, EventArgs a)
-    {     
-        waveCountText.text = "" + WaveManager.Instance.WaveNumber;
+    {
+        if (WaveManager.Instance)
+        {
+            waveCountText.text = "" + WaveManager.Instance.WaveNumber;
+        }
     }
 }

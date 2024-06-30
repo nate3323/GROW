@@ -25,7 +25,9 @@ public class GameState_InGame : GameState_Base
     {
         // We don't want to reload the level if we are just returning from the Settings dialog.
         if (!IsReturningFromSettings)
+        {
             SceneManager.LoadScene($"Level_{GameManager.Instance.CurrentLevelNumber}");
+        }
 
 
         // Reset this flag variable.
