@@ -19,6 +19,12 @@ public class Tower_Base : MonoBehaviour
     [SerializeField]
     protected GameObject rangeShower;//TODO find better option later
 
+    [SerializeField]
+    private AudioClip _placementClip;
+
+    [SerializeField]
+    private AudioSource _audioPlayer;
+
 
     protected Type _TargetEnemyType = typeof(Enemy_Base);
 
@@ -44,6 +50,9 @@ public class Tower_Base : MonoBehaviour
     
     public virtual void Start()
     {
+        _audioPlayer.clip = _placementClip;
+        _audioPlayer.Play();
+
         Destroy(rangeShower);
         InitTowerStats();
     }

@@ -56,6 +56,12 @@ public class Enemy_Base : MonoBehaviour, IEnemy
 
     private HealthSystem _PlayerHealthSystem;
 
+    [SerializeField]
+    private AudioSource _audioPlayer;
+    [SerializeField]
+    private AudioClip _fatal;
+    [SerializeField]
+    private AudioClip _damage;
 
     protected void Awake()
     {
@@ -189,6 +195,9 @@ public class Enemy_Base : MonoBehaviour, IEnemy
     public void ApplyDamage(float damageValue, Tower_Base targetingTower)
     {
         _Health -= damageValue;
+        _audioPlayer.clip = _damage;
+        _audioPlayer.pitch = Health / _EnemyInfo.MaxHealth + .5f*(_EnemyInfo.MaxHealth/(Health+_EnemyInfo.MaxHealth));
+        _audioPlayer.Play();
         if (_Health <= 0 && !_IsDead)
         {
             StartCoroutine(PlayDeathSound());
@@ -326,8 +335,6 @@ public class Enemy_Base : MonoBehaviour, IEnemy
     IEnumerator PlayDeathSound()
     {
         _NavMeshAgent.speed = 0;
-
-        // TODO: Play death sound here
 
         yield return new WaitForSeconds(0.5f);
 

@@ -47,7 +47,6 @@ public class WaveManager : MonoBehaviour
 
     private void InitInstance()
     {
-        Debug.Log("Please Unity");
         if (Instance != null)
         {
             Debug.LogError("There is already a WaveManager in this scene. Self destructing!");

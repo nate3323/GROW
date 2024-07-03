@@ -72,6 +72,10 @@ public class Placer : MonoBehaviour
                 GameManager.Instance.MoneySystem.SubtractCurrency((int)info.BuildCost);
                 PlaceTower();
             }
+            else if (!IsOverUI())
+            {
+                GameManager.Instance.MoneySystem.SubtractCurrency(999999999);//This will show the player that they do not have enough money
+            }
         }
     }
 

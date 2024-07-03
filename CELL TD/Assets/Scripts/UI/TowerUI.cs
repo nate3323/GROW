@@ -272,6 +272,10 @@ public class TowerUI : MonoBehaviour
 
             HideTowerUI();
         }
+        else
+        {
+            GameManager.Instance.MoneySystem.SubtractCurrency(999999999);//This will show the player that they do not have enough money
+        }
     }
 
     public void OnDestroyClicked()

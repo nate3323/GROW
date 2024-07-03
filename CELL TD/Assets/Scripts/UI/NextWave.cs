@@ -9,6 +9,9 @@ public class NextWave : MonoBehaviour
     Button _btn;
     public static NextWave Instance;
 
+    [SerializeField]
+    private AudioSource _audioPlayer;
+
     private void Start()
     {
         if (Instance != null)
@@ -28,6 +31,7 @@ public class NextWave : MonoBehaviour
 
     public void EnableButton()
     {
+        _audioPlayer.Play();
         _btn.enabled = true;
         _btn.transform.localScale = Vector3.one;
     }
